@@ -1,0 +1,41 @@
+/*
+* @Author: Itfallrain
+* @Date:   2019-1-119 14:21:42
+* @Last Modified by:   Itfallrain
+* @Last Modified time: 2019-1-119 16:22:34
+*/
+
+@charset "UTF-8";
+
+/*css 初始化 */
+
+html, body, ul, ol, li, h1, h2, h3, h4, h5, p {
+    margin: 0;
+    padding: 0;
+}
+
+ul, ol {
+    list-style: none;
+}
+
+textarea {
+    resize: none;
+}
+
+/*防止拖动*/
+img {
+    border: 0;
+    vertical-align: middle;
+    max-width: 100%
+}
+
+/*  去掉图片低测默认的3像素空白缝隙*/
+table {
+    border-collapse: collapse;
+}
+
+a {
+    color: #666;
+    text-decoration: none;
+}
+
