@@ -8,6 +8,7 @@
 .footer-container {
   width: 100%;
   height: 60px;
+  position: fixed;
   bottom: 0px;
   background: rgba(222, 225, 230, 0.856);
 }

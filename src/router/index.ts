@@ -4,25 +4,39 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
     name: 'Index',
-    component: () => import('@/views/front/Index.vue'),
+    component: () => import('@/views/client/Index.vue'),
     redirect: 'Home',
     children: [
       {
         path: 'home',
         name: 'Home',
-        component: () => import('@/views/front/Home.vue')
+        component: () => import('@/views/client/Home.vue')
       },
       {
         path: 'markdown',
         name: 'Markdown',
-        component: () => import('@/views/front/markdown/Markdown.vue')
+        component: () => import('@/views/client/markdown/Markdown.vue')
       }
     ]
   },
   {
     path: '/login',
     name: 'Login',
-    component: () => import('@/views/front/login/Index.vue')
+    component: () => import('@/views/client/login/Index.vue')
+  },
+  // 后台管理
+  {
+    path: '/admin',
+    name: 'Admin',
+    component: () => import('@/views/admin/Index.vue'),
+    redirect: '/admin/dashboard',
+    children: [
+      {
+        path: 'dashboard',
+        name: 'Dashboard',
+        component: () => import('@/views/admin/layout/Index.vue')
+      }
+    ]
   }
 ];
 

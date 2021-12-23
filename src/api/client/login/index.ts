@@ -1,9 +1,9 @@
-import service from '@/utils/request'
+import service from '@/utils/request';
 
 export const userLogin = async (userLoginForm: object) => {
   return await service.axios({
-    url: '/api/front/login',
+    url: '/api/client/login',
     method: 'post',
     data: userLoginForm
-  })
-}
+  });
+};

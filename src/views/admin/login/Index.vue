@@ -49,7 +49,7 @@ import {
   getCurrentInstance
 } from 'vue';
 import { useMessage, useLoadingBar } from 'naive-ui';
-import { userLogin } from '@/api/front/login/index';
+import { userLogin } from '@/api/client/login/index';
 
 interface btnType {
   type: string;

@@ -157,7 +157,8 @@ const menuShowList = () => {
 .header-container {
   width: 100%;
   height: 60px;
-  position: relative;
+  position: fixed;
+  z-index: 9;
   background: rgba(222, 225, 230, 0.856);
   .container-menu {
     width: 100%;

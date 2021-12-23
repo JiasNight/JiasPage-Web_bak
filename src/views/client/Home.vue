@@ -32,20 +32,34 @@ import {
   getCurrentInstance
 } from 'vue';
 
-const imgLists: Array<string> = reactive([
+onMounted(() => {
+  // 获取后端设置的轮播图
+});
+
+// 轮播图列表
+interface loopImgType {
+  id: string;
+  label: string;
+  imgSrc: string;
+}
+const imgLists: loopImgType[] = reactive([
   {
+    id: '1',
     label: 'primary',
     imgSrc: 'https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel1.jpeg'
   },
   {
+    id: '2',
     label: 'info',
     imgSrc: 'https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel2.jpeg'
   },
   {
+    id: '3',
     label: 'warning',
     imgSrc: 'https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel3.jpeg'
   },
   {
+    id: '4',
     label: 'error',
     imgSrc: 'https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel4.jpeg'
   }
@@ -55,14 +69,12 @@ const imgLists: Array<string> = reactive([
 <style lang="scss" scoped>
 .home-container {
   width: 70%;
-  height: calc(100vh - 120px);
+  // height: calc(100vh - 120px);
+  height: 100%;
   margin: 0 auto;
-  overflow: hidden;
   .container-main {
     width: 100%;
     height: 100%;
-    overflow-x: hidden;
-    overflow-y: auto;
     .main-top {
       width: 100%;
       height: 280px;

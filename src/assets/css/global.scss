@@ -9,33 +9,43 @@
 
 /*css 初始化 */
 
-html, body, ul, ol, li, h1, h2, h3, h4, h5, p {
-    margin: 0;
-    padding: 0;
+html,
+body,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+p {
+  margin: 0;
+  padding: 0;
 }
 
-ul, ol {
-    list-style: none;
+ul,
+ol {
+  list-style: none;
 }
 
 textarea {
-    resize: none;
+  resize: none;
 }
 
 /*防止拖动*/
 img {
-    border: 0;
-    vertical-align: middle;
-    max-width: 100%
+  border: 0;
+  vertical-align: middle;
+  max-width: 100%;
 }
 
 /*  去掉图片低测默认的3像素空白缝隙*/
 table {
-    border-collapse: collapse;
+  border-collapse: collapse;
 }
 
 a {
-    color: #666;
-    text-decoration: none;
+  color: #666;
+  text-decoration: none;
 }
-

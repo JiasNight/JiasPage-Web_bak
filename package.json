@@ -1,6 +1,7 @@
 {
   "name": "jiaspage-web",
   "version": "0.0.0",
+  "license": "ISC",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
@@ -8,6 +9,7 @@
     "lint": "eslint . --ext .ts"
   },
   "dependencies": {
+    "@vicons/utils": "^0.1.4",
     "axios": "^0.24.0",
     "md-editor-v3": "^1.8.0",
     "vue": "^3.2.25",

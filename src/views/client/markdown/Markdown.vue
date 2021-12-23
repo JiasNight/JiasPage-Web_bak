@@ -5,7 +5,7 @@
         <span>首页</span>
       </router-link>
     </div>
-    <md-editor v-model="markdownText" height="400px" @onSave="saveMarkdownText"></md-editor>
+    <md-editor v-model="markdownText" showCodeRowNumber @onSave="saveMarkdownText"></md-editor>
     <n-button @click="getMarkdownById" attr-type="button">获 取</n-button>
   </div>
 </template>
@@ -21,9 +21,9 @@ import {
   computed,
   getCurrentInstance
 } from 'vue';
-import { markdownSave, markdownById } from '@/api/front/markdown/index';
 import MdEditor from 'md-editor-v3';
 import 'md-editor-v3/lib/style.css';
+import { markdownSave, markdownById } from '@/api/client/markdown/index';
 
 const toolbars: Array<string> = ['italic', 'underline', '-', 'bold', '=', 'github'];
 
