@@ -14,18 +14,7 @@
 <script lang="ts" setup>
 import Header from '@/views/client/Header.vue';
 import Footer from '@/views/client/Footer.vue';
-import {
-  defineComponent,
-  ref,
-  reactive,
-  isRef,
-  toRefs,
-  watch,
-  computed,
-  onMounted,
-  onUnmounted,
-  getCurrentInstance
-} from 'vue';
+import { ref, onMounted, onUnmounted } from 'vue';
 
 onMounted(() => {
   window.addEventListener('scroll', handleScroll);
@@ -36,7 +25,7 @@ onUnmounted(() => {
 });
 
 // 头部导航栏滑动隐藏
-const headerShow = ref(true);
+const headerShow = ref<boolean>(true);
 const handleScroll = () => {
   const top = document.documentElement.scrollTop;
   if (top > 30) {

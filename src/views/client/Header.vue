@@ -34,8 +34,8 @@
           </router-link>
         </div>
         <div class="box-item item-menu">
-          <router-link to="/markdown">
-            <span>编辑</span>
+          <router-link to="/three">
+            <span>THREE</span>
           </router-link>
         </div>
         <div class="box-item item-menu">
@@ -208,6 +208,8 @@ const menuShowList = () => {
         height: 80%;
         justify-self: center;
         align-self: center;
+        display: table-cell;
+        text-align: center;
         border-right: 2px solid rgb(133, 126, 126);
         span {
           font-size: 18px;

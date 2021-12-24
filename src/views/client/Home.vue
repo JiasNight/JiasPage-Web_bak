@@ -31,8 +31,10 @@ import {
   onMounted,
   getCurrentInstance
 } from 'vue';
+import * as THREE from 'three';
 
 onMounted(() => {
+  console.log('轮播');
   // 获取后端设置的轮播图
 });
 

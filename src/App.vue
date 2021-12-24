@@ -1,5 +1,6 @@
 <template>
-  <n-config-provider :theme-overrides="themeOverrides">
+  <!-- <n-config-provider :theme-overrides="themeOverrides"> -->
+  <n-config-provider>
     <n-dialog-provider>
       <n-message-provider>
         <n-notification-provider>
