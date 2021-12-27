@@ -1,103 +1,168 @@
 <template>
   <div class="three-container">
-    <div class="three-main" id="three-box"></div>
+    <div ref="threeDom" class="three-main"></div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { onMounted } from 'vue';
+import { ref, onMounted } from 'vue';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
-// import CreateDivThree from './utils/threeTool';
+import { DragControls } from 'three/examples/jsm/controls/DragControls';
+import gsap from 'gsap';
 
 onMounted(() => {
   initCurrentThree();
-  loadGltf();
+  loadGltfModel();
+  renderThree();
 });
 
-let scene;
-const initCurrentThree = () => {
-  // 初始化场景
-  scene = new THREE.Scene();
-  let camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 3000);
+const Scene = new THREE.Scene();
+const Camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 2000);
+const Renderer = new THREE.WebGLRenderer({
+  antialias: true,
+  alpha: true //开启alpha
+});
+// 控制器
+const Controls = new OrbitControls(Camera, Renderer.domElement);
+//gltfLoader
+const Gltfloader = new GLTFLoader();
+// 注意:此处为threejs的DOM,需要将threejs的场景渲染进去
+const threeDom = ref(null);
 
-  // 初始化灯光
-  // 环境光 能保持整体都是亮点
-  let ambientLight = new THREE.AmbientLight(0x404040);
-  // let ambientLight = new THREE.AmbientLight('#fff', 0.3);
-  // 点光源 就像灯泡一样的效果  白色灯光 亮度0.6
-  let pointLight = new THREE.PointLight(0xffffff, 0.6);
-  // 将灯光加入到场景中
-  scene.add(ambientLight);
-  // 将灯光加到摄像机中 点光源跟随摄像机移动
-  // 为什么这样做  因为这样可以让后期处理时的辉光效果更漂亮
-  camera.add(pointLight);
-  // 我们将摄像机加入到场景中
-  scene.add(camera);
-  // 初始化渲染器
-  let renderer = new THREE.WebGLRenderer({
-    // 开启抗锯齿
-    antialias: true,
-    // 开启背景透明
-    alpha: true
-  });
-  renderer.setPixelRatio(window.devicePixelRatio);
-  renderer.setSize(window.innerWidth, window.innerHeight);
-  let threeBox = document.getElementById('three-box');
-  threeBox.appendChild(renderer.domElement);
-  // 背景
-  renderer.setClearColor('#000', 0);
-
-  // 三维坐标
-  scene.add(new THREE.AxesHelper(200));
-
-  let controls = new OrbitControls(camera, renderer.domElement);
-  controls.enableDamping = true;
-  controls.enableZoom = true;
-  controls.autoRotate = false;
-  controls.autoRotateSpeed = 0.3;
-  controls.enablePan = true;
-
-  let directionalLight = new THREE.DirectionalLight('#fff');
-  directionalLight.position.set(30, 30, 30).normalize();
-  scene.add(directionalLight);
-  camera.position.x = 20; //相机的位置
-  camera.position.y = 30;
-  camera.position.z = 250;
-
-  renderer.render(scene, camera);
+// 首页进入相机的视角,这个视角可以在三维模型中建立一个摄像机获取摄像机的坐标,如C4D,非常准确.
+const cameraPosition = {
+  x: 0,
+  y: 700,
+  z: 0
+};
+const cameraLookat = {
+  x: 0,
+  y: 0,
+  z: 1
 };
 
-// 外部模型加载函数
-const loadGltf = () => {
-  // 加载模型
-  let loader = new GLTFLoader();
-  loader.setPath('/src/assets/json/');
-  loader.load('city.gltf', (gltf) => {
-    // 就是两个模型 这个是动态的,下面是静态的,这些从sketchfab上面下载即可
-    gltf.scene.traverse((object) => {
-      if (object.isMesh) {
-        // 修改模型的材质
-        console.log(object);
-        object.castShadow = true;
-        object.receiveShadow = true;
-      }
-    });
-    gltf.scene.receiveShadow = true;
-    scene.add(gltf.scene);
+// 声明一个方法传入参数可以在不同的地方调用相机
+const cameraReset = (position, lookAt, time = 1) => {
+  gsap.to(Camera.position, {
+    x: position.x,
+    y: position.y,
+    z: position.z,
+    duration: time,
+    ease: 'power4.out'
+    // onComplete: function () {
+    // 这是相机运动完成的回调,可以执行其他的方法.
+    // }
   });
+  gsap.to(Camera.lookAt, {
+    x: lookAt.x,
+    y: lookAt.y,
+    z: lookAt.z,
+    duration: time,
+    ease: 'power4.out'
+  });
+  gsap.to(Controls.target, {
+    x: lookAt.x,
+    y: lookAt.y,
+    z: lookAt.z,
+    duration: time,
+    ease: 'power4.out'
+  });
+};
+
+const initCurrentThree = () => {
+  // 点光源
+  const point = new THREE.PointLight(0xffffff, 1);
+  point.position.set(10, 600, -40); // 点光源位置
+  // Scene.position.set(0, 15, 0); // 场景位置
+  // Scene.add(point); // 点光源添加到场景中
+  // 环境光
+  const ambient = new THREE.AmbientLight(0x444444, 1);
+  Scene.add(ambient);
+  // 辅助坐标系
+  const axesHelper = new THREE.AxesHelper(500);
+  // Scene.add(axesHelper);
+  // 修改相机,场景的参数
+  // Camera.position.set(18, 364, 397);
+  // Camera.lookAt(0, 0, 0);
+  // Camera.up.x = 0; //相机以哪个方向为上方
+  // Camera.up.y = 1;
+  // Camera.up.z = 1;
+  Controls.target = new THREE.Vector3(0, 0, 0);
+  // 使动画循环使用时阻尼或自转 意思是否有惯性
+  Controls.enableDamping = true;
+  // 动态阻尼系数 就是鼠标拖拽旋转灵敏度
+  Controls.dampingFactor = 0.04;
+  // 是否可以旋转
+  Controls.enableRotate = false;
+  // 是否可以缩放与速度
+  Controls.enableZoom = false;
+  // 设置相机距离原点的最远距离
+  Controls.minDistance = 1;
+  // 设置相机距离原点的最远距离
+  Controls.maxDistance = 2000;
+  // 是否开启右键拖拽
+  Controls.enablePan = false;
+  //render的相关设置
+  Renderer.setPixelRatio(window.devicePixelRatio);
+  Renderer.setSize(window.innerWidth, window.innerHeight);
+  Renderer.inputEncoding = true;
+  Renderer.outputEncoding = THREE.sRGBEncoding;
+  Renderer.setClearColor(0xd0d0d0, 1);
+  // 将renderer渲染进DOM里面
+  threeDom.value.appendChild(Renderer.domElement);
+};
+
+// 设置页面自适应
+const onWindowResize = () => {
+  Camera.aspect = window.innerWidth / window.innerHeight;
+  Camera.updateProjectionMatrix();
+  Renderer.setSize(window.innerWidth, window.innerHeight);
+  renderThree();
+};
+window.addEventListener('resize', onWindowResize, false);
+
+// 外部模型加载函数
+const loadGltfModel = () => {
+  // 加载模型
+  let gltfLoader = new GLTFLoader();
+  gltfLoader.load(
+    '/src/assets/gltf/scene.gltf',
+    (gltf: any) => {
+      const loadscene = gltf.scene;
+      console.log(gltf);
+      window.gltf = gltf;
+      // gltf.position.set(100, 100, 100);
+      Scene.add(loadscene);
+      // 设置大小比例
+      loadscene.scale.set(0.06, 0.05, 0.05);
+      // 模型加载完,进行相机的初始化,传入设置的参数,模型加载为异步
+      cameraReset(cameraPosition, cameraLookat);
+    },
+    (xhr) => {
+      // 控制台查看加载进度xhr
+      console.log(Math.floor((xhr.loaded / xhr.total) * 100));
+    }
+  );
+};
+
+const renderThree = () => {
+  requestAnimationFrame(renderThree);
+  Controls.update(); // 轨道控制器的更新
+  Renderer.clear(); // 清除画布
+  Renderer.render(Scene, Camera);
 };
 </script>
 
 <style lang="scss" scoped>
 .three-container {
   width: 100vw;
-  height: calc(100vh - 120px);
+  height: 100vh;
   .three-main {
     width: 100%;
     height: 100%;
-    overflow: hidden;
+    // overflow: hidden;
   }
 }
 </style>

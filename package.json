@@ -11,6 +11,7 @@
   "dependencies": {
     "@vicons/utils": "^0.1.4",
     "axios": "^0.24.0",
+    "gsap": "^3.9.1",
     "md-editor-v3": "^1.8.0",
     "three": "^0.135.0",
     "vue": "^3.2.25",
