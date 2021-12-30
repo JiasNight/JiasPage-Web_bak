@@ -55,7 +55,7 @@ export class CreateDivThree {
     // 改成这样就可以居中
     this.renderer.setSize(width, height);
     this.canvas.appendChild(this.renderer.domElement);
-    // this.renderer.setClearColor('#000');
+    // this.renderer.setClearColor('#1e1e1e');
 
     // 初始化控制器,创建控件对象
     let controls = new TrackballControls(this.camera, this.renderer.domElement);
@@ -111,6 +111,53 @@ export class CreateDivThree {
       ease: 'power4.out'
     });
   }
+
+  // 加载模型
+  loadModel(modelPath: string, modelName: string) {
+    let gltfLoader = new GLTFLoader();
+    gltfLoader.setPath(modelPath);
+    gltfLoader.load(
+      modelName,
+      (gltf: any) => {
+        const loadscene = gltf.scene;
+        let wrapper = new THREE.Object3D();
+        //模型在场景中的为准
+        wrapper.position.set(220, 0, 50);
+        wrapper.add(loadscene);
+        wrapper.rotation.set(0, Math.PI / 2, 0);
+        // loadscene.rotate.set(180, 0, 0);
+        // this.modelScene = loadscene;
+        // 设置大小比例
+        loadscene.scale.set(50, 50, 50);
+        this.scene.add(wrapper);
+      },
+      (xhr: any) => {
+        // 控制台查看加载进度xhr
+        console.log(Math.floor((xhr.loaded / xhr.total) * 100));
+      },
+      (error: any) => {
+        // 加载出错
+        console.log(error);
+      }
+    );
+  }
+
+  // 加载天空盒
+  loadSky(skyPath: any) {
+    let skyTexture = new THREE.CubeTextureLoader().setPath(skyPath).load([
+      'px.jpg', //右
+      'nx.jpg', //左
+      'py.jpg', //上
+      'ny.jpg', //下
+      'pz.jpg', //前
+      'nz.jpg' //后
+    ]);
+    console.log(skyTexture);
+    this.scene.background = skyTexture;
+    console.log(this.scene);
+    this.renderer.setClearAlpha(1);
+    requestAnimationFrame(this.renderThree);
+  }
 }
 
 // 加载3D模型类
@@ -136,18 +183,16 @@ export class LoadGltfModel {
       this.modelName,
       (gltf: any) => {
         const loadscene = gltf.scene;
-        loadscene.children[0].geometry.computeBoundingBox();
-        loadscene.children[0].geometry.center();
-        let helper = new THREE.BoundingBoxHelper(loadscene, 0xff0000);
-        helper.update();
-        this.scene.add(helper);
-        this.scene.add(loadscene);
-        gltf.rotation.x = THREE.Math.degToRad(90);
+        let wrapper = new THREE.Object3D();
+        //模型在场景中的为准
+        wrapper.position.set(220, 0, 50);
+        wrapper.add(loadscene);
+        wrapper.rotation.set(0, Math.PI / 2, 0);
         // loadscene.rotate.set(180, 0, 0);
-        this.modelScene = loadscene;
+        // this.modelScene = loadscene;
         // 设置大小比例
-        loadscene.scale.set(100, 100, 100);
-        this.scene.add(loadscene);
+        loadscene.scale.set(50, 50, 50);
+        this.scene.add(wrapper);
       },
       (xhr: any) => {
         // 控制台查看加载进度xhr
@@ -158,6 +203,21 @@ export class LoadGltfModel {
         console.log(error);
       }
     );
+  }
+
+  // 加载天空盒
+  loaderSky(path: any) {
+    let skyTexture = new THREE.CubeTextureLoader().setPath(path).load([
+      'px.jpg', //右
+      'nx.jpg', //左
+      'py.jpg', //上
+      'ny.jpg', //下
+      'pz.jpg', //前
+      'nz.jpg' //后
+    ]);
+
+    this.scene.background = skyTexture;
+    this.renderer.setClearAlpha(1);
   }
 
   // 动态设置模型比例大小

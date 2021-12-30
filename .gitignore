@@ -4,4 +4,4 @@ dist
 dist-ssr
 *.local
 *.log
-src/assets/gltf/*
+public/model

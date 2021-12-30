@@ -1,6 +1,5 @@
 import { defineConfig } from 'vite';
 import VuePlugin from '@vitejs/plugin-vue';
-import THREE from 'three';
 
 import * as path from 'path';
 const resolve = (str: string): string => path.resolve(__dirname, str);
