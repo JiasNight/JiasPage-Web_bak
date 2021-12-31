@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import { TrackballControls } from 'three/examples/jsm/controls/TrackballControls.js';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { DragControls } from 'three/examples/jsm/controls/DragControls';
+import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader';
 import gsap from 'gsap';
 
 export class CreateDivThree {
@@ -17,11 +18,6 @@ export class CreateDivThree {
     this.canvas = document.querySelector(dom);
   }
 
-  init() {
-    this.initThree();
-    this.renderThree();
-  }
-
   // 初始化场景
   initThree() {
     let width = this.canvas.offsetWidth;
@@ -33,11 +29,15 @@ export class CreateDivThree {
     this.scene.add(axesHelper);
     // 平行光
     let directionalLight = new THREE.DirectionalLight(0xdfebff, 0.45);
-    directionalLight.position.set(50, 200, 100).normalize();
+    directionalLight.position.set(2000, 2000, 1000).normalize();
     this.scene.add(directionalLight);
     // 环境光
     let ambientLight = new THREE.AmbientLight(0x999999);
     this.scene.add(ambientLight);
+    // 点光源
+    var light = new THREE.PointLight(0xffffff);
+    light.position.set(0, 2500, 1000);
+    this.scene.add(light);
     // 相机设置
     this.camera = new THREE.PerspectiveCamera(45, width / height, 1, 2000);
     this.camera.position.set(10, 150, 150);
@@ -47,9 +47,12 @@ export class CreateDivThree {
     this.renderer = new THREE.WebGLRenderer({
       // 是否执行抗锯齿
       antialias: true,
-      // 透明度
+      // 开启背景透明
       alpha: true
     });
+    // this.scene.background = new THREE.TextureLoader().load(
+    //   '../../../../../public/model/skyImages/nx.png'
+    // );
     // 为了兼容高清屏幕
     this.renderer.setPixelRatio(window.devicePixelRatio);
     // 改成这样就可以居中
@@ -65,7 +68,8 @@ export class CreateDivThree {
     controls.noPan = false;
     controls.staticMoving = true;
     controls.dynamicDampingFactor = 0.3;
-    controls.target = new THREE.Vector3(2, 44, -32);
+    controls.target.set(0, 0, 0);
+    // controls.target = new THREE.Vector3(2, 44, 32);
     this.controls = controls;
   }
 
@@ -82,7 +86,9 @@ export class CreateDivThree {
     this.renderer.setSize(window.innerWidth, window.innerHeight);
   }
 
-  windowResize = () => window.addEventListener('resize', () => this.resize());
+  windowResize() {
+    window.addEventListener('resize', () => this.resize());
+  }
 
   // 声明一个方法传入参数可以在不同的地方调用相机
   cameraReset(position: any, lookAt: any, time = 1) {
@@ -120,16 +126,19 @@ export class CreateDivThree {
       modelName,
       (gltf: any) => {
         const loadscene = gltf.scene;
+        //  投影
+        loadscene.castShadow = true;
         let wrapper = new THREE.Object3D();
         //模型在场景中的为准
-        wrapper.position.set(220, 0, 50);
+        wrapper.position.set(210, -80, 50);
         wrapper.add(loadscene);
         wrapper.rotation.set(0, Math.PI / 2, 0);
         // loadscene.rotate.set(180, 0, 0);
         // this.modelScene = loadscene;
         // 设置大小比例
-        loadscene.scale.set(50, 50, 50);
+        loadscene.scale.set(60, 50, 50);
         this.scene.add(wrapper);
+        this.renderThree();
       },
       (xhr: any) => {
         // 控制台查看加载进度xhr
@@ -143,20 +152,31 @@ export class CreateDivThree {
   }
 
   // 加载天空盒
-  loadSky(skyPath: any) {
-    let skyTexture = new THREE.CubeTextureLoader().setPath(skyPath).load([
-      'px.jpg', //右
-      'nx.jpg', //左
-      'py.jpg', //上
-      'ny.jpg', //下
-      'pz.jpg', //前
-      'nz.jpg' //后
+  loadSky(skyPath: string) {
+    // this.scene.background = new THREE.TextureLoader().load(skyPath + 'nx.png');
+    this.scene.background = new THREE.CubeTextureLoader().setPath(skyPath).load([
+      'px.png' //右
     ]);
-    console.log(skyTexture);
-    this.scene.background = skyTexture;
-    console.log(this.scene);
-    this.renderer.setClearAlpha(1);
-    requestAnimationFrame(this.renderThree);
+    // this.renderer.setClearAlpha(1);
+  }
+
+  // 加载环境贴图
+  loadHdr() {
+    // 使用hdr作为背景色
+    let pmremGenerator = new THREE.PMREMGenerator(this.renderer);
+    // 阴影
+    pmremGenerator.compileEquirectangularShader();
+    new RGBELoader()
+      .setDataType(THREE.UnsignedByteType)
+      .load('/public/model/skyImages/railway_bridge_02_4k.hdr', (texture: any) => {
+        const envMap = pmremGenerator.fromEquirectangular(texture).texture;
+        // 给场景添加环境光效果
+        this.scene.environment = envMap;
+        // 给场景添加背景图
+        // this.scene.background = envMap；
+        pmremGenerator.dispose();
+      });
+    this.renderThree();
   }
 }
 
@@ -207,17 +227,20 @@ export class LoadGltfModel {
 
   // 加载天空盒
   loaderSky(path: any) {
-    let skyTexture = new THREE.CubeTextureLoader().setPath(path).load([
-      'px.jpg', //右
-      'nx.jpg', //左
-      'py.jpg', //上
-      'ny.jpg', //下
-      'pz.jpg', //前
-      'nz.jpg' //后
-    ]);
+    this.scene.background = new THREE.TextureLoader().load(
+      '../../../../../public/model/skyImages/nx.png'
+    );
+    // let skyTexture = new THREE.CubeTextureLoader().setPath(path).load([
+    //   'px.jpg', //右
+    //   'nx.jpg', //左
+    //   'py.jpg', //上
+    //   'ny.jpg', //下
+    //   'pz.jpg', //前
+    //   'nz.jpg' //后
+    // ]);
 
-    this.scene.background = skyTexture;
-    this.renderer.setClearAlpha(1);
+    // this.scene.background = skyTexture;
+    // this.renderer.setClearAlpha(1);
   }
 
   // 动态设置模型比例大小

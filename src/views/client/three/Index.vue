@@ -21,23 +21,26 @@ onMounted(() => {
 
 const initCurrentThree = () => {
   const cdt = new CreateDivThree('#three-box');
-  cdt.init();
-  const skyPath: string = '/public/model/skyImages/';
-  cdt.loadSky(skyPath);
+  cdt.initThree();
   const modelPath: string = '/public/model/';
   const modelName: string = 'scene.gltf';
-  cdt.loadModel(modelPath, modelName);
+  // cdt.loadModel(modelPath, modelName);
+  const skyPath: string = '/public/model/skyImages/';
+  cdt.loadSky(skyPath);
+  // cdt.loadHdr();
+  cdt.renderThree();
+  cdt.windowResize();
 
   // 首页进入相机的视角,这个视角可以在三维模型中建立一个摄像机获取摄像机的坐标,如C4D,非常准确.
   const cameraPosition = {
-    x: 2,
+    x: 0,
     y: 250,
     z: 250
   };
   const cameraLookat = {
     x: 0,
-    y: 500,
-    z: 300
+    y: 0,
+    z: 0
   };
   cdt.cameraReset(cameraPosition, cameraLookat);
 };
