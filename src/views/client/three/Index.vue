@@ -24,7 +24,7 @@ const initCurrentThree = () => {
   cdt.initThree();
   const modelPath: string = '/public/model/';
   const modelName: string = 'scene.gltf';
-  // cdt.loadModel(modelPath, modelName);
+  cdt.loadModel(modelPath, modelName);
   const skyPath: string = '/public/model/skyImages/';
   cdt.loadSky(skyPath);
   // cdt.loadHdr();
@@ -34,8 +34,8 @@ const initCurrentThree = () => {
   // 首页进入相机的视角,这个视角可以在三维模型中建立一个摄像机获取摄像机的坐标,如C4D,非常准确.
   const cameraPosition = {
     x: 0,
-    y: 250,
-    z: 250
+    y: 300,
+    z: 300
   };
   const cameraLookat = {
     x: 0,

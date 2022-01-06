@@ -24,6 +24,9 @@ export class CreateDivThree {
     let height = this.canvas.offsetHeight;
     //  创建场景对象Scene
     this.scene = new THREE.Scene();
+    // this.scene.background = new THREE.CubeTextureLoader()
+    //   .setPath('../../../../../public/model/skyImages/')
+    //   .load(['px.png', 'nx.png', 'py.png', 'ny.png', 'pz.png', 'nz.png']);
     // 辅助三维坐标系
     const axesHelper = new THREE.AxesHelper(500);
     this.scene.add(axesHelper);
@@ -50,9 +53,9 @@ export class CreateDivThree {
       // 开启背景透明
       alpha: true
     });
-    // this.scene.background = new THREE.TextureLoader().load(
-    //   '../../../../../public/model/skyImages/nx.png'
-    // );
+    // this.scene.background = new THREE.TextureLoader()
+    //   .setPath('../../../../../public/model/skyImages/')
+    //   .load('nx.png');
     // 为了兼容高清屏幕
     this.renderer.setPixelRatio(window.devicePixelRatio);
     // 改成这样就可以居中
@@ -130,7 +133,7 @@ export class CreateDivThree {
         loadscene.castShadow = true;
         let wrapper = new THREE.Object3D();
         //模型在场景中的为准
-        wrapper.position.set(210, -80, 50);
+        wrapper.position.set(200, 0, 120);
         wrapper.add(loadscene);
         wrapper.rotation.set(0, Math.PI / 2, 0);
         // loadscene.rotate.set(180, 0, 0);
@@ -153,11 +156,9 @@ export class CreateDivThree {
 
   // 加载天空盒
   loadSky(skyPath: string) {
-    // this.scene.background = new THREE.TextureLoader().load(skyPath + 'nx.png');
-    this.scene.background = new THREE.CubeTextureLoader().setPath(skyPath).load([
-      'px.png' //右
-    ]);
-    // this.renderer.setClearAlpha(1);
+    this.scene.background = new THREE.CubeTextureLoader()
+      .setPath(skyPath)
+      .load(['px.png', 'nx.png', 'py.png', 'ny.png', 'pz.png', 'nz.png']);
   }
 
   // 加载环境贴图
