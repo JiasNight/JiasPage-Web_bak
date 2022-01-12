@@ -1,22 +1,29 @@
 <template>
   <div class="three-container">
-    <div ref="threeDom" class="three-main" id="three-box"></div>
+    <n-spin :show="isLoading" size="large">
+      <div ref="threeDom" class="three-main" id="three-box"></div>
+      <template #description>正在加载 . . .</template>
+    </n-spin>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, onBeforeMount } from 'vue';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { DragControls } from 'three/examples/jsm/controls/DragControls';
-import gsap from 'gsap';
-import { CreateDivThree, LoadGltfModel } from './utils/threeTool';
+import CreateDivThree from './utils/threeTool';
+
+const isLoading = ref<boolean>(true);
+
+onBeforeMount(() => {});
 
 onMounted(() => {
   initCurrentThree();
-  // loadGltfModel();
-  // renderThree();
+  setTimeout(() => {
+    isLoading.value = false;
+  }, 3000);
 });
 
 const initCurrentThree = () => {
@@ -25,17 +32,17 @@ const initCurrentThree = () => {
   const modelPath: string = '/public/model/';
   const modelName: string = 'scene.gltf';
   cdt.loadModel(modelPath, modelName);
-  const skyPath: string = '/public/model/skyImages/';
+  const skyPath: string = '/public/images/';
   cdt.loadSky(skyPath);
   // cdt.loadHdr();
   cdt.renderThree();
-  cdt.windowResize();
+  cdt.onWindowResize();
 
   // 首页进入相机的视角,这个视角可以在三维模型中建立一个摄像机获取摄像机的坐标,如C4D,非常准确.
   const cameraPosition = {
     x: 0,
-    y: 300,
-    z: 300
+    y: 450,
+    z: 450
   };
   const cameraLookat = {
     x: 0,
@@ -53,7 +60,6 @@ const initCurrentThree = () => {
   .three-main {
     width: 100%;
     height: 100%;
-    // overflow: hidden;
   }
 }
 </style>

@@ -11,16 +11,7 @@
 </template>
 
 <script lang="ts" setup>
-import {
-  defineComponent,
-  ref,
-  reactive,
-  isRef,
-  toRefs,
-  watch,
-  computed,
-  getCurrentInstance
-} from 'vue';
+import { defineComponent, ref, reactive, isRef, toRefs, watch, computed, getCurrentInstance } from 'vue';
 import MdEditor from 'md-editor-v3';
 import 'md-editor-v3/lib/style.css';
 import { markdownSave, markdownById } from '@/api/client/markdown/index';
