@@ -1,12 +1,25 @@
 <template>
   <div class="markdown-container">
-    <div>
-      <router-link to="/">
+    <n-space class="container-top" justify="end">
+      <!-- <router-link to="/">
         <span>首页</span>
-      </router-link>
+      </router-link>-->
+      <n-button strong round>取 消</n-button>
+      <n-button strong round type="primary">保 存</n-button>
+    </n-space>
+    <n-divider>虚线</n-divider>
+    <div class="container-body">
+      <div class="body-catalogue">
+        <h3>目录</h3>
+      </div>
+      <md-editor
+        class="body-mdeditor"
+        v-model="markdownText"
+        showCodeRowNumber
+        @onSave="saveMarkdownText"
+      ></md-editor>
     </div>
-    <md-editor v-model="markdownText" showCodeRowNumber @onSave="saveMarkdownText"></md-editor>
-    <n-button @click="getMarkdownById" attr-type="button">获 取</n-button>
+    <!-- <n-button @click="getMarkdownById">获 取</n-button> -->
   </div>
 </template>
 
@@ -50,7 +63,29 @@ const getMarkdownById = () => {
 <style lang="scss" scoped>
 .markdown-container {
   width: 100%;
+  height: 100%;
   background: rgba(222, 225, 230, 0.856);
+  .container-top {
+    width: 80%;
+    margin: 0 auto;
+    // height: 80px;
+  }
+  .container-body {
+    width: 70%;
+    height: calc(100vh - 120px);
+    margin: 0 auto;
+    .body-catalogue {
+      width: 13%;
+      height: 100%;
+      float: left;
+      border: 2px solid rgb(126, 119, 119);
+    }
+    .body-mdeditor {
+      width: 85%;
+      height: 100%;
+      float: right;
+    }
+  }
 }
 
 // 移动端优先原则

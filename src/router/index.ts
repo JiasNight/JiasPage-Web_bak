@@ -11,11 +11,6 @@ const routes: Array<RouteRecordRaw> = [
         path: 'home',
         name: 'Home',
         component: () => import('@/views/client/Home.vue')
-      },
-      {
-        path: 'markdown',
-        name: 'Markdown',
-        component: () => import('@/views/client/markdown/Markdown.vue')
       }
     ]
   },
@@ -23,6 +18,16 @@ const routes: Array<RouteRecordRaw> = [
     path: '/three',
     name: 'Three',
     component: () => import('@/views/client/three/Index.vue')
+  },
+  {
+    path: '/markdown',
+    name: 'Markdown',
+    component: () => import('@/views/client/markdown/Markdown.vue')
+  },
+  {
+    path: '/word',
+    name: 'Word',
+    component: () => import('@/views/client/markdown/Word.vue')
   },
   {
     path: '/login',

@@ -29,8 +29,8 @@
           </router-link>
         </div>
         <div class="box-item item-menu">
-          <router-link to="/">
-            <span>菜单</span>
+          <router-link to="/word">
+            <span>word</span>
           </router-link>
         </div>
         <div class="box-item item-menu">
