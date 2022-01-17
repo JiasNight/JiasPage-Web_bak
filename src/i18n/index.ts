@@ -1,12 +1,14 @@
 import { createI18n } from 'vue-i18n';
 
 // 自定义国际化文件
-import zh_CN from './language/zh_CN.js';
-import en_US from './language/en_US.js';
+import zh_CN from './language/zh_CN/index';
+import en_US from './language/en_US/index';
 
 const i18n = createI18n({
-  legacy: false, // Composition API 模式
-  globalInjection: true, // 全局注册 $t方法
+  // Composition API 模式
+  legacy: false,
+  // 全局注册 $t方法
+  globalInjection: true,
   // 默认语言
   locale: 'zh_CN',
   // 语言库

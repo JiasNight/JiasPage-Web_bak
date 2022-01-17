@@ -25,44 +25,43 @@
         </div>
         <div class="box-item item-menu">
           <router-link to="/home">
-            <span>菜单</span>
+            <span>{{$t('client.navMenu.menu1')}}</span>
           </router-link>
         </div>
         <div class="box-item item-menu">
           <router-link to="/word">
-            <span>word</span>
+            <span>{{$t('client.navMenu.menu2')}}</span>
           </router-link>
         </div>
         <div class="box-item item-menu">
           <router-link to="/three">
-            <span>THREE</span>
+            <span>{{$t('client.navMenu.menu3')}}</span>
           </router-link>
         </div>
         <div class="box-item item-menu">
           <router-link to="/markdown">
-            <span>笔记</span>
+            <span>{{$t('client.navMenu.menu4')}}</span>
           </router-link>
         </div>
         <div class="box-item item-user">
-          <router-link to="/login">
+          <n-dropdown :options="dropdownUser" :show-arrow="true" @select="onClickDropdown">
             <span>
               <n-avatar
                 round
                 object-fit="fill"
                 src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel1.jpeg"
-              >
-              </n-avatar>
+              ></n-avatar>
             </span>
-          </router-link>
+          </n-dropdown>
         </div>
       </div>
       <div class="menu-right" @click="menuShowList">
-        <span v-show="data.isMenuShow">
+        <span v-show="menuDrawer.isMenuShow">
           <n-icon color="green" size="50">
             <TextBulletListLtr24Filled />
           </n-icon>
         </span>
-        <span v-show="!data.isMenuShow">
+        <span v-show="!menuDrawer.isMenuShow">
           <n-icon color="green" size="50">
             <TextBulletListTree24Filled />
           </n-icon>
@@ -84,22 +83,22 @@
       </div>
       <div class="drawer-item">
         <router-link to="/home">
-          <span>菜单</span>
+          <span>{{$t('client.navMenu.menu1')}}</span>
         </router-link>
       </div>
       <div class="drawer-item">
         <router-link to="/">
-          <span>菜单</span>
+          <span>{{$t('client.navMenu.menu2')}}</span>
         </router-link>
       </div>
       <div class="drawer-item">
         <router-link to="/">
-          <span>菜单</span>
+          <span>{{$t('client.navMenu.menu3')}}</span>
         </router-link>
       </div>
       <div class="drawer-item">
         <router-link to="/markdown">
-          <span>笔记</span>
+          <span>{{$t('client.navMenu.menu4')}}</span>
         </router-link>
       </div>
       <div class="drawer-user">
@@ -107,7 +106,7 @@
           <n-avatar round :size="50">
             <!-- <n-icon color="green">
               <PersonCircle20Regular />
-            </n-icon> -->
+            </n-icon>-->
             AoA
           </n-avatar>
         </router-link>
@@ -118,37 +117,87 @@
 </template>
 
 <script setup lang="ts">
-import { defineComponent, ref, reactive, isRef, toRefs, watch, computed } from 'vue';
+import { defineComponent, h, ref, reactive, isRef, toRefs, watch, computed } from 'vue';
+import { NIcon, useMessage } from 'naive-ui';
+import router from '@/router/index';
+import { useI18n } from 'vue-i18n';
 import {
   Search12Regular,
   PersonCircle20Regular,
+  PersonCircle20Filled as UserIcon,
+  LocalLanguageZi24Filled as LocaleLanguage,
+  DoorArrowLeft20Regular as Logout,
   TextBulletListTree24Filled,
   TextBulletListLtr24Filled
 } from '@vicons/fluent';
-interface header {
+
+const { locale, t } = useI18n();
+const message = useMessage();
+
+const renderIcon = (icon: any) => {
+  return () => {
+    return h(NIcon, null, {
+      default: () => h(icon)
+    });
+  };
+};
+
+interface IDropdownMenu {
+  label: string;
+  key: string;
+  icon: void;
+}
+
+// 用户图标下拉菜单
+const dropdownUser: IDropdownMenu = reactive([
+  {
+    label: '用户资料',
+    key: 'userInfo',
+    icon: renderIcon(UserIcon)
+  },
+  {
+    label: 'English',
+    key: 'localeLanguage',
+    icon: renderIcon(LocaleLanguage)
+  },
+  {
+    label: '退出登录',
+    key: 'logout',
+    icon: renderIcon(Logout)
+  }
+]);
+
+const onClickDropdown = (key: string): void => {
+  if (key === 'logout') {
+    message.success('退出登陆');
+    router.push('/login');
+  }
+};
+
+interface IMenuDrawer {
   isMenuShow: boolean;
   maskShow: boolean;
 }
 const menusList: any = ref(null);
-const data: header = reactive({
+const menuDrawer: IMenuDrawer = reactive({
   isMenuShow: true,
   maskShow: false
 });
 const setMaskStyle = computed(() => {
-  return { 'container-mask': data.maskShow };
+  return { 'container-mask': menuDrawer.maskShow };
 });
 const menuShowList = () => {
   menusList.value.style.transition = '0.5s';
-  if (data.isMenuShow) {
-    data.maskShow = true;
+  if (menuDrawer.isMenuShow) {
+    menuDrawer.maskShow = true;
     menusList.value.style.top = '60px';
     menusList.value.style.zIndex = 0;
-    data.isMenuShow = false;
+    menuDrawer.isMenuShow = false;
   } else {
-    data.maskShow = false;
+    menuDrawer.maskShow = false;
     menusList.value.style.zIndex = -9;
     menusList.value.style.top = '-500px';
-    data.isMenuShow = true;
+    menuDrawer.isMenuShow = true;
   }
 };
 </script>
@@ -243,12 +292,14 @@ const menuShowList = () => {
         height: 80%;
         justify-self: center;
         align-self: center;
+        display: table-cell;
+        text-align: center;
         span {
           font-size: 16px;
           color: rgb(7, 7, 7);
           position: relative;
           top: 25%;
-          transform: translate(0, -50%);
+          transform: translate(-100%, -50%);
         }
       }
     }

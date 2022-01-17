@@ -2,6 +2,8 @@ import { defineConfig } from 'vite';
 import VuePlugin from '@vitejs/plugin-vue';
 
 import * as path from 'path';
+// const path = require('path');
+// console.log(path.resolve(__dirname, './src'));
 const resolve = (str: string): string => path.resolve(__dirname, str);
 
 // https://vitejs.dev/config/
@@ -11,6 +13,7 @@ export default defineConfig({
     alias: {
       // 取相对路径别名, @表示当前的src目录路径
       '@': resolve('src')
+      // '@': path.resolve(__dirname, './src')
     }
   },
   // 样式相关规则

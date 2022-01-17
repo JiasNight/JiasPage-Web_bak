@@ -51,12 +51,12 @@ import {
 import { useMessage, useLoadingBar } from 'naive-ui';
 import { userLogin } from '@/api/client/login/index';
 
-interface btnType {
+interface IBtnType {
   type: string;
   label: string;
   bgImg: string;
 }
-const btnList: btnType[] = reactive([
+const btnList: IBtnType[] = reactive([
   { type: 'primary', label: '春', bgImg: '/src/assets/images/login_spring.jpg' },
   { type: 'info', label: '夏', bgImg: '/src/assets/images/login_summer.jpg' },
   { type: 'warning', label: '秋', bgImg: '/src/assets/images/login_autumn.jpg' },
@@ -69,11 +69,11 @@ const seasonClickBtn = (val: String) => {
 const loginFormRef: any = ref(null);
 const message = useMessage();
 
-interface loginFormType {
+interface ILoginFormType {
   userName: string;
   password: string;
 }
-const loginFormData: loginFormType = reactive({
+const loginFormData: ILoginFormType = reactive({
   userName: '',
   password: ''
 });

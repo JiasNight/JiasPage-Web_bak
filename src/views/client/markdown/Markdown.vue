@@ -10,7 +10,8 @@
     <n-divider>虚线</n-divider>
     <div class="container-body">
       <div class="body-catalogue">
-        <h3>目录</h3>
+        <p>文章目录</p>
+        <n-divider></n-divider>
       </div>
       <md-editor
         class="body-mdeditor"
@@ -68,7 +69,6 @@ const getMarkdownById = () => {
   .container-top {
     width: 80%;
     margin: 0 auto;
-    // height: 80px;
   }
   .container-body {
     width: 70%;
@@ -78,7 +78,12 @@ const getMarkdownById = () => {
       width: 13%;
       height: 100%;
       float: left;
-      border: 2px solid rgb(126, 119, 119);
+      border-right: 2px solid rgb(126, 119, 119);
+      p {
+        text-align: center;
+        font-size: 20px;
+        font-weight: 900;
+      }
     }
     .body-mdeditor {
       width: 85%;
