@@ -8,7 +8,12 @@ const en_US = {
       menu1: 'Menu',
       menu2: 'Question',
       menu3: 'Three',
-      menu4: 'Markdown'
+      menu4: 'Markdown',
+      user: {
+        userInfo: 'User Info',
+        defaultLanguage: 'English',
+        logout: 'Log Out'
+      }
     }
   },
   // 后台

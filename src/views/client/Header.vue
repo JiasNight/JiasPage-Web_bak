@@ -117,7 +117,7 @@
 </template>
 
 <script setup lang="ts">
-import { defineComponent, h, ref, reactive, isRef, toRefs, watch, computed } from 'vue';
+import { defineComponent, h, ref, reactive, isRef, toRefs, watch, computed, onMounted } from 'vue';
 import { NIcon, useMessage } from 'naive-ui';
 import router from '@/router/index';
 import { useI18n } from 'vue-i18n';
@@ -131,9 +131,13 @@ import {
   TextBulletListLtr24Filled
 } from '@vicons/fluent';
 
+// 国际化语言
 const { locale, t } = useI18n();
+
+// 消息提示
 const message = useMessage();
 
+// 渲染icon图标方法
 const renderIcon = (icon: any) => {
   return () => {
     return h(NIcon, null, {
@@ -142,35 +146,58 @@ const renderIcon = (icon: any) => {
   };
 };
 
+// 抽屉菜单接口
 interface IDropdownMenu {
   label: string;
   key: string;
-  icon: void;
+  icon: any;
 }
 
-// 用户图标下拉菜单
-const dropdownUser: IDropdownMenu = reactive([
-  {
-    label: '用户资料',
-    key: 'userInfo',
-    icon: renderIcon(UserIcon)
-  },
-  {
-    label: 'English',
-    key: 'localeLanguage',
-    icon: renderIcon(LocaleLanguage)
-  },
-  {
-    label: '退出登录',
-    key: 'logout',
-    icon: renderIcon(Logout)
-  }
-]);
+const getDropdownUserData = (): IDropdownMenu[] => {
+  const dataList = [
+    {
+      label: t('client.navMenu.user.userInfo'),
+      key: 'userInfo',
+      icon: renderIcon(UserIcon)
+    },
+    {
+      label: t('client.navMenu.user.defaultLanguage'),
+      key: 'localeLanguage',
+      icon: renderIcon(LocaleLanguage)
+    },
+    {
+      label: t('client.navMenu.user.logout'),
+      key: 'logout',
+      icon: renderIcon(Logout)
+    }
+  ];
+  return dataList;
+};
 
+// 用户图标下拉菜单
+let dropdownUser = ref(getDropdownUserData());
+
+// onMounted(() => {
+//   dropdownUser = ref<IDropdownMenu[]>(getDropdownUserData());
+//   console.log(dropdownUser);
+// });
+
+// 用户图标出现的下拉菜单点击方法
 const onClickDropdown = (key: string): void => {
   if (key === 'logout') {
     message.success('退出登陆');
     router.push('/login');
+  } else if (key === 'localeLanguage') {
+    console.log(locale.value);
+    const language = locale.value;
+    if (language === 'zh_CN') {
+      locale.value = 'en_US';
+      console.log(t('client.navMenu.user.defaultLanguage'));
+      console.log(dropdownUser);
+    } else {
+      locale.value = 'zh_CN';
+      console.log(dropdownUser);
+    }
   }
 };
 

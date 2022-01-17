@@ -38,7 +38,7 @@ const initCurrentThree = () => {
   cdt.renderThree();
   cdt.onWindowResize();
 
-  // 首页进入相机的视角,这个视角可以在三维模型中建立一个摄像机获取摄像机的坐标,如C4D,非常准确.
+  // 首页进入相机的视角,这个视角可以在三维模型中建立一个摄像机获取摄像机的坐标
   const cameraPosition = {
     x: 0,
     y: 450,
@@ -52,7 +52,7 @@ const initCurrentThree = () => {
   cdt.cameraReset(cameraPosition, cameraLookat);
 };
 </script>
-
+                                                                             
 <style lang="scss" scoped>
 .three-container {
   width: 100vw;
