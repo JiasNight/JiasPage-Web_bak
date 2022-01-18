@@ -1,24 +1,43 @@
 <template>
   <div class="markdown-container">
     <n-space class="container-top" justify="end">
-      <!-- <router-link to="/">
+      <router-link to="/">
         <span>首页</span>
-      </router-link>-->
+      </router-link>
       <n-button strong round>取 消</n-button>
       <n-button strong round type="primary">保 存</n-button>
     </n-space>
     <n-divider>虚线</n-divider>
     <div class="container-body">
-      <div class="body-catalogue">
+      <!-- 左边部分 -->
+      <div class="body-left">
         <p>文章目录</p>
-        <n-divider></n-divider>
+        <div class="left-catalog">
+          <hr />
+          <ul class="catalog-box">
+            <li
+              class="box-li"
+              v-for="(item, index) in articleCatalogList"
+              :key="index"
+              @click="onClickArticle(item)"
+            >{{item.label}}</li>
+          </ul>
+        </div>
+        <!-- 热度排行 -->
+        <p>热度排行</p>
+        <div class="left-hotrank">
+          <hr />
+        </div>
       </div>
-      <md-editor
-        class="body-mdeditor"
-        v-model="markdownText"
-        showCodeRowNumber
-        @onSave="saveMarkdownText"
-      ></md-editor>
+      <!-- 右边部分 -->
+      <div class="body-right">
+        <md-editor
+          class="right-mdeditor"
+          v-model="markdownText"
+          showCodeRowNumber
+          @onSave="saveMarkdownText"
+        ></md-editor>
+      </div>
     </div>
     <!-- <n-button @click="getMarkdownById">获 取</n-button> -->
   </div>
@@ -59,6 +78,18 @@ const getMarkdownById = () => {
       console.log('异常');
     });
 };
+
+const articleCatalogList = reactive([
+  { id: '1', label: '文章1', author: 'sf', date: '2022-01-14 12:29:45' },
+  { id: '2', label: '文章2', author: 'sf', date: '2022-01-14 12:29:45' },
+  { id: '3', label: '文章3', author: 'sf', date: '2022-01-14 12:29:45' },
+  { id: '4', label: '文章4', author: 'sf', date: '2022-01-14 12:29:45' },
+  { id: '5', label: '文章5', author: 'sf', date: '2022-01-14 12:29:45' }
+]);
+
+const onClickArticle = (item: any) => {
+  alert(item.label);
+};
 </script>
 
 <style lang="scss" scoped>
@@ -71,24 +102,50 @@ const getMarkdownById = () => {
     margin: 0 auto;
   }
   .container-body {
-    width: 70%;
+    width: 80%;
     height: calc(100vh - 120px);
     margin: 0 auto;
-    .body-catalogue {
-      width: 13%;
+    .body-left {
+      width: 20%;
       height: 100%;
       float: left;
-      border-right: 2px solid rgb(126, 119, 119);
       p {
         text-align: center;
         font-size: 20px;
         font-weight: 900;
       }
+      .left-catalog {
+        width: 98%;
+        height: 50%;
+        .catalog-box {
+          width: 100%;
+          height: 95%;
+          margin-top: 10px;
+          overflow-y: auto;
+          .box-li {
+            width: 95%;
+            height: 25px;
+            margin: 2px auto;
+            font-size: 16px;
+            line-height: 25px;
+            font-weight: bolder;
+            background: #d3d3d8;
+            border: 1px solid #adadb8;
+            cursor: pointer;
+          }
+          .box-li:hover {
+            background: #e2e5e9;
+          }
+        }
+      }
     }
-    .body-mdeditor {
-      width: 85%;
+    .body-right {
+      width: 80%;
       height: 100%;
       float: right;
+      .right-mdeditor {
+        height: 100%;
+      }
     }
   }
 }
