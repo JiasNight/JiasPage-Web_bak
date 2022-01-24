@@ -27,6 +27,14 @@
         <p>热度排行</p>
         <div class="left-hotrank">
           <hr />
+          <n-space>
+            <n-tag
+              v-for="(word, index) in hotWordsList"
+              :key="index"
+              :type="word.type"
+              round
+            >{{word.label}}</n-tag>
+          </n-space>
         </div>
       </div>
       <!-- 右边部分 -->
@@ -90,6 +98,14 @@ const articleCatalogList = reactive([
 const onClickArticle = (item: any) => {
   alert(item.label);
 };
+
+const hotWordsList = reactive([
+  { id: '1', label: '爱在西元前', type: 'success', date: '2022-01-14 12:29:45' },
+  { id: '2', label: '不该', type: 'warning', date: '2022-01-14 12:29:45' },
+  { id: '3', label: '超人不会飞', type: 'error', date: '2022-01-14 12:29:45' },
+  { id: '4', label: '手写的从前', type: 'info', date: '2022-01-14 12:29:45' },
+  { id: '5', label: '哪里都是你', type: '', date: '2022-01-14 12:29:45' }
+]);
 </script>
 
 <style lang="scss" scoped>
@@ -114,6 +130,7 @@ const onClickArticle = (item: any) => {
         font-size: 20px;
         font-weight: 900;
       }
+      // 文章目录
       .left-catalog {
         width: 98%;
         height: 50%;
@@ -137,6 +154,10 @@ const onClickArticle = (item: any) => {
             background: #e2e5e9;
           }
         }
+      }
+      // 热度排行
+      .left-hotrank {
+        width: 98%;
       }
     }
     .body-right {
