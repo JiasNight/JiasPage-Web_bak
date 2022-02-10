@@ -15,12 +15,7 @@
         <div class="left-catalog">
           <hr />
           <ul class="catalog-box">
-            <li
-              class="box-li"
-              v-for="(item, index) in articleCatalogList"
-              :key="index"
-              @click="onClickArticle(item)"
-            >{{item.label}}</li>
+            <li class="box-li" v-for="(item, index) in articleCatalogList" :key="index" @click="onClickArticle(item)">{{item.label}}</li>
           </ul>
         </div>
         <!-- 热度排行 -->
@@ -28,23 +23,13 @@
         <div class="left-hotrank">
           <hr />
           <n-space>
-            <n-tag
-              v-for="(word, index) in hotWordsList"
-              :key="index"
-              :type="word.type"
-              round
-            >{{word.label}}</n-tag>
+            <n-tag v-for="(word, index) in hotWordsList" :key="index" :type="word.type" round>{{word.label}}</n-tag>
           </n-space>
         </div>
       </div>
       <!-- 右边部分 -->
       <div class="body-right">
-        <md-editor
-          class="right-mdeditor"
-          v-model="markdownText"
-          showCodeRowNumber
-          @onSave="saveMarkdownText"
-        ></md-editor>
+        <md-editor class="right-mdeditor" v-model="markdownText" showCodeRowNumber @onSave="saveMarkdownText"></md-editor>
       </div>
     </div>
     <!-- <n-button @click="getMarkdownById">获 取</n-button> -->

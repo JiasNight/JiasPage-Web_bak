@@ -2,24 +2,12 @@
   <n-loading-bar-provider>
     <div class="login-container" :style="{ backgroundImage: 'url(' + backImgUrl + ')' }">
       <div class="container-header">
-        <n-button
-          v-for="(item, index) in btnList"
-          :key="index"
-          :type="item.type"
-          ghost
-          @click="seasonClickBtn(item)"
-          >{{ item.label }}</n-button
-        >
+        <n-button v-for="(item, index) in btnList" :key="index" :type="item.type" ghost @click="seasonClickBtn(item)">{{ item.label }}</n-button>
       </div>
       <!-- 表单 -->
       <div class="container-login">
         <n-message-provider>
-          <n-form
-            ref="loginFormRef"
-            :label-width="80"
-            :model="loginFormData"
-            :rules="loginFormRules"
-          >
+          <n-form ref="loginFormRef" :label-width="80" :model="loginFormData" :rules="loginFormRules">
             <n-form-item label="用户名" path="userName">
               <n-input v-model:value="loginFormData.userName" placeholder="输入用户名" />
             </n-form-item>

@@ -1,19 +1,29 @@
 import { defineConfig } from 'vite';
 import VuePlugin from '@vitejs/plugin-vue';
+// 组件样式按需加载
+import usePluginImport from 'vite-plugin-importer';
+// 压缩
+import viteCompression from 'vite-plugin-compression';
 
-import * as path from 'path';
-// const path = require('path');
-// console.log(path.resolve(__dirname, './src'));
-const resolve = (str: string): string => path.resolve(__dirname, str);
+const path = require('path');
+const resolve = (dir: string): string => path.join(__dirname, dir);
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [VuePlugin()],
+  plugins: [
+    VuePlugin(),
+    // gzip压缩
+    viteCompression(),
+    // usePluginImport({
+    //   libraryName: 'naive-ui',
+    //   libraryDirectory: 'es',
+    //   style: (name) => `${name}/styles/index`,
+    // })
+  ],
   resolve: {
     alias: {
       // 取相对路径别名, @表示当前的src目录路径
       '@': resolve('src')
-      // '@': path.resolve(__dirname, './src')
     }
   },
   // 样式相关规则
@@ -41,6 +51,10 @@ export default defineConfig({
       compress: {
         drop_console: true,
         drop_debugger: true
+      },
+      output: {
+        // 去掉注释内容
+        comments: true,
       }
     }
   },

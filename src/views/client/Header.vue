@@ -46,11 +46,7 @@
         <div class="box-item item-user">
           <n-dropdown :options="dropdownUser" :show-arrow="true" @select="onClickDropdown">
             <span>
-              <n-avatar
-                round
-                object-fit="fill"
-                src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel1.jpeg"
-              ></n-avatar>
+              <n-avatar round object-fit="fill" src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel1.jpeg"></n-avatar>
             </span>
           </n-dropdown>
         </div>
@@ -121,6 +117,7 @@ import { defineComponent, h, ref, reactive, isRef, toRefs, watch, computed, onMo
 import { NIcon, useMessage } from 'naive-ui';
 import router from '@/router/index';
 import { useI18n } from 'vue-i18n';
+
 import {
   Search12Regular,
   PersonCircle20Regular,
