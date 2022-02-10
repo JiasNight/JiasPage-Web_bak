@@ -12,3 +12,11 @@ declare module '*.vue' {
 
 declare module 'three';
 declare module '@/utils/request';
+declare module 'three/examples/jsm/loaders/RGBELoader';
+declare module 'three/examples/jsm/loaders/GLTFLoader';
+declare module 'three/examples/jsm/controls/TrackballControls.js';
+declare module '@/api/client/login/index';
+declare module '@/api/client/markdown/index';
+declare module 'three/examples/jsm/controls/DragControls';
+declare module 'three/examples/jsm/controls/OrbitControls.js';
+declare module '@/router/index';

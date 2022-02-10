@@ -36,7 +36,7 @@ class Interceptors {
   init() {
     // 请求拦截
     this.instance.interceptors.request.use(
-      (config) => {
+      (config: any) => {
         this.startLoading();
         // 每次发送请求之前判断是否存在token，如果存在，则统一在http请求的header都加上token，不用每次请求都手动添加了
         const token = window.localStorage.getItem('TOKEN');

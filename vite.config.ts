@@ -34,6 +34,7 @@ export default defineConfig({
       //   additionalData: '@import "./src/assets/css/global.scss";'
       // }
       scss: {
+        charset: false,
         // 加载全局样式
         additionalData: `@use './src/assets/css/global.scss';`
       }

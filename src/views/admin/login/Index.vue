@@ -63,7 +63,7 @@ const btnList: btnType[] = reactive([
   { type: 'error', label: '冬', bgImg: '/src/assets/images/login_winter.jpg' }
 ]);
 let backImgUrl = ref('/src/assets/images/login_spring.jpg');
-const seasonClickBtn = (val: String) => {
+const seasonClickBtn = (val: any) => {
   backImgUrl.value = (val as any).bgImg;
 };
 const loginFormRef: any = ref(null);

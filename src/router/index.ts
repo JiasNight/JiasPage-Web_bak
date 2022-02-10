@@ -39,14 +39,14 @@ const routes: Array<RouteRecordRaw> = [
     path: '/admin',
     name: 'Admin',
     component: () => import('@/views/admin/Index.vue'),
-    redirect: '/admin/dashboard',
-    children: [
-      {
-        path: 'dashboard',
-        name: 'Dashboard',
-        component: () => import('@/views/admin/layout/Index.vue')
-      }
-    ]
+    // redirect: '/admin/dashboard',
+    // children: [
+    //   {
+    //     path: 'dashboard',
+    //     name: 'Dashboard',
+    //     component: () => import('@/views/admin/layout/Index.vue')
+    //   }
+    // ]
   }
 ];
 
