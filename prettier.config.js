@@ -1,5 +1,5 @@
 module.exports = {
-  extends: ['airbnb', 'prettier', 'prettier/react'],
+  // extends: ['airbnb', 'prettier', 'prettier/react'],
   // 一行最多 200 字符
   printWidth: 200,
   // 不使用缩进符，而使用空格
