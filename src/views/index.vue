@@ -12,8 +12,8 @@
 </template>
 
 <script lang="ts" setup>
-import Header from '@/views/client/Header.vue';
-import Footer from '@/views/client/Footer.vue';
+import Header from '@/views/layout/header.vue';
+import Footer from '@/views/layout/footer.vue';
 import { ref, onMounted, onUnmounted } from 'vue';
 
 onMounted(() => {

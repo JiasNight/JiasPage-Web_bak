@@ -3,51 +3,37 @@ import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
-    name: 'Index',
-    component: () => import('@/views/client/Index.vue'),
-    redirect: 'Home',
+    name: 'index',
+    component: () => import('@/views/index.vue'),
+    redirect: 'home',
     children: [
       {
         path: 'home',
         name: 'Home',
-        component: () => import('@/views/client/Home.vue')
+        component: () => import('@/views/home/index.vue')
       }
     ]
   },
   {
     path: '/three',
     name: 'Three',
-    component: () => import('@/views/client/three/Index.vue')
+    component: () => import('@/views/three/index.vue')
   },
   {
     path: '/markdown',
     name: 'Markdown',
-    component: () => import('@/views/client/markdown/Markdown.vue')
+    component: () => import('@/views/markdown/markdown.vue')
   },
   {
     path: '/word',
     name: 'Word',
-    component: () => import('@/views/client/markdown/Word.vue')
+    component: () => import('@/views/markdown/word.vue')
   },
   {
     path: '/login',
     name: 'Login',
-    component: () => import('@/views/client/login/Index.vue')
+    component: () => import('@/views/login/index.vue')
   },
-  // 后台管理
-  {
-    path: '/admin',
-    name: 'Admin',
-    component: () => import('@/views/admin/Index.vue'),
-    // redirect: '/admin/dashboard',
-    // children: [
-    //   {
-    //     path: 'dashboard',
-    //     name: 'Dashboard',
-    //     component: () => import('@/views/admin/layout/Index.vue')
-    //   }
-    // ]
-  }
 ];
 
 const router = createRouter({

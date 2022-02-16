@@ -4,13 +4,7 @@
       <!-- 轮播图 -->
       <div class="main-top">
         <n-carousel show-arrow autoplay>
-          <img
-            class="carousel-img"
-            v-for="(item, index) in imgLists"
-            :key="index"
-            :src="item.imgSrc"
-            :alt="item.label"
-          />
+          <img class="carousel-img" v-for="(item, index) in imgLists" :key="index" :src="item.imgSrc" :alt="item.label" />
         </n-carousel>
       </div>
       <!-- 主体部分 -->

@@ -2,24 +2,12 @@
   <n-loading-bar-provider>
     <div class="login-container" :style="{ backgroundImage: 'url(' + backImgUrl + ')' }">
       <div class="container-header">
-        <n-button
-          v-for="(item, index) in btnList"
-          :key="index"
-          :type="item.type"
-          ghost
-          @click="seasonClickBtn(item)"
-          >{{ item.label }}</n-button
-        >
+        <n-button v-for="(item, index) in btnList" :key="index" :type="item.type" ghost @click="seasonClickBtn(item)">{{ item.label }}</n-button>
       </div>
       <!-- 表单 -->
       <div class="container-login">
         <n-message-provider>
-          <n-form
-            ref="loginFormRef"
-            :label-width="80"
-            :model="loginFormData"
-            :rules="loginFormRules"
-          >
+          <n-form ref="loginFormRef" :label-width="80" :model="loginFormData" :rules="loginFormRules">
             <n-form-item label="用户名" path="userName">
               <n-input v-model:value="loginFormData.userName" placeholder="输入用户名" />
             </n-form-item>
@@ -49,14 +37,14 @@ import {
   getCurrentInstance
 } from 'vue';
 import { useMessage, useLoadingBar } from 'naive-ui';
-import { userLogin } from '@/api/client/login/index';
+import { userLogin } from '@/api/login/index';
 
-interface btnType {
+interface IBtnType {
   type: string;
   label: string;
   bgImg: string;
 }
-const btnList: btnType[] = reactive([
+const btnList: IBtnType[] = reactive([
   { type: 'primary', label: '春', bgImg: '/src/assets/images/login_spring.jpg' },
   { type: 'info', label: '夏', bgImg: '/src/assets/images/login_summer.jpg' },
   { type: 'warning', label: '秋', bgImg: '/src/assets/images/login_autumn.jpg' },
@@ -69,11 +57,11 @@ const seasonClickBtn = (val: any) => {
 const loginFormRef: any = ref(null);
 const message = useMessage();
 
-interface loginFormType {
+interface ILoginFormType {
   userName: string;
   password: string;
 }
-const loginFormData: loginFormType = reactive({
+const loginFormData: ILoginFormType = reactive({
   userName: '',
   password: ''
 });

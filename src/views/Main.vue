@@ -1,5 +1,5 @@
 <template>
-  <div id="amin">
+  <div id="main">
     <router-view></router-view>
   </div>
 </template>
@@ -16,7 +16,7 @@ window.$loadingBar = useLoadingBar();
 </script>
 
 <style>
-#amin {
+#main {
   /* font-family: Avenir, Helvetica, Arial, sans-serif; */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
