@@ -1,15 +1,33 @@
 <template>
   <div class="home-container">
-    <div class="container-main">
-      <!-- 轮播图 -->
-      <div class="main-top">
-        <n-carousel show-arrow autoplay>
-          <img class="carousel-img" v-for="(item, index) in imgLists" :key="index" :src="item.imgSrc" :alt="item.label" />
-        </n-carousel>
-      </div>
-      <!-- 主体部分 -->
-      <div class="main-body"></div>
+    <!-- 轮播图 -->
+    <!-- <n-carousel show-arrow autoplay>
+      <img class="carousel-img" v-for="(item, index) in imgLists" :key="index" :src="item.imgSrc" :alt="item.label" />
+    </n-carousel> -->
+    <div class="container-main" v-for="(item, index) in imgLists" :key="index" :style="{backgroundImage: `url(${item.imgSrc})`, backgroundSize: '100% 100%'}">
+      <n-space>
+        <n-button>Default</n-button>
+        <n-button type="tertiary">
+          Tertiary
+        </n-button>
+        <n-button type="primary">
+          Primary
+        </n-button>
+        <n-button type="info">
+          Info
+        </n-button>
+        <n-button type="success">
+          Success
+        </n-button>
+        <n-button type="warning">
+          Warning
+        </n-button>
+        <n-button type="error">
+          Error
+        </n-button>
+      </n-space>
     </div>
+    <!-- <img class="carousel-img" v-for="(item, index) in imgLists" :key="index" :src="item.imgSrc" :alt="item.label" /> -->
   </div>
 </template>
 
@@ -64,22 +82,11 @@ const imgLists: loopImgType[] = reactive([
 
 <style lang="scss" scoped>
 .home-container {
-  width: 70%;
-  // height: calc(100vh - 120px);
-  height: 100%;
+  width: 100%;
   margin: 0 auto;
   .container-main {
     width: 100%;
-    height: 100%;
-    .main-top {
-      width: 100%;
-      height: 280px;
-      .carousel-img {
-        width: 100%;
-        height: 280px;
-        object-fit: cover;
-      }
-    }
+    height: calc(100vh - 60px);
   }
   .container-main::-webkit-scrollbar {
     width: 0 !important;

@@ -15,7 +15,9 @@
         <div class="left-catalog">
           <hr />
           <ul class="catalog-box">
-            <li class="box-li" v-for="(item, index) in articleCatalogList" :key="index" @click="onClickArticle(item)">{{item.label}}</li>
+            <li class="box-li" v-for="(item, index) in articleCatalogList" :key="index" @click="onClickArticle(item)">
+              {{ item.label }}
+            </li>
           </ul>
         </div>
         <!-- 热度排行 -->
@@ -23,7 +25,7 @@
         <div class="left-hotrank">
           <hr />
           <n-space>
-            <n-tag v-for="(word, index) in hotWordsList" :key="index" :type="word.type" round>{{word.label}}</n-tag>
+            <n-tag v-for="(word, index) in hotWordsList" :key="index" :type="word.type" round>{{ word.label }}</n-tag>
           </n-space>
         </div>
       </div>
@@ -40,7 +42,7 @@
 import { defineComponent, ref, reactive, isRef, toRefs, watch, computed, getCurrentInstance } from 'vue';
 import MdEditor from 'md-editor-v3';
 import 'md-editor-v3/lib/style.css';
-import { markdownSave, markdownById } from '@/api/client/markdown/index';
+import { markdownSave, markdownById } from '@/api/markdown/index';
 
 const toolbars: Array<string> = ['italic', 'underline', '-', 'bold', '=', 'github'];
 
@@ -131,12 +133,12 @@ const hotWordsList = reactive([
             font-size: 16px;
             line-height: 25px;
             font-weight: bolder;
-            background: #d3d3d8;
+            background: #e2e5e9;
             border: 1px solid #adadb8;
             cursor: pointer;
           }
           .box-li:hover {
-            background: #e2e5e9;
+            background: #13dd60;
           }
         }
       }

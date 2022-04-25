@@ -20,6 +20,11 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import('@/views/three/index.vue')
   },
   {
+    path: '/article',
+    name: 'Markdown',
+    component: () => import('@/views/markdown/index.vue')
+  },
+  {
     path: '/markdown',
     name: 'Markdown',
     component: () => import('@/views/markdown/markdown.vue')
@@ -33,7 +38,7 @@ const routes: Array<RouteRecordRaw> = [
     path: '/login',
     name: 'Login',
     component: () => import('@/views/login/index.vue')
-  },
+  }
 ];
 
 const router = createRouter({

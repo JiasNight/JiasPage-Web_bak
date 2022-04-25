@@ -1,7 +1,7 @@
 <template>
-  <div id="main">
+  <n-scrollbar id="main" @scrollTo="scrollByLength">
     <router-view></router-view>
-  </div>
+  </n-scrollbar>
 </template>
 
 <script lang="ts" setup>
@@ -13,6 +13,11 @@ window.$message = useMessage();
 window.$dialog = useDialog();
 window.$notification = useNotification();
 window.$loadingBar = useLoadingBar();
+
+const scrollByLength: any = (options: { left?: number, top?: number, behavior?: ScrollBehavior }): void => {
+  console.log(options)
+}
+
 </script>
 
 <style>

@@ -7,7 +7,7 @@
       <!-- 子路由 -->
       <router-view></router-view>
     </div>
-    <Footer></Footer>
+    <!-- <Footer></Footer> -->
   </div>
 </template>
 
@@ -17,11 +17,11 @@ import Footer from '@/views/layout/footer.vue';
 import { ref, onMounted, onUnmounted } from 'vue';
 
 onMounted(() => {
-  window.addEventListener('scroll', handleScroll);
+  window.addEventListener('scroll', handleScroll, true);
 });
 
 onUnmounted(() => {
-  window.removeEventListener('scroll', handleScroll);
+  window.removeEventListener('scroll', handleScroll, true);
 });
 
 // 头部导航栏滑动隐藏
@@ -48,9 +48,10 @@ const handleScroll = () => {
   }
   .container-body {
     width: 100%;
-    min-height: calc(100vh - 120px);
+    min-height: calc(100vh - 60px);
+    max-height: calc(100vh - 60px);
     position: relative;
-    top: 62px;
+    top: 60px;
   }
 }
 </style>
