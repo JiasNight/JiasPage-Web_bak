@@ -1,8 +1,10 @@
 <template>
   <div class="index-container">
-    <transition name="fade">
-      <Header v-show="headerShow" :bgColor="headerColor" :ftColor="headerFontColor"></Header>
-    </transition>
+    <div class="container-nav">
+      <transition name="fade">
+        <Header v-show="headerShow" :headerColor="headerColor"></Header>
+      </transition>
+    </div>
     <div class="container-body">
       <!-- 子路由 -->
       <router-view></router-view>
@@ -24,25 +26,28 @@ onUnmounted(() => {
 });
 
 // 头部导航背景色
-const headerColor = ref<String>('rgb(75, 73, 72, 0.4)');
-
-const headerFontColor = ref<String>('#fff');
+const headerColor = $ref('rgb(75, 73, 72, 0.4)');
+// const headerColor = $ref('rgb(0, 0, 0)');
 
 // 头部导航栏滑动隐藏
-const headerShow = ref<boolean>(true);
+let headerShow = $ref(true);
+
 const handleScroll = () => {
   const top = document.documentElement.scrollTop;
-  console.log(top)
+  console.log(document.documentElement)
   if (top > 30) {
-    headerShow.value = false;
+    headerShow = false;
   } else {
-    headerShow.value = true;
+    headerShow = true;
   }
 };
 </script>
 
 <style lang="scss" scoped>
 .index-container {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
   .fade-enter-active,
   .fade-leave-active {
     transition: all 0.5s ease;
@@ -51,12 +56,16 @@ const handleScroll = () => {
   .fade-leave-to {
     opacity: 0;
   }
+  .container-nav {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 1;
+  }
   .container-body {
     width: 100%;
     height: 100vh;
-    background-color: aqua;
-    // position: relative;
-    // top: 60px;
+    flex: 1;
   }
 }
 </style>

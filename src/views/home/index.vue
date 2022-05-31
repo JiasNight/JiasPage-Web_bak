@@ -3,14 +3,29 @@
     <!-- 轮播图 -->
     <div class="container-loop">
       <n-carousel show-arrow autoplay draggable>
+      <!-- <n-carousel draggable> -->
         <div class="loop-img" v-for="(item, index) in imgLists" :key="index" :style="{backgroundImage: `url(${item.imgSrc})`}">
+          <n-space class="img-content" align="center" justify="center">
+            <n-statistic label="少年，多喝热水吧！！！" tabular-nums>
+              <n-countdown
+                :render="renderCountdown"
+                :duration="996 * 1000"
+                :active="true"
+              />
+            </n-statistic>
+          </n-space>
         </div>
       </n-carousel>
     </div>
+    <!-- 首页主要内容 -->
+    <section class="container-main">
+      
+    </section>
   </div>
 </template>
 
 <script lang="ts" setup>
+import { CountdownProps  } from 'naive-ui'
 
 onMounted(() => {
   console.log('轮播');
@@ -70,6 +85,17 @@ const imgLists: loopImgType[] = reactive([
     imgSrc: 'src/assets/images/home/999.jpg'
   }
 ]);
+
+const renderCountdown: CountdownProps['render'] = ({
+  hours,
+  minutes,
+  seconds
+}) => {
+  return `早起${String(hours).padStart(2, '0')}晚睡${String(
+    minutes
+  ).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`
+}
+
 </script>
 
 <style lang="scss" scoped>
@@ -83,20 +109,16 @@ const imgLists: loopImgType[] = reactive([
       width: 100%;
       height: 100%;
       background-size: cover;
+      object-fit: cover;
+      .img-content {
+        width: 100%;
+        height: 100%;
+      }
     }
   }
   .container-main {
     width: 100%;
-    height: 100%;
-  }
-  .container-main::-webkit-scrollbar {
-    width: 0 !important;
-  }
-  .container-main {
-    -ms-overflow-style: none;
-  }
-  .container-main {
-    overflow: -moz-scrollbars-none;
+    height: 1000px;
   }
 }
 </style>

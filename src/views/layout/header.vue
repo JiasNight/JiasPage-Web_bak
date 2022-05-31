@@ -129,16 +129,14 @@ import {
 
 // 组件属性
 const props = defineProps({
-  bgColor: String,
-  ftColor: String
+  headerColor: String
 })
 
 // 组件方法
 const emit = defineEmits(['change', 'delete'])
 
-const headerColor: Object = reactive(Object)({
-  backgroundColor: props.bgColor,
-  color: props.ftColor
+const headerColor = $ref<String>({
+  backgroundColor: props.headerColor
 })
 
 // 国际化语言
@@ -242,12 +240,11 @@ const menuShowList = () => {
 <style lang="scss" scoped>
 .header-container {
   width: 100%;
-  height: 60px;
-  position: fixed;
-  z-index: 9;
+  position: relative;
+  // z-index: 9;
   .container-menu {
     width: 100%;
-    height: 100%;
+    height: 60px;
     .menu-left {
       width: 80%;
       height: 100%;
@@ -351,22 +348,22 @@ const menuShowList = () => {
       }
     }
   }
+  // 遮罩层
   .container-mask {
     width: 100%;
     height: 100%;
-    position: fixed;
+    position: absolute;
     top: 60px;
     background-color: rgba(0, 0, 0, 0.4);
-    z-index: -9;
     display: none;
   }
+  // 抽屉
   .container-drawer {
     width: 100%;
     height: 500px;
     position: absolute;
     top: -500px;
     background: linear-gradient(0deg, rgba(32, 107, 145, 0.774), rgba(222, 225, 230, 0.911));
-    z-index: -9;
     display: none;
     .drawer-search {
       width: 90%;
@@ -385,6 +382,7 @@ const menuShowList = () => {
       background: rgba(190, 184, 184, 0.377);
       border-radius: 5px;
       margin-top: 20px;
+      text-align: center;
       a {
         text-decoration: none;
       }
@@ -402,6 +400,7 @@ const menuShowList = () => {
     .drawer-user {
       width: 100%;
       margin-top: 30px;
+      text-align: center;
     }
   }
 }
