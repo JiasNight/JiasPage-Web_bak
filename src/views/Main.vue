@@ -1,11 +1,8 @@
 <template>
-  <n-scrollbar id="main" @scrollTo="scrollByLength">
-    <router-view></router-view>
-  </n-scrollbar>
+  <router-view></router-view>
 </template>
 
 <script lang="ts" setup>
-import { defineComponent } from 'vue';
 import { useMessage, useDialog, useNotification, useLoadingBar } from 'naive-ui';
 
 // mount on window
@@ -13,10 +10,6 @@ window.$message = useMessage();
 window.$dialog = useDialog();
 window.$notification = useNotification();
 window.$loadingBar = useLoadingBar();
-
-const scrollByLength: any = (options: { left?: number, top?: number, behavior?: ScrollBehavior }): void => {
-  console.log(options)
-}
 
 </script>
 

@@ -2,6 +2,10 @@ import { defineConfig, loadEnv } from 'vite';
 import VuePlugin from '@vitejs/plugin-vue';
 // 组件样式按需加载
 import usePluginImport from 'vite-plugin-importer';
+// 自动引入vue函数
+import autoImport from 'unplugin-auto-import/vite';
+// 添加tsx和jsx语法
+import vueJsx from '@vitejs/plugin-vue-jsx';
 // 打包压缩
 import viteCompression from 'vite-plugin-compression';
 
@@ -12,7 +16,15 @@ const resolve = (dir: string): string => path.join(__dirname, dir);
 export default ({ mode }) => {
   return defineConfig({
     plugins: [
-      VuePlugin(),
+      VuePlugin({
+        // 开启ref转换
+        refTransform: true
+      }),
+      autoImport({
+        // dts: 'src/auto-imports.d.ts', // 可以自定义文件生成的位置，默认是根目录下
+        imports: ['vue']
+      }),
+      vueJsx(),
       // gzip压缩
       viteCompression()
       // usePluginImport({

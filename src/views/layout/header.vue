@@ -1,5 +1,5 @@
 <template>
-  <div class="header-container">
+  <div class="header-container" :style="headerColor">
     <!-- 导航菜单 -->
     <div class="container-menu">
       <!-- grid布局 -->
@@ -11,7 +11,7 @@
         </div>
         <div class="box-item item-title">
           <router-link to="/">
-            <span>TITLE</span>
+            <span>PAGE</span>
           </router-link>
         </div>
         <div class="box-item item-search">
@@ -113,7 +113,6 @@
 </template>
 
 <script setup lang="ts">
-import { defineComponent, h, ref, reactive, isRef, toRefs, watch, computed, onMounted } from 'vue';
 import { NIcon, useMessage } from 'naive-ui';
 import router from '@/router/index';
 import { useI18n } from 'vue-i18n';
@@ -127,6 +126,20 @@ import {
   TextBulletListTree24Filled,
   TextBulletListLtr24Filled
 } from '@vicons/fluent';
+
+// 组件属性
+const props = defineProps({
+  bgColor: String,
+  ftColor: String
+})
+
+// 组件方法
+const emit = defineEmits(['change', 'delete'])
+
+const headerColor: Object = reactive(Object)({
+  backgroundColor: props.bgColor,
+  color: props.ftColor
+})
 
 // 国际化语言
 const { locale, t } = useI18n();
@@ -232,7 +245,6 @@ const menuShowList = () => {
   height: 60px;
   position: fixed;
   z-index: 9;
-  background: rgba(222, 225, 230, 0.856);
   .container-menu {
     width: 100%;
     height: 100%;
@@ -262,7 +274,7 @@ const menuShowList = () => {
         span {
           font-size: 35px;
           font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-          color: rgb(7, 7, 7);
+          color: #f1f3f5;
         }
       }
       .item-search {
@@ -288,13 +300,13 @@ const menuShowList = () => {
           font-size: 18px;
           font-weight: 600;
           font-family: '楷体';
-          color: rgb(7, 7, 7);
           position: relative;
+          color: #ecf0f1;
           top: 25%;
           transform: translate(0, -50%);
         }
         span:hover {
-          color: rgb(6, 221, 6);
+          color: #26de81;
         }
         span::after {
           width: 5px;
@@ -320,7 +332,6 @@ const menuShowList = () => {
         text-align: center;
         span {
           font-size: 16px;
-          color: rgb(7, 7, 7);
           position: relative;
           top: 25%;
           transform: translate(-100%, -50%);
