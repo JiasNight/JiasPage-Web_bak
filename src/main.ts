@@ -2,8 +2,8 @@ import { createApp } from 'vue';
 import App from './App.vue';
 // 引入路由
 import router from './router';
-// 引入vuex
-import { store, key } from './store';
+// 引入pinia
+import store from './store';
 // 引入axios
 import axios from 'axios';
 // 引入i18n
@@ -20,7 +20,7 @@ const app = createApp(App);
 app.use(naiveUI);
 app.use(router);
 app.use(i18n);
-app.use(store, key);
+app.use(store);
 // 全局挂在axios
 app.config.globalProperties.$axios = axios;
 // 挂载

@@ -15,7 +15,7 @@ module.exports = {
     'prettier/@typescript-eslint', // 使用eslint-config-prettier禁用一些与Prettier冲突的ESLint规则
     'plugin:prettier/recommended', // 启用eslint-plugin-prettier和eslint-config-prettier，使编辑器显示错误提示，确保这项是扩展数组中的最后一个配置
     'plugin:vue/vue3-strongly-recommended',
-    'plugin:vue/vue3-recommende',
+    'plugin:vue/vue3-recommended',
   ],
   rules: {
     '@typescript-eslint/ban-ts-ignore': 'off',

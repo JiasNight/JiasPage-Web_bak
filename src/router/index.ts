@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 
-const routes: Array<RouteRecordRaw> = [
+const commonRoutes: Array<RouteRecordRaw> = [
   {
     path: '/',
     name: 'index',
@@ -10,42 +10,42 @@ const routes: Array<RouteRecordRaw> = [
       {
         path: 'home',
         name: 'Home',
-        component: () => import('@/views/home/index.vue')
-      }
-    ]
+        component: () => import('@/views/client/home/index.vue'),
+      },
+    ],
   },
   {
     path: '/three',
     name: 'Three',
-    component: () => import('@/views/three/index.vue')
+    component: () => import('@/views/client/three/index.vue'),
   },
   {
     path: '/article',
     name: 'Markdown',
-    component: () => import('@/views/markdown/index.vue')
+    component: () => import('@/views/client/markdown/index.vue'),
   },
   {
     path: '/markdown',
     name: 'Markdown',
-    component: () => import('@/views/markdown/markdown.vue')
+    component: () => import('@/views/client/markdown/markdown.vue'),
   },
   {
     path: '/word',
     name: 'Word',
-    component: () => import('@/views/markdown/word.vue')
+    component: () => import('@/views/client/markdown/word.vue'),
   },
   {
     path: '/login',
     name: 'Login',
-    component: () => import('@/views/login/index.vue')
-  }
+    component: () => import('@/views/client/login/index.vue'),
+  },
 ];
 
 const router = createRouter({
   history: createWebHistory(), // History 路由
   // history: createWebHashHistory(), // Hash 路由
   // base: process.env.BASE_URL,
-  routes: [...routes]
+  routes: [...commonRoutes],
 });
 
 router.beforeEach((to, from, next) => {

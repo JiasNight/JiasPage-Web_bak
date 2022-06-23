@@ -1,27 +1,37 @@
 module.exports = {
-  printWidth: 120, // 超过最大值换行
-  tabWidth: 2, // 缩进字节数
-  useTabs: false, // 缩进使用tab，不使用空格
-  semi: true, // 句尾添加分号
-  singleQuote: true, // 使用单引号代替双引号
-  proseWrap: 'preserve', // 默认值。因为使用了一些折行敏感型的渲染器（如GitHub comment）而按照markdown文本样式进行折行
-  arrowParens: 'avoid', //  (x) => {} 箭头函数参数只有一个时是否要有小括号。avoid：省略括号
-  bracketSpacing: true, // 在对象，数组括号与文字之间加空格 "{ foo: bar }"
-  endOfLine: 'auto', // 结尾是 \n \r \n\r auto
-  eslintIntegration: false, //不让prettier使用eslint的代码格式进行校验
-  htmlWhitespaceSensitivity: 'ignore', // 指定HTML文件的全局空白区域敏感度 有效选项："css"- 遵守CSS display属性的默认值。"strict" - 空格被认为是敏感的。"ignore" - 空格被认为是不敏感的。html 中空格也会占位，影响布局，prettier 格式化的时候可能会将文本换行，造成布局错乱
-  ignorePath: '.prettierignore', // 不使用prettier格式化的文件填写在项目的.prettierignore文件中
-  jsxSingleQuote: false, // 在jsx中使用单引号代替双引号
-  requireConfig: false, // Require a 'prettierconfig' to format prettier
-  stylelintIntegration: false, //不让prettier使用stylelint的代码格式进行校验
-  trailingComma: 'none', // 在对象或数组最后一个元素后面是否加逗号（在ES5中加尾逗号）
-  tslintIntegration: false, // 不让prettier使用tslint的代码格式进行校验
-  overrides: [
-    {
-      files: '*.html',
-      options: {
-        parser: 'html'
-      }
-    }
-  ]
+  // 一行最多 120 字符
+  printWidth: 120,
+  // 使用 2 个空格缩进
+  tabWidth: 2,
+  // 不使用 tab 缩进，而使用空格
+  useTabs: false,
+  // 行尾需要有分号
+  semi: true,
+  // 使用单引号代替双引号
+  singleQuote: true,
+  // 对象的 key 仅在必要时用引号
+  quoteProps: 'as-needed',
+  // jsx 不使用单引号，而使用双引号
+  jsxSingleQuote: false,
+  // 末尾使用逗号
+  trailingComma: 'all',
+  // 大括号内的首尾需要空格 { foo: bar }
+  bracketSpacing: true,
+  // jsx 标签的反尖括号需要换行
+  jsxBracketSameLine: false,
+  // 箭头函数，只有一个参数的时候，也需要括号
+  arrowParens: 'always',
+  // 每个文件格式化的范围是文件的全部内容
+  rangeStart: 0,
+  rangeEnd: Infinity,
+  // 不需要写文件开头的 @prettier
+  requirePragma: false,
+  // 不需要自动在文件开头插入 @prettier
+  insertPragma: false,
+  // 使用默认的折行标准
+  proseWrap: 'preserve',
+  // 根据显示样式决定 html 要不要折行
+  htmlWhitespaceSensitivity: 'css',
+  // 换行符使用 lf
+  endOfLine: 'lf',
 };

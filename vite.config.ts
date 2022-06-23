@@ -8,13 +8,21 @@ import autoImport from 'unplugin-auto-import/vite';
 import vueJsx from '@vitejs/plugin-vue-jsx';
 // 打包压缩
 import viteCompression from 'vite-plugin-compression';
+// 按需引入Naive
+import Components from 'unplugin-vue-components/vite';
+import { NaiveUiResolver } from 'unplugin-vue-components/resolvers';
 
-const path = require('path');
-const resolve = (dir: string): string => path.join(__dirname, dir);
+import * as path from 'path';
 
 // https://vitejs.dev/config/
 export default ({ mode }) => {
   return defineConfig({
+    resolve: {
+      alias: {
+        // 取相对路径别名, @表示当前的src目录路径
+        '@': path.resolve(__dirname, 'src')
+      }
+    },
     plugins: [
       vuePlugin({
         // 开启ref转换
@@ -26,19 +34,11 @@ export default ({ mode }) => {
       }),
       vueJsx(),
       // gzip压缩
-      viteCompression()
-      // usePluginImport({
-      //   libraryName: 'naive-ui',
-      //   libraryDirectory: 'es',
-      //   style: (name) => `${name}/styles/index`,
-      // })
+      viteCompression(),
+      Components({
+        resolvers: [NaiveUiResolver()]
+      })
     ],
-    resolve: {
-      alias: {
-        // 取相对路径别名, @表示当前的src目录路径
-        '@': resolve('src')
-      }
-    },
     // 样式相关规则
     css: {
       preprocessorOptions: {
