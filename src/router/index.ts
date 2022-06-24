@@ -39,6 +39,11 @@ const commonRoutes: Array<RouteRecordRaw> = [
     name: 'Login',
     component: () => import('@/views/client/login/index.vue'),
   },
+  {
+    path: '/admin',
+    name: 'Admin',
+    component: () => import('@/views/admin/index.vue'),
+  },
 ];
 
 const router = createRouter({

@@ -14,8 +14,8 @@
 </template>
 
 <script lang="ts" setup>
-import Header from '@/views/layout/header.vue';
-import Footer from '@/views/layout/footer.vue';
+import Header from '@/views/client/layout/header.vue';
+import Footer from '@/views/client/layout/footer.vue';
 
 onMounted(() => {
   window.addEventListener('scroll', handleScroll, true);

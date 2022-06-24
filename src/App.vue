@@ -15,11 +15,6 @@
 
 <script lang="ts" setup>
 import {
-  NConfigProvider,
-  NMessageProvider,
-  NDialogProvider,
-  NNotificationProvider,
-  NLoadingBarProvider,
   GlobalThemeOverrides
 } from 'naive-ui';
 import Main from '@/views/Main.vue';

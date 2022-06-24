@@ -135,7 +135,7 @@ const props = defineProps({
 // 组件方法
 const emit = defineEmits(['change', 'delete'])
 
-const headerColor = $ref<String>({
+const headerColor = $ref<string>({
   backgroundColor: props.headerColor
 })
 
@@ -146,12 +146,8 @@ const { locale, t } = useI18n();
 const message = useMessage();
 
 // 渲染icon图标方法
-const renderIcon = (icon: any) => {
-  return () => {
-    return h(NIcon, null, {
-      default: () => h(icon)
-    });
-  };
+const renderIcon = (icon: Component) => {
+  return h(NIcon, null, { default: () => h(icon) });
 };
 
 // 抽屉菜单接口
