@@ -7,9 +7,8 @@
 
 <script lang="ts" setup>
 import { NIcon, NEllipsis } from 'naive-ui';
-import { AppsList20Filled as Menu } from '@vicons/fluent';
 import type { MenuOption } from 'naive-ui';
-import { watch } from 'vue-demi';
+import { AppsList20Filled as Menu } from '@vicons/fluent';
 
 const renderIcon = (icon: Component = Menu) => {
   return () => h(NIcon, null, { default: () => h(icon) })
@@ -19,31 +18,33 @@ const renderLabel = (label: string) => {
   return () => h(NEllipsis, null, { default: () => label })
 }
 
-const props = {
+const props = defineProps({
   collapsed: {
     // 侧边栏菜单是否收起
     type: Boolean,
     default: true
   },
-}
+})
 
-watch(() => props.collapsed, (newValue, oldValue) => {
+watch(() => props.collapsed, (newValue: boolean, oldValue: boolean) => {
   console.log(newValue)
-  console.log(oldValue)
 }, { deep: true })
 
 </script>
 
 <style lang="scss" scoped>
 .box-logo {
-  height: 60px;
+  height: 50px;
+  color: #f1f3f5;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  line-height: 60px;
+  line-height: 50px;
   overflow: hidden;
   white-space: nowrap;
+  border-bottom: 1px dashed #fff;
+  padding-bottom: 10px;
   img {
     height: 60px;
   }

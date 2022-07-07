@@ -14,6 +14,8 @@ import 'vfonts/Lato.css';
 import 'vfonts/FiraCode.css';
 // 引入naiveUI组件
 import naiveUI from 'naive-ui';
+// 引入vuetify组件
+import vuetify from './plugins/vuetify';
 
 // 创建app实例
 const app = createApp(App);
@@ -21,6 +23,7 @@ app.use(naiveUI);
 app.use(router);
 app.use(i18n);
 app.use(store);
+app.use(vuetify);
 // 全局挂在axios
 app.config.globalProperties.$axios = axios;
 // 挂载

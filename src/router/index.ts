@@ -49,7 +49,6 @@ const commonRoutes: Array<RouteRecordRaw> = [
 const router = createRouter({
   history: createWebHistory(), // History 路由
   // history: createWebHashHistory(), // Hash 路由
-  // base: process.env.BASE_URL,
   routes: [...commonRoutes],
 });
 

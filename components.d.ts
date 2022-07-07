@@ -7,6 +7,7 @@ declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     '// Provider': typeof import('./src/components/Provider.vue')['default']
     NAvatar: typeof import('naive-ui')['NAvatar']
+    NButton: typeof import('naive-ui')['NButton']
     NCarousel: typeof import('naive-ui')['NCarousel']
     NConfigProvider: typeof import('naive-ui')['NConfigProvider']
     NCountdown: typeof import('naive-ui')['NCountdown']
@@ -14,6 +15,8 @@ declare module '@vue/runtime-core' {
     NDirver: typeof import('naive-ui')['NDirver']
     NDivider: typeof import('naive-ui')['NDivider']
     NDropdown: typeof import('naive-ui')['NDropdown']
+    NForm: typeof import('naive-ui')['NForm']
+    NFormItem: typeof import('naive-ui')['NFormItem']
     NH2: typeof import('naive-ui')['NH2']
     NInput: typeof import('naive-ui')['NInput']
     NLayout: typeof import('naive-ui')['NLayout']

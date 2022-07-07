@@ -73,6 +73,6 @@ const menuOptions: MenuOption[] = [
 
 <style lang="scss" scoped>
 .menu-label {
-  color: #fff;
+  color: #fff !important;
 }
 </style>

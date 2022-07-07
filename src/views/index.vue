@@ -2,7 +2,7 @@
   <div class="index-container">
     <div class="container-nav">
       <transition name="fade">
-        <Header v-show="headerShow" :headerColor="headerColor"></Header>
+        <Header v-show="!headerShow" :headerColor="headerColor"></Header>
       </transition>
     </div>
     <div class="container-body">

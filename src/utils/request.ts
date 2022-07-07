@@ -1,5 +1,5 @@
 import axios, { AxiosInstance } from 'axios';
-import { errorCodeType } from './error_code_type';
+import { errorCodeType } from './errorCodeType';
 
 // 这个就是上面创建的router实例，用来跳转到login页面的
 import router from '../router';
