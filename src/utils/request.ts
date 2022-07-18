@@ -16,8 +16,8 @@ class Interceptors {
       // 超时设置
       timeout: 1500,
       headers: {
-        'Content-Type': 'application/json;charset=UTF-8;'
-      }
+        'Content-Type': 'application/json;charset=UTF-8;',
+      },
     });
 
     this.init();
@@ -47,7 +47,7 @@ class Interceptors {
         // 失败就简单处理了
         this.errorLoading();
         return Promise.reject(error);
-      }
+      },
     );
 
     // 响应拦截
@@ -87,7 +87,7 @@ class Interceptors {
           window.$message.error('系统错误');
         }
         return Promise.reject(error);
-      }
+      },
     );
   }
 
