@@ -1,17 +1,17 @@
 import { h } from 'vue';
 import { NIcon } from 'naive-ui';
 
-function renderIcon(icon) {
+function renderIcon(icon: any) {
   return () => h(NIcon, null, { default: () => h(icon) });
 }
 
-export function creatMenuOption(routes) {
-  let res = [];
-  routes.forEach((route) => {
+export function creatMenuOption(routes: any) {
+  let res: Array<any> = [];
+  routes.forEach((route: any) => {
     if (route.hidden) {
       return;
     }
-    let newRoute;
+    let newRoute: any;
     if (route.children && route.children.length === 1) {
       const { name, label, icon } = route.children[0];
       newRoute = { key: name, name, label };

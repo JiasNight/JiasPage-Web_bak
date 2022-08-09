@@ -1,8 +1,11 @@
 import axios, { AxiosInstance } from 'axios';
-import { errorCodeType } from './errorCodeType';
+import { errorCodeType } from './requestErrorCode';
 
 // 这个就是上面创建的router实例，用来跳转到login页面的
 import router from '../router';
+
+// 请求加密方法引入
+import { aesUtil, rsaUtil, publicKey, privateKey } from './transfer';
 
 const baseUrl = import.meta.env.VITE_APP_BASE_API;
 class Interceptors {
@@ -16,7 +19,7 @@ class Interceptors {
       // 超时设置
       timeout: 1500,
       headers: {
-        'Content-Type': 'application/json;charset=UTF-8;',
+        'Content-Type': 'application/json; charset=UTF-8;',
       },
     });
 
@@ -35,12 +38,54 @@ class Interceptors {
   }
   init() {
     // 请求拦截
+    let aesKey = aesUtil.genKey();
     this.instance.interceptors.request.use(
       (config: any) => {
         this.startLoading();
         // 每次发送请求之前判断是否存在token，如果存在，则统一在http请求的header都加上token，不用每次请求都手动添加了
         const token = window.localStorage.getItem('TOKEN');
         token && (config.headers.Authorization = token);
+
+        let requestMethod = config.method;
+        if (requestMethod.toLocaleLowerCase() === 'post') {
+          if (config.data) {
+            let requestData = config.data;
+            if (Object.prototype.toString.call(requestData) === '[object FormData]') {
+              // 设置请求头为表单提交头
+              let jsonData: any = {};
+              for (let key of requestData.keys()) {
+                jsonData[key] = requestData.get(key);
+              }
+              let objData: any = {
+                data: aesUtil.encrypt(jsonData, aesKey),
+                aesKey: rsaUtil.encrypt(aesKey, window.sessionStorage.getItem('javaPublicKey')),
+                publicKey: publicKey,
+              };
+              let fd: FormData = new FormData();
+              for (let key in objData) {
+                fd.append(key, objData[key]);
+              }
+              config.data = fd;
+            } else {
+              let objData: any = {
+                data: aesUtil.encrypt(requestData, aesKey),
+                aesKey: rsaUtil.encrypt(aesKey, window.sessionStorage.getItem('javaPublicKey')),
+                publicKey: publicKey,
+              };
+              config.data = objData;
+            }
+          }
+        } else if (requestMethod.toLocaleLowerCase() === 'get') {
+          if (config.params) {
+            let requestParams = config.params;
+            let objParams: any = {
+              data: aesUtil.encrypt(requestParams, aesKey),
+              aesKey: rsaUtil.encrypt(aesKey, window.sessionStorage.getItem('javaPublicKey')),
+              publicKey: publicKey,
+            };
+            config.params = objParams;
+          }
+        }
         return config;
       },
       (error) => {

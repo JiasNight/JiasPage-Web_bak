@@ -17,12 +17,9 @@
         <div class="box-item item-search">
           <n-input type="text" round clearable placeholder="输入关键字搜索">
             <template #suffix>
-              <!-- <n-icon>
+              <n-icon>
                 <Search12Regular />
-              </n-icon> -->
-              <v-icon large color="green darken-2">
-                mdi-domain
-              </v-icon>
+              </n-icon>
             </template>
           </n-input>
         </div>
