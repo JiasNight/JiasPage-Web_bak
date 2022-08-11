@@ -15,8 +15,7 @@
           </router-link>
         </div>
         <div class="box-item item-search">
-          <v-text-field v-model="message4" type="text" rounded placeholder="输入关键字搜索！" density="compact" variant="outlined"
-                        prepend-inner-icon="mdi-magnify" clear-icon="mdi-delete" clearable autofocus color="green" bg-color="#b7b6b6" single-line>
+          <v-text-field v-model="searchValue" type="text" density="compact" variant="solo" placeholder="输入关键字搜索！" prepend-inner-icon="mdi-magnify" clear-icon="mdi-delete" clearable autofocus hide-details color="green" bg-color="#b7b6b6" single-line>
           </v-text-field>
         </div>
         <div class="box-item item-menu">
@@ -40,9 +39,26 @@
           </router-link>
         </div>
         <div class="box-item item-user">
-          <v-avatar color="info">
-            <v-icon icon="mdi-account-circle"></v-icon>
-          </v-avatar>
+          <v-menu
+            open-on-hover
+          >
+            <template v-slot:activator="{ props }">
+              <v-avatar color="info" v-bind="props">
+                <v-icon icon="mdi-account-circle" size="40"></v-icon>
+              </v-avatar>
+            </template>
+            <v-list>
+              <v-list-item>
+                <v-list-item-title>{{ $t('client.navMenu.user.userInfo') }}</v-list-item-title>
+              </v-list-item>
+              <v-list-item>
+                <v-list-item-title>{{ $t('client.navMenu.user.defaultLanguage') }}</v-list-item-title>
+              </v-list-item>
+              <v-list-item>
+                <v-list-item-title>{{ $t('client.navMenu.user.logout') }}</v-list-item-title>
+              </v-list-item>
+            </v-list>
+          </v-menu>
         </div>
       </div>
       <div class="menu-right" @click="menuShowList">
@@ -63,9 +79,8 @@
     <!-- 弹出抽屉 -->
     <div class="container-drawer" ref="menusList">
       <div class="drawer-search">
-        <v-icon large color="green darken-2">
-          mdi-view-list
-        </v-icon>
+        <v-text-field v-model="searchValue" type="text" density="compact" variant="solo" placeholder="输入关键字搜索！" prepend-inner-icon="mdi-magnify" clear-icon="mdi-delete" clearable autofocus hide-details color="green" bg-color="#b7b6b6" single-line>
+        </v-text-field>
       </div>
       <div class="drawer-item">
         <router-link to="/home">
@@ -100,18 +115,7 @@
 </template>
 
 <script setup lang="ts">
-import router from '@/router/index';
 import { useI18n } from 'vue-i18n';
-
-import {
-  Search12Regular,
-  PersonCircle20Regular,
-  PersonCircle20Filled as UserIcon,
-  LocalLanguageZi24Filled as LocaleLanguage,
-  DoorArrowLeft20Regular as Logout,
-  TextBulletListTree24Filled,
-  TextBulletListLtr24Filled
-} from '@vicons/fluent';
 
 // 组件属性
 const props = defineProps({
@@ -124,6 +128,8 @@ const emit = defineEmits(['change', 'delete'])
 const headerColor = $ref<string>({
   backgroundColor: props.headerColor
 })
+
+const searchValue = $ref<string>('')
 
 // 国际化语言
 const { locale, t } = useI18n();
@@ -200,9 +206,6 @@ const menuShowList = () => {
         height: 60%;
         justify-self: center;
         align-self: center;
-        :deep(.v-input) {
-          padding-top: -20px;
-        }
       }
       .item-menu {
         width: 100%;
