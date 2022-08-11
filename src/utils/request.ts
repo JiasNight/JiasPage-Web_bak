@@ -26,22 +26,11 @@ class Interceptors {
     this.init();
   }
 
-  // 下面两个方法可以参考element-plus
-  startLoading() {
-    this.loading = window.$loadingBar.start();
-  }
-  errorLoading() {
-    this.loading = window.$loadingBar.error();
-  }
-  endLoading() {
-    this.loading = window.$loadingBar.finish();
-  }
   init() {
     // 请求拦截
     let aesKey = aesUtil.genKey();
     this.instance.interceptors.request.use(
       (config: any) => {
-        this.startLoading();
         // 每次发送请求之前判断是否存在token，如果存在，则统一在http请求的header都加上token，不用每次请求都手动添加了
         const token = window.localStorage.getItem('TOKEN');
         token && (config.headers.Authorization = token);
@@ -90,7 +79,6 @@ class Interceptors {
       },
       (error) => {
         // 失败就简单处理了
-        this.errorLoading();
         return Promise.reject(error);
       },
     );
@@ -98,7 +86,6 @@ class Interceptors {
     // 响应拦截
     this.instance.interceptors.response.use(
       (response) => {
-        this.endLoading();
         if (response.data.success) {
           return Promise.resolve(response.data);
         } else {
@@ -119,7 +106,6 @@ class Interceptors {
         }
       },
       (error) => {
-        this.errorLoading();
         // 具体业务具体处理，加上注释只供参考
         const { status } = error.response;
         if (status == '401') {

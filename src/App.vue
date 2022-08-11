@@ -1,30 +1,18 @@
 <template>
-  <!-- <n-config-provider :theme-overrides="themeOverrides"> -->
-  <n-config-provider>
-    <n-dialog-provider>
-      <n-message-provider>
-        <n-notification-provider>
-          <n-loading-bar-provider>
-            <Main />
-          </n-loading-bar-provider>
-        </n-notification-provider>
-      </n-message-provider>
-    </n-dialog-provider>
-  </n-config-provider>
+  <router-view></router-view>
 </template>
 
 <script lang="ts" setup>
-import {
-  GlobalThemeOverrides
-} from 'naive-ui';
-import Main from '@/views/Main.vue';
 
-const themeOverrides: GlobalThemeOverrides = reactive({
-  common: {
-    primaryColor: '#4fb233',
-    primaryColorHover: '#4fb233',
-    fontSize: '16px',
-    borderRadius: '16px'
-  }
-});
 </script>
+
+<style>
+#main {
+  /* font-family: Avenir, Helvetica, Arial, sans-serif; */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #2c3e50;
+  width: 100%;
+  height: 100vh;
+}
+</style>

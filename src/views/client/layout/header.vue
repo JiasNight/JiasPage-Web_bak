@@ -15,16 +15,9 @@
           </router-link>
         </div>
         <div class="box-item item-search">
-          <n-input type="text" round clearable placeholder="输入关键字搜索">
-            <template #suffix>
-              <!-- <n-icon>
-                <Search12Regular />
-              </n-icon> -->
-              <v-icon large color="green darken-2">
-                mdi-domain
-              </v-icon>
-            </template>
-          </n-input>
+          <v-text-field v-model="message4" type="text" rounded placeholder="输入关键字搜索！" density="compact" variant="outlined"
+                        prepend-inner-icon="mdi-magnify" clear-icon="mdi-delete" clearable autofocus color="green" bg-color="#b7b6b6" single-line>
+          </v-text-field>
         </div>
         <div class="box-item item-menu">
           <router-link to="/home">
@@ -47,23 +40,21 @@
           </router-link>
         </div>
         <div class="box-item item-user">
-          <n-dropdown :options="dropdownUser" :show-arrow="true" @select="onClickDropdown">
-            <span>
-              <n-avatar round object-fit="fill" src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel1.jpeg"></n-avatar>
-            </span>
-          </n-dropdown>
+          <v-avatar color="info">
+            <v-icon icon="mdi-account-circle"></v-icon>
+          </v-avatar>
         </div>
       </div>
       <div class="menu-right" @click="menuShowList">
         <span v-show="menuDrawer.isMenuShow">
-          <n-icon color="green" size="50">
-            <TextBulletListLtr24Filled />
-          </n-icon>
+          <v-icon large color="green darken-2">
+            mdi-view-list
+          </v-icon>
         </span>
         <span v-show="!menuDrawer.isMenuShow">
-          <n-icon color="green" size="50">
-            <TextBulletListTree24Filled />
-          </n-icon>
+          <v-icon large color="green darken-2">
+            mdi-menu-open
+          </v-icon>
         </span>
       </div>
     </div>
@@ -72,13 +63,9 @@
     <!-- 弹出抽屉 -->
     <div class="container-drawer" ref="menusList">
       <div class="drawer-search">
-        <n-input type="text" size="large" round clearable placeholder="输入关键字搜索">
-          <template #suffix>
-            <n-icon>
-              <Search12Regular />
-            </n-icon>
-          </template>
-        </n-input>
+        <v-icon large color="green darken-2">
+          mdi-view-list
+        </v-icon>
       </div>
       <div class="drawer-item">
         <router-link to="/home">
@@ -102,12 +89,9 @@
       </div>
       <div class="drawer-user">
         <router-link to="/login">
-          <n-avatar round :size="50">
-            <!-- <n-icon color="green">
-              <PersonCircle20Regular />
-            </n-icon>-->
-            AoA
-          </n-avatar>
+          <v-avatar color="red">
+            <span class="text-white text-h5">CJ</span>
+          </v-avatar>
         </router-link>
         <div>josn</div>
       </div>
@@ -116,7 +100,6 @@
 </template>
 
 <script setup lang="ts">
-import { NIcon, useMessage } from 'naive-ui';
 import router from '@/router/index';
 import { useI18n } from 'vue-i18n';
 
@@ -144,69 +127,6 @@ const headerColor = $ref<string>({
 
 // 国际化语言
 const { locale, t } = useI18n();
-
-// 消息提示
-const message = useMessage();
-
-// 渲染icon图标方法
-const renderIcon = (icon: Component) => {
-  return h(NIcon, null, { default: () => h(icon) });
-};
-
-// 抽屉菜单接口
-interface IDropdownMenu {
-  label: string;
-  key: string;
-  icon: any;
-}
-
-const getDropdownUserData = (): IDropdownMenu[] => {
-  const dataList = [
-    {
-      label: t('client.navMenu.user.userInfo'),
-      key: 'userInfo',
-      icon: renderIcon(UserIcon)
-    },
-    {
-      label: t('client.navMenu.user.defaultLanguage'),
-      key: 'localeLanguage',
-      icon: renderIcon(LocaleLanguage)
-    },
-    {
-      label: t('client.navMenu.user.logout'),
-      key: 'logout',
-      icon: renderIcon(Logout)
-    }
-  ];
-  return dataList;
-};
-
-// 用户图标下拉菜单
-let dropdownUser = ref(getDropdownUserData());
-
-// onMounted(() => {
-//   dropdownUser = ref<IDropdownMenu[]>(getDropdownUserData());
-//   console.log(dropdownUser);
-// });
-
-// 用户图标出现的下拉菜单点击方法
-const onClickDropdown = (key: string): void => {
-  if (key === 'logout') {
-    message.success('退出登陆');
-    router.push('/login');
-  } else if (key === 'localeLanguage') {
-    console.log(locale.value);
-    const language = locale.value;
-    if (language === 'zh_CN') {
-      locale.value = 'en_US';
-      console.log(t('client.navMenu.user.defaultLanguage'));
-      console.log(dropdownUser);
-    } else {
-      locale.value = 'zh_CN';
-      console.log(dropdownUser);
-    }
-  }
-};
 
 interface IMenuDrawer {
   isMenuShow: boolean;
@@ -280,8 +200,8 @@ const menuShowList = () => {
         height: 60%;
         justify-self: center;
         align-self: center;
-        :deep(.n-input__placeholder) {
-          line-height: 35px;
+        :deep(.v-input) {
+          padding-top: -20px;
         }
       }
       .item-menu {

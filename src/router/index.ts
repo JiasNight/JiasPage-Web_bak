@@ -10,6 +10,9 @@ const commonRoutes: Array<RouteRecordRaw> = [
       {
         path: 'home',
         name: 'Home',
+        meta: {
+          title: '首页'
+        },
         component: () => import('@/views/client/home/index.vue'),
       },
     ],
@@ -17,38 +20,59 @@ const commonRoutes: Array<RouteRecordRaw> = [
   {
     path: '/three',
     name: 'Three',
+    meta: {
+      title: '首页'
+    },
     component: () => import('@/views/client/three/index.vue'),
   },
   {
     path: '/article',
     name: 'Markdown',
+    meta: {
+      title: '首页'
+    },
     component: () => import('@/views/client/markdown/index.vue'),
   },
   {
     path: '/markdown',
     name: 'Markdown',
+    meta: {
+      title: '首页'
+    },
     component: () => import('@/views/client/markdown/markdown.vue'),
   },
   {
     path: '/word',
     name: 'Word',
+    meta: {
+      title: '首页'
+    },
     component: () => import('@/views/client/markdown/word.vue'),
   },
   {
     path: '/login',
     name: 'Login',
+    meta: {
+      title: '首页'
+    },
     component: () => import('@/views/client/login/index.vue'),
-  },
-  {
-    path: '/admin',
-    name: 'Admin',
-    component: () => import('@/views/admin/index.vue'),
   },
   {
     path: '/adminLogin',
     name: 'AdminLogin',
+    meta: {
+      title: '管理端登录'
+    },
     component: () => import('@/views/admin/login/index.vue'),
-  }
+  },
+  {
+    path: '/admin',
+    name: 'Admin',
+    meta: {
+      title: '管理端首页'
+    },
+    component: () => import('@/views/admin/index.vue'),
+  },
 ];
 
 const router = createRouter({
@@ -58,7 +82,7 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  window.$loadingBar.start();
+  // window.$loadingBar.start();
   const isLogin = localStorage.TOKEN ? true : false;
   if (to.path == '/login') {
     next();
@@ -68,7 +92,7 @@ router.beforeEach((to, from, next) => {
 });
 
 router.afterEach(() => {
-  window.$loadingBar.finish();
+  // window.$loadingBar.finish();
 });
 
 export default router;

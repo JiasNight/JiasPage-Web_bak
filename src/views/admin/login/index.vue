@@ -1,21 +1,15 @@
 <template>
   <div class="app-container">
-    <v-form>
-      <v-container>
-        <v-row>
-          <v-col cols="12" md="4">
-            <v-text-field v-model="adminForm.userName" required :rules="adminFormRules.userName" :counter="10" label="登录账户"
-                          prepend-inner-icon="mdi-account-lock" variant="outlined" color="success" density="compact" shaped>
-            </v-text-field>
-          </v-col>
+    <!-- <v-container>
+      <v-form>
+        <v-text-field v-model="adminForm.userName" required :rules="adminFormRules.userName" :counter="10" label="登录账户"
+                      prepend-inner-icon="mdi-account-lock" variant="outlined" color="success" density="compact" shaped>
+        </v-text-field>
 
-          <v-col cols="12" md="4">
-            <v-text-field v-model="adminForm.password" required :rules="adminFormRules.password" :counter="10" label="登录密码"
-                          prepend-inner-icon="mdi-account-key" variant="outlined" color="success" density="compact" shaped></v-text-field>
-          </v-col>
-        </v-row>
-      </v-container>
-    </v-form>
+        <v-text-field v-model="adminForm.password" required :rules="adminFormRules.password" :counter="10" label="登录密码"
+                      prepend-inner-icon="mdi-account-key" variant="outlined" color="success" density="compact" shaped></v-text-field>
+      </v-form>
+    </v-container> -->
   </div>
 </template>
 
@@ -46,5 +40,10 @@ const adminFormRules = reactive({
 
 <style lang="scss" scoped>
 .app-container {
+  width: 100vw;
+  height: 100vh;
+  background-image: url('/src/assets/images/admin/login/autumn.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
 }
 </style>
