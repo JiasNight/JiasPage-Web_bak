@@ -44,12 +44,12 @@ const initCurrentThree = () => {
     y: 450,
     z: 450
   };
-  const cameraLookat = {
+  const cameraLookAt = {
     x: 0,
     y: 0,
     z: 0
   };
-  cdt.cameraReset(cameraPosition, cameraLookat);
+  cdt.cameraReset(cameraPosition, cameraLookAt);
 };
 </script>
                                                                              

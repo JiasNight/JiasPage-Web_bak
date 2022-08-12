@@ -1,44 +1,28 @@
 <template>
-  <div class="app-container">
-    <n-layout class="container-layout" has-sider>
-      <!-- 左边菜单 -->
-      <n-layout-sider class="layout-sider" show-trigger="bar" width="220" :collapsed-width="65" collapse-mode="width" bordered
-                      :native-scrollbar="false" :on-update:collapsed="collapseActive">
-        <!-- logo -->
-        <VLogo :collapsed="!collapsed"></VLogo>
-        <!-- 菜单 -->
-        <VMenu :collapsed="collapsed"></VMenu>
-      </n-layout-sider>
-      <!-- 右边主要部分 -->
-      <n-layout class="layout-body">
-        <!-- 横条菜单 -->
-        <n-layout-header class="body-header" bordered>{{collapsed}}</n-layout-header>
-        <!-- 内容 -->
-        <n-layout-content :native-scrollbar="false" content-style="padding: 24px;">
-          <v-table>
-            <thead>
-              <tr>
-                <th class="text-left">
-                  Name
-                </th>
-                <th class="text-left">
-                  Calories
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr v-for="item in desserts" :key="item.name">
-                <td>{{ item.name }}</td>
-                <td>{{ item.calories }}</td>
-              </tr>
-            </tbody>
-          </v-table>
-        </n-layout-content>
-        <!-- 底部 -->
-        <n-layout-footer bordered>成府路</n-layout-footer>
-      </n-layout>
-    </n-layout>
-  </div>
+
+  <v-navigation-drawer v-model="openMenu" app color="#218c74" :width="menuWidth">
+    <VLogo></VLogo>
+    <!-- <VMenu></VMenu> -->
+  </v-navigation-drawer>
+
+  <v-app-bar app>
+    app-bar
+  </v-app-bar>
+
+  <!-- Sizes your content based upon application components -->
+  <v-main>
+    面包屑
+    <!-- Provides the application the proper gutter -->
+    <v-container fluid>
+      路由内容
+      <!-- If using vue-router -->
+      <router-view></router-view>
+    </v-container>
+  </v-main>
+
+  <v-footer app>
+    底部内容
+  </v-footer>
 </template>
 
 <script lang="ts" setup>
@@ -47,16 +31,8 @@ import VLogo from './layout/logo/index.vue';
 import VMenu from './layout/menu/index.vue';
 import { NIcon } from 'naive-ui';
 
-import {
-  PersonCircle20Filled as UserIcon,
-} from '@vicons/fluent';
-
-let collapsed = $ref<boolean>(false)
-
-const collapseActive = (val: boolean) => {
-  collapsed = val
-}
-
+const openMenu = $ref<boolean>(true)
+const menuWidth = openMenu ? '250' : '60'
 const desserts = [
   {
     name: 'Frozen Yogurt',
@@ -104,7 +80,7 @@ const desserts = [
 <style lang="scss" scoped>
 .app-container {
   width: 100vw;
-  height: 100vh;
+  height: 100%;
   .container-layout {
     height: 100%;
     .layout-sider {

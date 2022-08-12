@@ -94,7 +94,7 @@ const submitLoginBtn = () => {
 <style lang="scss" scoped>
 .login-container {
   width: 100%;
-  height: 100vh;
+  height: 100%;
   background-size: cover;
   position: relative;
   .container-header {

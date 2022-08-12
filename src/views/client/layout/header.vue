@@ -15,7 +15,8 @@
           </router-link>
         </div>
         <div class="box-item item-search">
-          <v-text-field v-model="searchValue" type="text" density="compact" variant="solo" placeholder="输入关键字搜索！" prepend-inner-icon="mdi-magnify" clear-icon="mdi-delete" clearable autofocus hide-details color="green" bg-color="#b7b6b6" single-line>
+          <v-text-field v-model="searchValue" type="text" density="compact" variant="solo" placeholder="输入关键字搜索！" prepend-inner-icon="mdi-magnify"
+                        clear-icon="mdi-delete" clearable autofocus hide-details color="green" bg-color="#b7b6b6" single-line>
           </v-text-field>
         </div>
         <div class="box-item item-menu">
@@ -39,9 +40,7 @@
           </router-link>
         </div>
         <div class="box-item item-user">
-          <v-menu
-            open-on-hover
-          >
+          <v-menu open-on-hover>
             <template v-slot:activator="{ props }">
               <v-avatar color="info" v-bind="props">
                 <v-icon icon="mdi-account-circle" size="40"></v-icon>
@@ -79,7 +78,8 @@
     <!-- 弹出抽屉 -->
     <div class="container-drawer" ref="menusList">
       <div class="drawer-search">
-        <v-text-field v-model="searchValue" type="text" density="compact" variant="solo" placeholder="输入关键字搜索！" prepend-inner-icon="mdi-magnify" clear-icon="mdi-delete" clearable autofocus hide-details color="green" bg-color="#b7b6b6" single-line>
+        <v-text-field v-model="searchValue" type="text" density="compact" variant="solo" placeholder="输入关键字搜索！" prepend-inner-icon="mdi-magnify"
+                      clear-icon="mdi-delete" clearable autofocus hide-details color="green" bg-color="#b7b6b6" single-line>
         </v-text-field>
       </div>
       <div class="drawer-item">
@@ -165,11 +165,14 @@ const menuShowList = () => {
 <style lang="scss" scoped>
 .header-container {
   width: 100%;
-  position: relative;
-  // z-index: 9;
+  height: 60px;
+  position: fixed;
+  top: 0;
+  z-index: 999;
   .container-menu {
     width: 100%;
-    height: 60px;
+    height: 100%;
+    position: relative;
     .menu-left {
       width: 80%;
       height: 100%;

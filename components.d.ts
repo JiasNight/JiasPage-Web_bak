@@ -5,12 +5,8 @@ import '@vue/runtime-core'
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
-    NButton: typeof import('naive-ui')['NButton']
-    NDivider: typeof import('naive-ui')['NDivider']
-    NInput: typeof import('naive-ui')['NInput']
+    NMenu: typeof import('naive-ui')['NMenu']
     NSpace: typeof import('naive-ui')['NSpace']
-    NSpin: typeof import('naive-ui')['NSpin']
-    NTag: typeof import('naive-ui')['NTag']
     Provider: typeof import('./src/components/Provider.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']

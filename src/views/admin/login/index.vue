@@ -41,7 +41,7 @@ const adminFormRules = reactive({
 <style lang="scss" scoped>
 .app-container {
   width: 100vw;
-  height: 100vh;
+  height: 100%;
   background-image: url('/src/assets/images/admin/login/autumn.jpg');
   background-repeat: no-repeat;
   background-position: center;

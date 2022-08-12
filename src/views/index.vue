@@ -1,10 +1,11 @@
 <template>
   <div ref="indexBox" class="index-container">
-    <div class="container-nav">
-      <transition name="fade">
-        <Header v-show="!headerShow" :headerColor="headerColor"></Header>
-      </transition>
-    </div>
+    <!-- <div class="container-nav">
+    </div> -->
+    <transition name="fade">
+      <!-- <Header v-show="!headerShow" :headerColor="headerColor"></Header> -->
+      <Header :headerColor="headerColor"></Header>
+    </transition>
     <div class="container-body">
       <!-- 子路由 -->
       <router-view></router-view>
@@ -204,7 +205,6 @@ const handleScroll = () => {
 <style lang="scss" scoped>
 .index-container {
   display: flex;
-  min-height: 100vh;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -224,7 +224,7 @@ const handleScroll = () => {
   }
   .container-body {
     width: 100%;
-    height: 100vh;
+    height: 800px;
     flex: 1;
     animation: ease;
   }

@@ -2,15 +2,6 @@
   <div class="home-container">
     <!-- 轮播图 -->
     <div class="container-loop">
-      <!-- <n-carousel show-arrow autoplay draggable>
-        <div class="loop-img" v-for="(item, index) in imgLists" :key="index" :style="{backgroundImage: `url(${item.imgSrc})`}">
-          <n-space class="img-content" align="center" justify="center">
-            <n-statistic label="少年，多喝热水吧！！！" tabular-nums>
-              <n-countdown :render="renderCountdown" :duration="996 * 1000" :active="true" />
-            </n-statistic>
-          </n-space>
-        </div>
-      </n-carousel> -->
       <v-carousel cycle hide-delimiter-background show-arrows="hover">
         <v-carousel-item v-for="(item, i) in imgLists" :key="i">
           <v-sheet height="100%" :style="{backgroundImage: `url(${item.imgSrc})`}">
@@ -24,9 +15,9 @@
       </v-carousel>
     </div>
     <!-- 首页主要内容 -->
-    <section class="container-main">
-
-    </section>
+    <div class="container-main">
+      <h1>这是首页的主要内容</h1>
+    </div>
   </div>
 </template>
 
@@ -96,7 +87,7 @@ const renderCountdown: CountdownProps['render'] = ({
   margin: 0 auto;
   .container-loop {
     width: 100%;
-    height: 50vh;
+    height: calc(100vh - 50%);
     .img-text {
       color: #fff;
       font-size: 30px;
@@ -105,7 +96,6 @@ const renderCountdown: CountdownProps['render'] = ({
   }
   .container-main {
     width: 100%;
-    height: 1000px;
   }
 }
 </style>
