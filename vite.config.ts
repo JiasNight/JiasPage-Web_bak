@@ -20,33 +20,45 @@ export default ({ mode }) => {
     resolve: {
       alias: {
         // 取相对路径别名, @表示当前的src目录路径
-        '@': path.resolve(__dirname, 'src')
-      }
+        '@': path.resolve(__dirname, 'src'),
+      },
     },
     plugins: [
       vuePlugin({
         // 开启ref转换
-        reactivityTransform: true
+        reactivityTransform: true,
       }),
       autoImport({
-        // dts: 'src/auto-imports.d.ts', // 可以自定义文件生成的位置，默认是根目录下
-        imports: ['vue']
+        resolvers: [],
+        // 自定引入 Vue VueRouter API,如果还需要其他的可以自行引入
+        imports: ['vue', 'vue-router', 'pinia'],
+        // 可以自定义文件生成的位置，默认是根目录下
+        dts: 'src/auto-imports.d.ts',
+        // 解决自动引入eslint报错问题 需要在eslintrc的extend选项中引入
+        eslintrc: {
+          enabled: true,
+          // 配置文件的位置
+          filepath: './.eslintrc-auto-import.json',
+          globalsPropValue: true,
+        },
       }),
       vueJsx(),
       // gzip压缩
       viteCompression(),
       Components({
-        resolvers: [NaiveUiResolver()]
-      })
+        // 需要自动导入的组件
+        resolvers: [NaiveUiResolver()],
+        dts: 'src/components.d.ts',
+      }),
     ],
     // 样式相关规则
     css: {
       preprocessorOptions: {
         // 导入global.scss, 这样就可以在vue全局中使用global.scss中定义的变量了
         scss: {
-          additionalData: '@import "./src/assets/css/global.scss";'
-        }
-      }
+          additionalData: '@import "./src/assets/css/global.scss";',
+        },
+      },
     },
     // 打包相关规则
     build: {
@@ -61,23 +73,23 @@ export default ({ mode }) => {
         // 生产环境移除console
         compress: {
           drop_console: true, // 打包时删除console
-          drop_debugger: true // 打包时删除 debugger
+          drop_debugger: true, // 打包时删除 debugger
         },
         output: {
           // 去掉注释内容
-          comments: true
-        }
+          comments: true,
+        },
       },
       rollupOptions: {
         output: {
           manualChunks: {
             // 拆分代码，这个就是分包，配置完后自动按需加载，现在还比不上webpack的splitchunk，不过也能用了。
             vue: ['vue', 'vue-router', 'vuex'],
-            echarts: ['echarts']
-          }
-        }
+            echarts: ['echarts'],
+          },
+        },
       },
-      brotliSize: false
+      brotliSize: false,
     },
     // 为服务器设置代理规则
     server: {
@@ -88,7 +100,7 @@ export default ({ mode }) => {
       cors: true, // 默认启用并允许任何源
       open: false, // 在服务器启动时自动在浏览器中打开
       hmr: {
-        overlay: false
+        overlay: false,
       },
       // 反向代理配置，注意rewrite写法
       proxy: {
@@ -96,9 +108,9 @@ export default ({ mode }) => {
           target: loadEnv(mode, process.cwd()).VITE_APP_BASE_API,
           ws: true,
           changeOrigin: true,
-          rewrite: path => path.replace(/^\/api/, '')
-        }
-      }
-    }
+          rewrite: (path) => path.replace(/^\/api/, ''),
+        },
+      },
+    },
   });
 };

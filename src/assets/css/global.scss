@@ -24,16 +24,15 @@ p {
   padding: 0;
 }
 
-html,
-body {
-  height: 100%;
-  width: 100%;
-  background-color: aquamarine;
+html {
+  box-sizing: border-box;
 }
 
-#app {
+html,
+body {
   width: 100%;
   height: 100%;
+  overflow: hidden;
 }
 
 ul,
@@ -60,4 +59,27 @@ table {
 a {
   color: #666;
   text-decoration: none;
+}
+
+/* 自定义滚动条样式 */
+.cus-scroll {
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: transparent;
+    border-radius: 3px;
+  }
+  &::-webkit-scrollbar-corner {
+    background: #f6f6f6;
+  }
+  &:hover {
+    &::-webkit-scrollbar-thumb {
+      background: #bfbfbf;
+    }
+    &::-webkit-scrollbar-thumb:hover {
+      background: #999999;
+    }
+  }
 }

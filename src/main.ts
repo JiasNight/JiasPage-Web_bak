@@ -16,6 +16,9 @@ import 'vfonts/FiraCode.css';
 import naiveUI from 'naive-ui';
 // 引入vuetify组件
 import vuetify from './plugins/vuetify';
+import { loadFonts } from './plugins/webfontloader';
+
+loadFonts();
 
 // 创建app实例
 const app = createApp(App);

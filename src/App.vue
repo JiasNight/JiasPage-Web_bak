@@ -1,8 +1,7 @@
 <template>
-  <!-- <v-app full-height class="main">
+  <v-app full-height class="main">
     <router-view></router-view>
-  </v-app> -->
-  <div></div>
+  </v-app>
 </template>
 
 <script lang="ts" setup>

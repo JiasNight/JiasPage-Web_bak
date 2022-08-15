@@ -15,28 +15,41 @@
           </router-link>
         </div>
         <div class="box-item item-search">
-          <v-text-field v-model="searchValue" type="text" density="compact" variant="solo" placeholder="输入关键字搜索！" prepend-inner-icon="mdi-magnify"
-                        clear-icon="mdi-delete" clearable autofocus hide-details color="green" bg-color="#b7b6b6" single-line>
+          <v-text-field
+            v-model="searchValue"
+            type="text"
+            density="compact"
+            variant="solo"
+            placeholder="输入关键字搜索！"
+            prepend-inner-icon="mdi-magnify"
+            clear-icon="mdi-delete"
+            clearable
+            autofocus
+            hide-details
+            color="green"
+            bg-color="#b7b6b6"
+            single-line
+          >
           </v-text-field>
         </div>
         <div class="box-item item-menu">
           <router-link to="/home">
-            <span>{{$t('client.navMenu.menu1')}}</span>
+            <span>{{ $t('client.navMenu.menu1') }}</span>
           </router-link>
         </div>
         <div class="box-item item-menu">
           <router-link to="/word">
-            <span>{{$t('client.navMenu.menu2')}}</span>
+            <span>{{ $t('client.navMenu.menu2') }}</span>
           </router-link>
         </div>
         <div class="box-item item-menu">
           <router-link to="/three">
-            <span>{{$t('client.navMenu.menu3')}}</span>
+            <span>{{ $t('client.navMenu.menu3') }}</span>
           </router-link>
         </div>
         <div class="box-item item-menu">
           <router-link to="/markdown">
-            <span>{{$t('client.navMenu.menu4')}}</span>
+            <span>{{ $t('client.navMenu.menu4') }}</span>
           </router-link>
         </div>
         <div class="box-item item-user">
@@ -62,14 +75,10 @@
       </div>
       <div class="menu-right" @click="menuShowList">
         <span v-show="menuDrawer.isMenuShow">
-          <v-icon large color="green darken-2">
-            mdi-view-list
-          </v-icon>
+          <v-icon large color="green darken-2"> mdi-view-list </v-icon>
         </span>
         <span v-show="!menuDrawer.isMenuShow">
-          <v-icon large color="green darken-2">
-            mdi-menu-open
-          </v-icon>
+          <v-icon large color="green darken-2"> mdi-menu-open </v-icon>
         </span>
       </div>
     </div>
@@ -78,28 +87,41 @@
     <!-- 弹出抽屉 -->
     <div class="container-drawer" ref="menusList">
       <div class="drawer-search">
-        <v-text-field v-model="searchValue" type="text" density="compact" variant="solo" placeholder="输入关键字搜索！" prepend-inner-icon="mdi-magnify"
-                      clear-icon="mdi-delete" clearable autofocus hide-details color="green" bg-color="#b7b6b6" single-line>
+        <v-text-field
+          v-model="searchValue"
+          type="text"
+          density="compact"
+          variant="solo"
+          placeholder="输入关键字搜索！"
+          prepend-inner-icon="mdi-magnify"
+          clear-icon="mdi-delete"
+          clearable
+          autofocus
+          hide-details
+          color="green"
+          bg-color="#b7b6b6"
+          single-line
+        >
         </v-text-field>
       </div>
       <div class="drawer-item">
         <router-link to="/home">
-          <span>{{$t('client.navMenu.menu1')}}</span>
+          <span>{{ $t('client.navMenu.menu1') }}</span>
         </router-link>
       </div>
       <div class="drawer-item">
         <router-link to="/">
-          <span>{{$t('client.navMenu.menu2')}}</span>
+          <span>{{ $t('client.navMenu.menu2') }}</span>
         </router-link>
       </div>
       <div class="drawer-item">
         <router-link to="/">
-          <span>{{$t('client.navMenu.menu3')}}</span>
+          <span>{{ $t('client.navMenu.menu3') }}</span>
         </router-link>
       </div>
       <div class="drawer-item">
         <router-link to="/markdown">
-          <span>{{$t('client.navMenu.menu4')}}</span>
+          <span>{{ $t('client.navMenu.menu4') }}</span>
         </router-link>
       </div>
       <div class="drawer-user">
@@ -119,17 +141,17 @@ import { useI18n } from 'vue-i18n';
 
 // 组件属性
 const props = defineProps({
-  headerColor: String
-})
+  headerColor: String,
+});
 
 // 组件方法
-const emit = defineEmits(['change', 'delete'])
+const emit = defineEmits(['change', 'delete']);
 
-const headerColor = $ref<string>({
-  backgroundColor: props.headerColor
-})
+const headerColor = ref<object>({
+  backgroundColor: props.headerColor,
+});
 
-const searchValue = $ref<string>('')
+const searchValue = ref<string>('');
 
 // 国际化语言
 const { locale, t } = useI18n();
@@ -141,7 +163,7 @@ interface IMenuDrawer {
 const menusList: any = ref(null);
 const menuDrawer: IMenuDrawer = reactive({
   isMenuShow: true,
-  maskShow: false
+  maskShow: false,
 });
 const setMaskStyle = computed(() => {
   return { 'container-mask': menuDrawer.maskShow };
@@ -169,10 +191,12 @@ const menuShowList = () => {
   position: fixed;
   top: 0;
   z-index: 999;
+
   .container-menu {
     width: 100%;
     height: 100%;
     position: relative;
+
     .menu-left {
       width: 80%;
       height: 100%;
@@ -181,35 +205,41 @@ const menuShowList = () => {
       grid-template-rows: 1fr;
       grid-template-columns: repeat(10, 10%);
       align-items: center;
+
       .box-item {
         a {
           text-decoration: none;
         }
       }
+
       .item-logo {
         justify-self: end;
         overflow: hidden;
+
         img {
           height: 60px;
         }
       }
+
       .item-title {
         justify-self: start;
         align-self: center;
+
         span {
           font-size: 35px;
           font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
           color: #f1f3f5;
         }
       }
+
       .item-search {
         grid-column-start: 3;
         grid-column-end: 6;
         width: 90%;
-        height: 60%;
         justify-self: center;
         align-self: center;
       }
+
       .item-menu {
         width: 100%;
         height: 80%;
@@ -218,6 +248,7 @@ const menuShowList = () => {
         display: table-cell;
         text-align: center;
         border-right: 2px solid rgb(133, 126, 126);
+
         span {
           font-size: 18px;
           font-weight: 600;
@@ -227,9 +258,11 @@ const menuShowList = () => {
           top: 25%;
           transform: translate(0, -50%);
         }
+
         span:hover {
           color: #26de81;
         }
+
         span::after {
           width: 5px;
           height: 5px;
@@ -241,10 +274,12 @@ const menuShowList = () => {
           left: 50%;
           transform: translate(-50%, 0);
         }
+
         span:hover::after {
           display: block;
         }
       }
+
       .item-user {
         width: 100%;
         height: 80%;
@@ -252,6 +287,7 @@ const menuShowList = () => {
         align-self: center;
         display: table-cell;
         text-align: center;
+
         span {
           font-size: 16px;
           position: relative;
@@ -260,6 +296,7 @@ const menuShowList = () => {
         }
       }
     }
+
     .menu-right {
       width: 50px;
       height: 50px;
@@ -268,11 +305,13 @@ const menuShowList = () => {
       position: relative;
       bottom: 60px;
       display: none;
+
       span {
         cursor: pointer;
       }
     }
   }
+
   // 遮罩层
   .container-mask {
     width: 100%;
@@ -282,6 +321,7 @@ const menuShowList = () => {
     background-color: rgba(0, 0, 0, 0.4);
     display: none;
   }
+
   // 抽屉
   .container-drawer {
     width: 100%;
@@ -290,6 +330,7 @@ const menuShowList = () => {
     top: -500px;
     background: linear-gradient(0deg, rgba(32, 107, 145, 0.774), rgba(222, 225, 230, 0.911));
     display: none;
+
     .drawer-search {
       width: 90%;
       height: 40px;
@@ -297,10 +338,12 @@ const menuShowList = () => {
       position: relative;
       left: 50%;
       transform: translate(-50%, 0);
+
       :deep(.n-input__placeholder) {
         line-height: 40px;
       }
     }
+
     .drawer-item {
       width: 100%;
       height: 50px;
@@ -308,9 +351,11 @@ const menuShowList = () => {
       border-radius: 5px;
       margin-top: 20px;
       text-align: center;
+
       a {
         text-decoration: none;
       }
+
       span {
         height: 100%;
         color: rgba(0, 0, 0, 0.705);
@@ -318,10 +363,12 @@ const menuShowList = () => {
         font-weight: bolder;
         line-height: 50px;
       }
+
       span:hover {
         color: rgba(23, 182, 36, 0.863);
       }
     }
+
     .drawer-user {
       width: 100%;
       margin-top: 30px;
@@ -337,60 +384,74 @@ const menuShowList = () => {
     .container-menu {
       .menu-left {
         grid-template-columns: repeat(3, 40%);
+
         .item-search {
           display: none;
         }
+
         .item-menu {
           display: none;
         }
+
         .item-user {
           display: none;
         }
       }
+
       .menu-right {
         display: block;
       }
     }
+
     // 抽屉
     .container-drawer {
       display: block;
     }
   }
 }
+
 // 横向放置的手机和竖向放置的平板之间的分辨率
 @media (min-width: 481px) and (max-width: 767px) {
   .header-container {
     .container-menu {
       .menu-left {
         grid-template-columns: repeat(3, 49%);
+
         .item-search {
           display: none;
         }
+
         .item-menu {
           display: none;
         }
+
         .item-user {
           display: none;
         }
       }
+
       .menu-right {
         display: block;
       }
     }
+
     .container-mask {
       display: block;
     }
+
     .container-drawer {
       display: block;
     }
   }
 }
+
 // 平板电脑和小屏电脑之间的分辨率
 @media (min-width: 768px) and (max-width: 979px) {
   .header-container {
     .container-menu {
       .menu-left {
         grid-template-columns: repeat(7, 14%);
+
         .item-search {
           display: none;
         }
@@ -398,9 +459,11 @@ const menuShowList = () => {
     }
   }
 }
+
 // 大屏幕
 @media (min-width: 1200px) {
 }
+
 // 超大屏幕
 @media (min-width: 1600px) {
 }

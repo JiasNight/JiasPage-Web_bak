@@ -107,7 +107,8 @@
   "[vue]": {
     "editor.codeActionsOnSave": {
       "source.fixAll.eslint": false
-    }
+    },
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "cSpell.words": [
     "vben",
@@ -122,5 +123,6 @@
     "pinia",
     "sider",
     "nprogress"
-  ]
+  ],
+  "vue3snippets.enable-compile-vue-file-on-did-save-code": false
 }

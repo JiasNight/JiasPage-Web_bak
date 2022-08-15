@@ -17,7 +17,11 @@
     "resolveJsonModule": true,
     "esModuleInterop": true,
     // 编译过程中需要引入的库文件的列表
-    "lib": ["esnext", "dom"]
+    "lib": ["esnext", "dom"],
+    "paths": {
+      // 用于设置模块名到基于baseUrl的路径映射
+      "@/*": ["./src/*"]
+    }
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"]
 }

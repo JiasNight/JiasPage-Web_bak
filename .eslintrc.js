@@ -4,9 +4,9 @@ module.exports = {
     ecmaVersion: 'latest',
     ecmaFeatures: {
       jsx: true,
-      modules: true
+      modules: true,
     },
-    sourceType: 'module' // 允许使用导入
+    sourceType: 'module', // 允许使用导入
   },
   plugins: ['vue', '@typescript-eslint'],
   extends: [
@@ -16,6 +16,7 @@ module.exports = {
     'plugin:prettier/recommended', // 启用eslint-plugin-prettier和eslint-config-prettier，使编辑器显示错误提示，确保这项是扩展数组中的最后一个配置
     'plugin:vue/vue3-strongly-recommended',
     'plugin:vue/vue3-recommended',
+    './.eslintrc-auto-import.json',
   ],
   rules: {
     '@typescript-eslint/ban-ts-ignore': 'off',
@@ -40,6 +41,8 @@ module.exports = {
     //     classes: true,
     //   },
     // ],
+    // 禁止使用 var
+    'no-var': 'error',
     '@typescript-eslint/ban-ts-comment': 'off',
     '@typescript-eslint/ban-types': 'off',
     '@typescript-eslint/no-non-null-assertion': 'off',
@@ -48,18 +51,18 @@ module.exports = {
       'error',
       {
         argsIgnorePattern: '^h$',
-        varsIgnorePattern: '^h$'
-      }
+        varsIgnorePattern: '^h$',
+      },
     ],
     'no-unused-vars': [
       'error',
       {
         argsIgnorePattern: '^h$',
-        varsIgnorePattern: '^h$'
-      }
+        varsIgnorePattern: '^h$',
+      },
     ],
     'space-before-function-paren': 'off',
     quotes: ['error', 'single'],
-    'comma-dangle': ['error', 'never']
-  }
+    'comma-dangle': ['error', 'never'],
+  },
 };
