@@ -25,28 +25,32 @@
         </div>
         <div class="box-item item-menu">
           <router-link to="/home">
-            <span>{{$t('client.navMenu.menu1')}}</span>
+            <span>{{ $t('client.navMenu.menu1') }}</span>
           </router-link>
         </div>
         <div class="box-item item-menu">
           <router-link to="/word">
-            <span>{{$t('client.navMenu.menu2')}}</span>
+            <span>{{ $t('client.navMenu.menu2') }}</span>
           </router-link>
         </div>
         <div class="box-item item-menu">
           <router-link to="/three">
-            <span>{{$t('client.navMenu.menu3')}}</span>
+            <span>{{ $t('client.navMenu.menu3') }}</span>
           </router-link>
         </div>
         <div class="box-item item-menu">
           <router-link to="/markdown">
-            <span>{{$t('client.navMenu.menu4')}}</span>
+            <span>{{ $t('client.navMenu.menu4') }}</span>
           </router-link>
         </div>
         <div class="box-item item-user">
           <n-dropdown :options="dropdownUser" :show-arrow="true" @select="onClickDropdown">
             <span>
-              <n-avatar round object-fit="fill" src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel1.jpeg"></n-avatar>
+              <n-avatar
+                round
+                object-fit="fill"
+                src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel1.jpeg"
+              ></n-avatar>
             </span>
           </n-dropdown>
         </div>
@@ -79,22 +83,22 @@
       </div>
       <div class="drawer-item">
         <router-link to="/home">
-          <span>{{$t('client.navMenu.menu1')}}</span>
+          <span>{{ $t('client.navMenu.menu1') }}</span>
         </router-link>
       </div>
       <div class="drawer-item">
         <router-link to="/">
-          <span>{{$t('client.navMenu.menu2')}}</span>
+          <span>{{ $t('client.navMenu.menu2') }}</span>
         </router-link>
       </div>
       <div class="drawer-item">
         <router-link to="/">
-          <span>{{$t('client.navMenu.menu3')}}</span>
+          <span>{{ $t('client.navMenu.menu3') }}</span>
         </router-link>
       </div>
       <div class="drawer-item">
         <router-link to="/markdown">
-          <span>{{$t('client.navMenu.menu4')}}</span>
+          <span>{{ $t('client.navMenu.menu4') }}</span>
         </router-link>
       </div>
       <div class="drawer-user">
@@ -130,14 +134,14 @@ import {
 // 组件属性
 const props = defineProps({
   headerColor: String
-})
+});
 
 // 组件方法
-const emit = defineEmits(['change', 'delete'])
+const emit = defineEmits(['change', 'delete']);
 
 const headerColor = $ref<string>({
   backgroundColor: props.headerColor
-})
+});
 
 // 国际化语言
 const { locale, t } = useI18n();

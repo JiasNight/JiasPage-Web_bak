@@ -141,14 +141,14 @@ import { useI18n } from 'vue-i18n';
 
 // 组件属性
 const props = defineProps({
-  headerColor: String,
+  headerColor: String
 });
 
 // 组件方法
 const emit = defineEmits(['change', 'delete']);
 
 const headerColor = $ref<object>({
-  backgroundColor: props.headerColor,
+  backgroundColor: props.headerColor
 });
 
 const searchValue = $ref<string>('');
@@ -163,7 +163,7 @@ interface IMenuDrawer {
 const menusList: any = $ref(null);
 const menuDrawer: IMenuDrawer = reactive({
   isMenuShow: true,
-  maskShow: false,
+  maskShow: false
 });
 const setMaskStyle = computed(() => {
   return { 'container-mask': menuDrawer.maskShow };

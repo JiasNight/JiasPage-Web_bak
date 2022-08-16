@@ -1,7 +1,7 @@
 <template>
   <div ref="indexBox" class="index-container">
     <!-- <div class="container-nav">
-    </div> -->
+      </div> -->
     <transition name="fade">
       <!-- <Header v-show="!headerShow" :headerColor="headerColor"></Header> -->
       <Header :headerColor="headerColor"></Header>
@@ -10,7 +10,7 @@
       <!-- 子路由 -->
       <router-view></router-view>
     </div>
-    <!-- <Footer></Footer> -->
+    <Footer></Footer>
   </div>
 </template>
 
@@ -193,8 +193,6 @@ const headerColor = $ref<string>('rgb(75, 73, 72, 0.4)');
 
 // 头部导航栏滑动隐藏
 let headerShow = $ref<boolean>(true);
-
-var a = 123;
 
 const handleScroll = () => {
   const top = document.documentElement.scrollTop;

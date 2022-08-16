@@ -22,6 +22,13 @@ module.exports = {
     // 'prettier/prettier': 1, //使用prettier
     semi: [2, 'always'], // 语句强制分号结尾
     quotes: [2, 'single'], // 引号类型''
+    'vue/multi-word-component-names': [
+      'off',
+      {
+        ignores: ['index'] // 需要忽略的组件名
+      }
+    ],
+    'no-unused-vars': 0,
     'no-var': 2,
     'no-alert': 0, // 禁止使用alert
     'no-console': 2, // 禁止使用console

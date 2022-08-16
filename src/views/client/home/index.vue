@@ -4,10 +4,10 @@
     <div class="container-loop">
       <v-carousel cycle hide-delimiter-background show-arrows="hover">
         <v-carousel-item v-for="(item, i) in imgLists" :key="i">
-          <v-sheet height="100%" :style="{backgroundImage: `url(${item.imgSrc})`}">
+          <v-sheet height="100%" :style="{ backgroundImage: `url(${item.imgSrc})` }">
             <div class="d-flex fill-height justify-center align-center">
               <div class="img-text">
-                {{item.describe}}
+                {{ item.describe }}
               </div>
             </div>
           </v-sheet>
@@ -22,10 +22,8 @@
 </template>
 
 <script lang="ts" setup>
-import { CountdownProps } from 'naive-ui'
-
 onMounted(() => {
-  console.log('轮播');
+  // console.log('轮播');
   // 获取后端设置的轮播图
 });
 
@@ -34,7 +32,7 @@ interface loopImgType {
   id: string;
   label: string;
   imgSrc: string;
-  describe: string
+  describe: string;
 }
 const imgLists: loopImgType[] = reactive([
   {
@@ -68,17 +66,6 @@ const imgLists: loopImgType[] = reactive([
     describe: '曾以为念念不忘的东西，总有一天会变得面目全非。'
   }
 ]);
-
-const renderCountdown: CountdownProps['render'] = ({
-  hours,
-  minutes,
-  seconds
-}) => {
-  return `早起${String(hours).padStart(2, '0')}晚睡${String(
-    minutes
-  ).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`
-}
-
 </script>
 
 <style lang="scss" scoped>
