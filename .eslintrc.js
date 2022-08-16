@@ -4,65 +4,40 @@ module.exports = {
     ecmaVersion: 'latest',
     ecmaFeatures: {
       jsx: true,
-      modules: true,
+      modules: true
     },
-    sourceType: 'module', // 允许使用导入
+    sourceType: 'module' // 允许使用导入
   },
-  plugins: ['vue', '@typescript-eslint'],
+  plugins: ['vue', 'prettier', '@typescript-eslint'], // 表示 eslint-config-prettier
   extends: [
-    'prettier',
-    'plugin:@typescript-eslint/recommended', // 使用@ typescript-eslint / eslint-plugin中的推荐规则
-    'prettier/@typescript-eslint', // 使用eslint-config-prettier禁用一些与Prettier冲突的ESLint规则
-    'plugin:prettier/recommended', // 启用eslint-plugin-prettier和eslint-config-prettier，使编辑器显示错误提示，确保这项是扩展数组中的最后一个配置
-    'plugin:vue/vue3-strongly-recommended',
-    'plugin:vue/vue3-recommended',
     './.eslintrc-auto-import.json',
+    'eslint:recommended', // 继承Eslint中推荐的（打钩的）规则项http://eslint.cn/docs/rules/
+    'plugin:vue/essential', // 此项是用来配置vue.js风格
+    'prettier' // 把prettier中设置的规则添加进来，让它覆盖上面设置的规则。这样就不会和上面的规则冲突了，表示 eslint-plugin-prettier，需要放到最后以覆盖别的规则
   ],
   rules: {
-    '@typescript-eslint/ban-ts-ignore': 'off',
-    '@typescript-eslint/explicit-function-return-type': 'off',
-    '@typescript-eslint/no-explicit-any': 'off',
-    '@typescript-eslint/no-var-requires': 'off',
-    '@typescript-eslint/no-empty-function': 'off',
-    'vue/custom-event-name-casing': 'off',
-    'no-use-before-define': 'off',
-    // 'no-use-before-define': [
-    //   'error',
-    //   {
-    //     functions: false,
-    //     classes: true,
-    //   },
-    // ],
-    '@typescript-eslint/no-use-before-define': 'off',
-    // '@typescript-eslint/no-use-before-define': [
-    //   'error',
-    //   {
-    //     functions: false,
-    //     classes: true,
-    //   },
-    // ],
-    // 禁止使用 var
-    'no-var': 'error',
-    '@typescript-eslint/ban-ts-comment': 'off',
-    '@typescript-eslint/ban-types': 'off',
-    '@typescript-eslint/no-non-null-assertion': 'off',
-    '@typescript-eslint/explicit-module-boundary-types': 'off',
-    '@typescript-eslint/no-unused-vars': [
-      'error',
-      {
-        argsIgnorePattern: '^h$',
-        varsIgnorePattern: '^h$',
-      },
-    ],
-    'no-unused-vars': [
-      'error',
-      {
-        argsIgnorePattern: '^h$',
-        varsIgnorePattern: '^h$',
-      },
-    ],
-    'space-before-function-paren': 'off',
-    quotes: ['error', 'single'],
-    'comma-dangle': ['error', 'never'],
+    // off | 0 :表示关闭规则。
+    // warn | 1 :表示将该规则转换为警告。
+    // error | 2 :表示将该规则转换为错
+    // 'prettier/prettier': 1, //使用prettier
+    semi: [2, 'always'], // 语句强制分号结尾
+    quotes: [2, 'single'], // 引号类型''
+    'no-var': 2,
+    'no-alert': 0, // 禁止使用alert
+    'no-console': 2, // 禁止使用console
+    'no-const-assign': 2, // 禁止修改const声明的变量
+    'no-debugger': 2, // 禁止使用debugger
+    'no-duplicate-case': 2, // switch中的case标签不能重复
+    'no-extra-semi': 2, // 禁止多余的冒号
+    'no-undef': 0,
+    'no-multi-spaces': 1 // 不能用多余的空格
   },
+  settings: {
+    'import/resolver': {
+      node: {
+        extensions: ['.js', '.ts'],
+        moduleDirectory: ['node_modules', './src']
+      }
+    }
+  }
 };

@@ -8,6 +8,8 @@ import autoImport from 'unplugin-auto-import/vite';
 import vueJsx from '@vitejs/plugin-vue-jsx';
 // 打包压缩
 import viteCompression from 'vite-plugin-compression';
+// 在开发和构建中进行代码规范校验
+import eslintPlugin from 'vite-plugin-eslint'
 // 按需引入Naive
 import Components from 'unplugin-vue-components/vite';
 import { NaiveUiResolver } from 'unplugin-vue-components/resolvers';
@@ -27,6 +29,9 @@ export default ({ mode }) => {
       vuePlugin({
         // 开启ref转换
         reactivityTransform: true,
+      }),
+      eslintPlugin({
+        cache: false
       }),
       autoImport({
         resolvers: [],

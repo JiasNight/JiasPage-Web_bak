@@ -23,45 +23,52 @@ onMounted(() => {
   window.addEventListener('scroll', handleScroll, true);
   window.addEventListener('resize', initBkgTime, true);
   nextTick(() => {
-    initBkgTime()
-  })
-
+    initBkgTime();
+  });
 });
 
 onUnmounted(() => {
   window.removeEventListener('scroll', handleScroll, true);
 });
 
-/** 
+/**
  * 根据一年不同的月份时间显示背景飘落花瓣，雨水，黄叶，雪花四种效果
  * 分别表示春夏秋冬四个季节的特效
  */
 // 获取背景dom
-const indexBox: HTMLDivElement = $ref(null)
+const indexBox: HTMLDivElement = $ref<HTMLDivElement>();
 const initBkgTime: any = (): void => {
   nextTick(() => {
-    renderImg(indexBox)
-  })
-}
+    renderImg(indexBox);
+  });
+};
 
 const renderImg = (indexBox: HTMLDivElement): void => {
   // 判断当前时间点处于四季的什么时候，再执行相应时期的动画函数
-  let current: number = currentSeason()
+  let current: number = currentSeason();
   switch (current) {
     // 春天
-    case 1: setInterval(() => {
-      initSpring(indexBox)
-    }, 5000); break;
+    case 1:
+      setInterval(() => {
+        initSpring(indexBox);
+      }, 5000);
+      break;
     // 夏天
-    case 2: setInterval(() => {
-      initSummer(indexBox)
-    }, 500); break;
+    case 2:
+      setInterval(() => {
+        initSummer(indexBox);
+      }, 500);
+      break;
     // 秋天
-    case 3: initAutumn(indexBox); break;
+    case 3:
+      initAutumn(indexBox);
+      break;
     // 冬天
-    case 4: initWinter(indexBox); break;
+    case 4:
+      initWinter(indexBox);
+      break;
   }
-}
+};
 
 /**
  * 判断当前季节
@@ -72,7 +79,7 @@ const currentSeason = (): number => {
   else if (month >= 5 && month <= 7) return 2;
   else if (month >= 8 && month <= 10) return 2;
   else return 4;
-}
+};
 
 /**
  * 春天背景动画
@@ -82,17 +89,17 @@ const initSpring = (div: HTMLDivElement): void => {
   let width = div.offsetWidth;
   let height = div.offsetHeight;
 
-  let imgArr = [petal1, petal2]
+  let imgArr = [petal1, petal2];
   let numImgs = 0;
   do {
     numImgs = Math.floor(Math.random() * 20 + 1);
-  } while (numImgs > 10)
-  const imgArray = []
+  } while (numImgs > 10);
+  const imgArray = [];
   for (let i = 0; i < numImgs; i++) {
     let img = document.createElement('img');
     imgArray.push(img);
-    let index = Math.floor(Math.random() * 2)
-    img.src = `${imgArr[index]}`
+    let index = Math.floor(Math.random() * 2);
+    img.src = `${imgArr[index]}`;
     img.style.zIndex = '99999';
     if (index === 1) {
       img.style.width = '20px';
@@ -103,21 +110,21 @@ const initSpring = (div: HTMLDivElement): void => {
     }
     img.style.position = 'absolute';
     let x = Math.random() * width + 1;
-    let y = 0
+    let y = 0;
     do {
-      y = Math.random() * height / 150;
-    } while (y > 500)
+      y = (Math.random() * height) / 150;
+    } while (y > 500);
     img.style.left = x + 'px';
     img.style.top = y + 'px';
     img.style.opacity = '0';
-    div.appendChild(img)
+    div.appendChild(img);
   }
   for (let i = 0; i < imgArray.length; i++) {
     let index = Math.floor(Math.random() * imgArray.length);
     let time = Math.random() * imgArray.length * 5 + 2;
-    imgArray[index].style.animation = `rotate1 ${time}s linear`
+    imgArray[index].style.animation = `rotate1 ${time}s linear`;
   }
-}
+};
 
 /**
  * 夏天下雨背景动画
@@ -125,24 +132,24 @@ const initSpring = (div: HTMLDivElement): void => {
 const initSummer = (div: HTMLDivElement): void => {
   let width = div.offsetWidth;
   let height = div.offsetHeight;
-  let tempSvg: HTMLCollection = document.getElementsByTagName('svg')
+  let tempSvg: HTMLCollection = document.getElementsByTagName('svg');
   for (let i = 0; i < tempSvg.length; i++) {
     const element = tempSvg[i];
-    element.remove()
+    element.remove();
   }
   // 命名空间
-  const SVG_NS = "http://www.w3.org/2000/svg";
+  const SVG_NS = 'http://www.w3.org/2000/svg';
   // 循环创建N个
   let rainNum: number = 20;
   // 创建的添加到数组存储
-  let rainArray = []
+  let rainArray = [];
   for (let i = 0; i < rainNum; i++) {
     // 1、创建svg容器
     let svg = document.createElementNS(SVG_NS, 'svg');
     // 随机位置出现
-    svg.style.position = 'absolute'
+    svg.style.position = 'absolute';
     svg.style.left = Math.random() * width + 'px';
-    svg.style.top = Math.random() * height / 6 + 'px';
+    svg.style.top = (Math.random() * height) / 6 + 'px';
     svg.style.zIndex = '999';
     svg.setAttribute('class', 'rain-drop');
     svg.setAttribute('preserveAspectRatio', 'xMinYMin slice');
@@ -160,37 +167,34 @@ const initSummer = (div: HTMLDivElement): void => {
     svg.appendChild(tag);
     // 5、将svg塞进指定容器
     div.appendChild(svg);
-    rainArray.push(svg)
+    rainArray.push(svg);
   }
 
   // 对每个雨滴添加动画，但时间不一样
   for (let i = 0; i < rainArray.length; i++) {
     let time = Math.random() * 1 + 0.5;
-    rainArray[i].style.animation = `rainDrop ${time}s 1s linear`
+    rainArray[i].style.animation = `rainDrop ${time}s 1s linear`;
   }
-}
+};
 
 /**
  * 秋天落叶背景动画
  */
-const initAutumn = (div: HTMLDivElement): void => {
-
-}
+const initAutumn = (div: HTMLDivElement): void => {};
 
 /**
  * 冬天下雪背景动画
  */
-const initWinter = (div: HTMLDivElement): void => {
-
-}
-
+const initWinter = (div: HTMLDivElement): void => {};
 
 // 头部导航背景色
-const headerColor = $ref('rgb(75, 73, 72, 0.4)');
+const headerColor = $ref<string>('rgb(75, 73, 72, 0.4)');
 // const headerColor = $ref('rgb(0, 0, 0)');
 
 // 头部导航栏滑动隐藏
-let headerShow = $ref(true);
+let headerShow = $ref<boolean>(true);
+
+var a = 123;
 
 const handleScroll = () => {
   const top = document.documentElement.scrollTop;

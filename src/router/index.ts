@@ -13,9 +13,9 @@ const commonRoutes: Array<RouteRecordRaw> = [
         meta: {
           title: '首页'
         },
-        component: () => import('@/views/client/home/index.vue'),
-      },
-    ],
+        component: () => import('@/views/client/home/index.vue')
+      }
+    ]
   },
   {
     path: '/three',
@@ -23,7 +23,7 @@ const commonRoutes: Array<RouteRecordRaw> = [
     meta: {
       title: '首页'
     },
-    component: () => import('@/views/client/three/index.vue'),
+    component: () => import('@/views/client/three/index.vue')
   },
   {
     path: '/article',
@@ -31,7 +31,7 @@ const commonRoutes: Array<RouteRecordRaw> = [
     meta: {
       title: '首页'
     },
-    component: () => import('@/views/client/markdown/index.vue'),
+    component: () => import('@/views/client/markdown/index.vue')
   },
   {
     path: '/markdown',
@@ -39,7 +39,7 @@ const commonRoutes: Array<RouteRecordRaw> = [
     meta: {
       title: '首页'
     },
-    component: () => import('@/views/client/markdown/markdown.vue'),
+    component: () => import('@/views/client/markdown/markdown.vue')
   },
   {
     path: '/word',
@@ -47,7 +47,7 @@ const commonRoutes: Array<RouteRecordRaw> = [
     meta: {
       title: '首页'
     },
-    component: () => import('@/views/client/markdown/word.vue'),
+    component: () => import('@/views/client/markdown/word.vue')
   },
   {
     path: '/login',
@@ -55,7 +55,7 @@ const commonRoutes: Array<RouteRecordRaw> = [
     meta: {
       title: '首页'
     },
-    component: () => import('@/views/client/login/index.vue'),
+    component: () => import('@/views/client/login/index.vue')
   },
   {
     path: '/adminLogin',
@@ -63,7 +63,7 @@ const commonRoutes: Array<RouteRecordRaw> = [
     meta: {
       title: '管理端登录'
     },
-    component: () => import('@/views/admin/login/index.vue'),
+    component: () => import('@/views/admin/login/index.vue')
   },
   {
     path: '/admin',
@@ -71,14 +71,14 @@ const commonRoutes: Array<RouteRecordRaw> = [
     meta: {
       title: '管理端首页'
     },
-    component: () => import('@/views/admin/index.vue'),
-  },
+    component: () => import('@/views/admin/index.vue')
+  }
 ];
 
 const router = createRouter({
   history: createWebHistory(), // History 路由
   // history: createWebHashHistory(), // Hash 路由
-  routes: [...commonRoutes],
+  routes: [...commonRoutes]
 });
 
 router.beforeEach((to, from, next) => {

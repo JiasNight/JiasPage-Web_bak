@@ -147,11 +147,11 @@ const props = defineProps({
 // 组件方法
 const emit = defineEmits(['change', 'delete']);
 
-const headerColor = ref<object>({
+const headerColor = $ref<object>({
   backgroundColor: props.headerColor,
 });
 
-const searchValue = ref<string>('');
+const searchValue = $ref<string>('');
 
 // 国际化语言
 const { locale, t } = useI18n();
@@ -160,7 +160,7 @@ interface IMenuDrawer {
   isMenuShow: boolean;
   maskShow: boolean;
 }
-const menusList: any = ref(null);
+const menusList: any = $ref(null);
 const menuDrawer: IMenuDrawer = reactive({
   isMenuShow: true,
   maskShow: false,
@@ -169,16 +169,16 @@ const setMaskStyle = computed(() => {
   return { 'container-mask': menuDrawer.maskShow };
 });
 const menuShowList = () => {
-  menusList.value.style.transition = '0.5s';
+  menusList.style.transition = '0.5s';
   if (menuDrawer.isMenuShow) {
     menuDrawer.maskShow = true;
-    menusList.value.style.top = '60px';
-    menusList.value.style.zIndex = 0;
+    menusList.style.top = '60px';
+    menusList.style.zIndex = 0;
     menuDrawer.isMenuShow = false;
   } else {
     menuDrawer.maskShow = false;
-    menusList.value.style.zIndex = -9;
-    menusList.value.style.top = '-500px';
+    menusList.style.zIndex = -9;
+    menusList.style.top = '-500px';
     menuDrawer.isMenuShow = true;
   }
 };
