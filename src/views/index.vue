@@ -4,7 +4,7 @@
       </div> -->
     <transition name="fade">
       <!-- <Header v-show="!headerShow" :headerColor="headerColor"></Header> -->
-      <Header :headerColor="headerColor"></Header>
+      <Header :header-color="headerColor"></Header>
     </transition>
     <div class="container-body">
       <!-- 子路由 -->
@@ -140,7 +140,7 @@ const initSummer = (div: HTMLDivElement): void => {
   // 命名空间
   const SVG_NS = 'http://www.w3.org/2000/svg';
   // 循环创建N个
-  let rainNum: number = 20;
+  let rainNum = 20;
   // 创建的添加到数组存储
   let rainArray = [];
   for (let i = 0; i < rainNum; i++) {

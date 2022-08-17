@@ -54,7 +54,7 @@
         </div>
         <div class="box-item item-user">
           <v-menu open-on-hover>
-            <template v-slot:activator="{ props }">
+            <template #activator="{ props }">
               <v-avatar color="info" v-bind="props">
                 <v-icon icon="mdi-account-circle" size="40"></v-icon>
               </v-avatar>
@@ -85,7 +85,7 @@
     <!-- 遮罩层 -->
     <div :class="setMaskStyle" @click="menuShowList"></div>
     <!-- 弹出抽屉 -->
-    <div class="container-drawer" ref="menusList">
+    <div ref="menusList" class="container-drawer">
       <div class="drawer-search">
         <v-text-field
           v-model="searchValue"
@@ -157,8 +157,8 @@ const searchValue = $ref<string>('');
 const { locale, t } = useI18n();
 
 interface IMenuDrawer {
-  isMenuShow: boolean;
-  maskShow: boolean;
+  isMenuShow: boolean
+  maskShow: boolean
 }
 const menusList: any = $ref(null);
 const menuDrawer: IMenuDrawer = reactive({

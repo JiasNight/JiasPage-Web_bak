@@ -6,7 +6,7 @@ function renderIcon(icon: any) {
 }
 
 export function creatMenuOption(routes: any) {
-  let res: Array<any> = [];
+  const res: Array<any> = [];
   routes.forEach((route: any) => {
     if (route.hidden) {
       return;

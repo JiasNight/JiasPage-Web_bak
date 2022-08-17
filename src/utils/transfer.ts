@@ -7,7 +7,7 @@ import { JSEncrypt } from 'jsencrypt';
 export const aesUtil = {
   // 获取key，
   genKey: function (length = 16) {
-    let random = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const random = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     let str = '';
     for (let i = 0; i < length; i++) {
       str = str + random.charAt(Math.random() * random.length);
@@ -21,18 +21,18 @@ export const aesUtil = {
       // JSON.stringify
       plaintext = JSON.stringify(plaintext);
     }
-    let encrypted = CryptoJS.AES.encrypt(CryptoJS.enc.Utf8.parse(plaintext), CryptoJS.enc.Utf8.parse(key), {
+    const encrypted = CryptoJS.AES.encrypt(CryptoJS.enc.Utf8.parse(plaintext), CryptoJS.enc.Utf8.parse(key), {
       mode: CryptoJS.mode.ECB,
-      padding: CryptoJS.pad.Pkcs7,
+      padding: CryptoJS.pad.Pkcs7
     });
     return encrypted.toString();
   },
 
   // 解密
   decrypt: function (ciphertext: any, key: string) {
-    let decrypt = CryptoJS.AES.decrypt(ciphertext, CryptoJS.enc.Utf8.parse(key), {
+    const decrypt = CryptoJS.AES.decrypt(ciphertext, CryptoJS.enc.Utf8.parse(key), {
       mode: CryptoJS.mode.ECB,
-      padding: CryptoJS.pad.Pkcs7,
+      padding: CryptoJS.pad.Pkcs7
     });
     let decString = CryptoJS.enc.Utf8.stringify(decrypt).toString();
     if (decString.charAt(0) === '{' || decString.charAt(0) === '[') {
@@ -40,7 +40,7 @@ export const aesUtil = {
       decString = JSON.parse(decString);
     }
     return decString;
-  },
+  }
 };
 
 /**
@@ -55,9 +55,9 @@ export const rsaUtil: any = {
 
   // 生成密钥对(公钥和私钥)
   genKeyPair: function (bits = rsaUtil.bits) {
-    let genKeyPair: any = {};
+    const genKeyPair: any = {};
     rsaUtil.thisKeyPair = new JSEncrypt({
-      default_key_size: bits,
+      default_key_size: bits
     });
     // 这里项目使用的是静态秘钥，所以该方法在本地执行一次，获取到配对的公私钥保存下即可
     // 获取私钥
@@ -91,7 +91,7 @@ export const rsaUtil: any = {
       decString = JSON.parse(decString);
     }
     return decString;
-  },
+  }
 };
 
 /**

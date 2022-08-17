@@ -34,8 +34,8 @@ export default class CreateDivThree {
 
   // 初始化相机
   initCamera() {
-    let width = this.canvas.offsetWidth;
-    let height = this.canvas.offsetHeight;
+    const width = this.canvas.offsetWidth;
+    const height = this.canvas.offsetHeight;
     // 相机设置
     this.camera = new THREE.PerspectiveCamera(45, width / height, 1, 1000);
     // this.camera.position.set(10, 150, 150);
@@ -46,14 +46,14 @@ export default class CreateDivThree {
   // 初始化灯光
   initLight() {
     // 平行光
-    let directionalLight = new THREE.DirectionalLight(0xdfebff, 0.45);
+    const directionalLight = new THREE.DirectionalLight(0xdfebff, 0.45);
     directionalLight.position.set(2000, 2000, 1000).normalize();
     this.scene.add(directionalLight);
     // 环境光
-    let ambientLight = new THREE.AmbientLight(0x999999);
+    const ambientLight = new THREE.AmbientLight(0x999999);
     this.scene.add(ambientLight);
     // 点光源
-    let light = new THREE.PointLight(0xffffff);
+    const light = new THREE.PointLight(0xffffff);
     light.position.set(0, 500, 1000);
     this.scene.add(light);
   }
@@ -67,7 +67,7 @@ export default class CreateDivThree {
   // 初始化控制器
   initControls() {
     // 初始化控制器,创建控件对象
-    let controls = new TrackballControls(this.camera, this.renderer.domElement);
+    const controls = new TrackballControls(this.camera, this.renderer.domElement);
     // 是否禁用缩放
     controls.noZoom = false;
     // 是否禁用平移
@@ -81,8 +81,8 @@ export default class CreateDivThree {
 
   // 初始化渲染
   initRenderer() {
-    let width = this.canvas.offsetWidth;
-    let height = this.canvas.offsetHeight;
+    const width = this.canvas.offsetWidth;
+    const height = this.canvas.offsetHeight;
     // 创建渲染器对象
     this.renderer = new THREE.WebGLRenderer({
       // 是否执行抗锯齿
@@ -146,7 +146,7 @@ export default class CreateDivThree {
 
   // 加载模型
   loadModel(modelPath: string, modelName: string) {
-    let gltfLoader = new GLTFLoader();
+    const gltfLoader = new GLTFLoader();
     gltfLoader.setPath(modelPath);
     gltfLoader.load(
       modelName,
@@ -156,7 +156,7 @@ export default class CreateDivThree {
         loadscene.castShadow = true;
         // 设置大小比例
         loadscene.scale.set(90, 80, 80);
-        let wrapper = new THREE.Object3D();
+        const wrapper = new THREE.Object3D();
         //模型在场景中的为准, x:左右，y:高低，x：上下
         wrapper.position.set(320, 0, 200);
         wrapper.add(loadscene);
@@ -195,7 +195,9 @@ export default class CreateDivThree {
     // let skybox = new THREE.Mesh(new THREE.BoxGeometry(800, 300, 300), skyMaterial);
     // this.scene.add(skybox);
     // 第二种方式
-    // let textureCube = new THREE.CubeTextureLoader().setPath(skyPath).load(['px.jpg', 'nx.jpg', 'py.jpg', 'ny.jpg', 'pz.jpg', 'nz.jpg']);
+    // const textureCube = new THREE.CubeTextureLoader()
+    //   .setPath(skyPath)
+    //   .load(['px.jpg', 'nx.jpg', 'py.jpg', 'ny.jpg', 'pz.jpg', 'nz.jpg']);
     // this.scene.background = textureCube;
     // this.renderer.setClearAlpha(1);
   }
@@ -203,10 +205,12 @@ export default class CreateDivThree {
   // 加载环境贴图
   loadHdr() {
     // 使用hdr作为背景色
-    let pmremGenerator = new THREE.PMREMGenerator(this.renderer);
+    const pmremGenerator = new THREE.PMREMGenerator(this.renderer);
     // 阴影
     pmremGenerator.compileEquirectangularShader();
-    new RGBELoader().setDataType(THREE.UnsignedByteType).load('/public/model/skyImages/railway_bridge_02_4k.hdr', (texture: any) => {
+    new RGBELoader()
+    .setDataType(THREE.UnsignedByteType)
+    .load('/public/model/skyImages/railway_bridge_02_4k.hdr', (texture: any) => {
       const envMap = pmremGenerator.fromEquirectangular(texture).texture;
       // 给场景添加环境光效果
       this.scene.environment = envMap;

@@ -2,8 +2,7 @@ const zh_CN = {
   // 前台
   client: {
     // 登陆
-    login: {
-    },
+    login: {},
     navMenu: {
       menu1: '菜单',
       menu2: '问答',

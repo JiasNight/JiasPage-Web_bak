@@ -1,1 +1,1 @@
-export { setupNaive } from './naive'
+export { setupNaive } from './naive';

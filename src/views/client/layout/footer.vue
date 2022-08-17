@@ -2,7 +2,7 @@
   <div class="footer-container">foote</div>
 </template>
 
-<script lang="ts" steup></script>
+<script lang="ts" setup></script>
 
 <style lang="scss" scoped>
 .footer-container {

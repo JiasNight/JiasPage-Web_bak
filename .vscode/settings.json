@@ -111,18 +111,18 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "cSpell.words": [
-    "vben",
-    "windi",
-    "browserslist",
-    "tailwindcss",
-    "esnext",
     "antv",
-    "tinymce",
+    "browserslist",
+    "esnext",
+    "nprogress",
+    "pinia",
     "qrcode",
     "sider",
-    "pinia",
-    "sider",
-    "nprogress"
+    "tailwindcss",
+    "tinymce",
+    "vben",
+    "VITE",
+    "windi"
   ],
   "vue3snippets.enable-compile-vue-file-on-did-save-code": false
 }

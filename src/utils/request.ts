@@ -19,8 +19,8 @@ class Interceptors {
       // 超时设置
       timeout: 1500,
       headers: {
-        'Content-Type': 'application/json; charset=UTF-8;',
-      },
+        'Content-Type': 'application/json; charset=UTF-8;'
+      }
     });
 
     this.init();
@@ -28,49 +28,49 @@ class Interceptors {
 
   init() {
     // 请求拦截
-    let aesKey = aesUtil.genKey();
+    const aesKey = aesUtil.genKey();
     this.instance.interceptors.request.use(
       (config: any) => {
         // 每次发送请求之前判断是否存在token，如果存在，则统一在http请求的header都加上token，不用每次请求都手动添加了
         const token = window.localStorage.getItem('TOKEN');
         token && (config.headers.Authorization = token);
 
-        let requestMethod = config.method;
+        const requestMethod = config.method;
         if (requestMethod.toLocaleLowerCase() === 'post') {
           if (config.data) {
-            let requestData = config.data;
+            const requestData = config.data;
             if (Object.prototype.toString.call(requestData) === '[object FormData]') {
               // 设置请求头为表单提交头
-              let jsonData: any = {};
-              for (let key of requestData.keys()) {
+              const jsonData: any = {};
+              for (const key of requestData.keys()) {
                 jsonData[key] = requestData.get(key);
               }
-              let objData: any = {
+              const objData: any = {
                 data: aesUtil.encrypt(jsonData, aesKey),
                 aesKey: rsaUtil.encrypt(aesKey, window.sessionStorage.getItem('javaPublicKey')),
-                publicKey: publicKey,
+                publicKey: publicKey
               };
-              let fd: FormData = new FormData();
-              for (let key in objData) {
+              const fd: FormData = new FormData();
+              for (const key in objData) {
                 fd.append(key, objData[key]);
               }
               config.data = fd;
             } else {
-              let objData: any = {
+              const objData: any = {
                 data: aesUtil.encrypt(requestData, aesKey),
                 aesKey: rsaUtil.encrypt(aesKey, window.sessionStorage.getItem('javaPublicKey')),
-                publicKey: publicKey,
+                publicKey: publicKey
               };
               config.data = objData;
             }
           }
         } else if (requestMethod.toLocaleLowerCase() === 'get') {
           if (config.params) {
-            let requestParams = config.params;
-            let objParams: any = {
+            const requestParams = config.params;
+            const objParams: any = {
               data: aesUtil.encrypt(requestParams, aesKey),
               aesKey: rsaUtil.encrypt(aesKey, window.sessionStorage.getItem('javaPublicKey')),
-              publicKey: publicKey,
+              publicKey: publicKey
             };
             config.params = objParams;
           }
@@ -80,7 +80,7 @@ class Interceptors {
       (error) => {
         // 失败就简单处理了
         return Promise.reject(error);
-      },
+      }
     );
 
     // 响应拦截
@@ -90,12 +90,12 @@ class Interceptors {
           return Promise.resolve(response.data);
         } else {
           // 这个就是错误的时候自行处理的代码了，具体业务具体处理，加上注释只供参考
-          if (response.data.code == '401') {
+          if (response.data.code === '401') {
             // 清除token
             localStorage.removeItem('TOKEN');
             router.push('/login');
             window.$message.error(errorCodeType('401'));
-          } else if (response.status == 200) {
+          } else if (response.status === 200) {
             window.$message.error(response.data.message || '系统错误');
             return Promise.resolve(response.data);
           } else {
@@ -108,7 +108,7 @@ class Interceptors {
       (error) => {
         // 具体业务具体处理，加上注释只供参考
         const { status } = error.response;
-        if (status == '401') {
+        if (status === '401') {
           window.$message.error(errorCodeType('401'));
           // 清除token
           localStorage.removeItem('TOKEN');
@@ -118,7 +118,7 @@ class Interceptors {
           window.$message.error('系统错误');
         }
         return Promise.reject(error);
-      },
+      }
     );
   }
 

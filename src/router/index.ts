@@ -84,7 +84,7 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   // window.$loadingBar.start();
   const isLogin = localStorage.TOKEN ? true : false;
-  if (to.path == '/login') {
+  if (to.path === '/login') {
     next();
   } else {
     isLogin ? next() : next('/login');

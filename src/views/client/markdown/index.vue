@@ -12,15 +12,15 @@
         <!-- 文档主体 -->
         <div class="content-main">
           <h2>一、基本问题</h2>
-          <div class="main-base-question" v-for="(item, index) in questionList" :key="index">
+          <div v-for="(item, index) in questionList" :key="index" class="main-base-question">
             <p>
-              <span>{{item.id}}.</span>
-              {{item.question}}
+              <span>{{ item.id }}.</span>
+              {{ item.question }}
             </p>
             <span class="answer-span">答：</span>
             <n-input
-              class="answer-input"
               v-model:value="item.answer"
+              class="answer-input"
               clearable
               show-count
               type="textarea"
@@ -95,10 +95,14 @@ const questionList = reactive([
       left: 50%;
       transform: translateX(-50%);
       border: 1px solid #ccc;
-      background: linear-gradient(to left, rgb(4, 172, 247), rgb(4, 172, 247)) left top no-repeat, linear-gradient(to bottom, rgb(4, 172, 247), rgb(4, 172, 247)) left top no-repeat,
-        linear-gradient(to left, rgb(4, 172, 247), rgb(4, 172, 247)) right top no-repeat, linear-gradient(to bottom, rgb(4, 172, 247), rgb(4, 172, 247)) right top no-repeat,
-        linear-gradient(to left, rgb(4, 172, 247), rgb(4, 172, 247)) left bottom no-repeat, linear-gradient(to bottom, rgb(4, 172, 247), rgb(4, 172, 247)) left bottom no-repeat,
-        linear-gradient(to left, rgb(4, 172, 247), rgb(4, 172, 247)) right bottom no-repeat, linear-gradient(to left, rgb(4, 172, 247), rgb(4, 172, 247)) right bottom no-repeat;
+      background: linear-gradient(to left, rgb(4, 172, 247), rgb(4, 172, 247)) left top no-repeat,
+        linear-gradient(to bottom, rgb(4, 172, 247), rgb(4, 172, 247)) left top no-repeat,
+        linear-gradient(to left, rgb(4, 172, 247), rgb(4, 172, 247)) right top no-repeat,
+        linear-gradient(to bottom, rgb(4, 172, 247), rgb(4, 172, 247)) right top no-repeat,
+        linear-gradient(to left, rgb(4, 172, 247), rgb(4, 172, 247)) left bottom no-repeat,
+        linear-gradient(to bottom, rgb(4, 172, 247), rgb(4, 172, 247)) left bottom no-repeat,
+        linear-gradient(to left, rgb(4, 172, 247), rgb(4, 172, 247)) right bottom no-repeat,
+        linear-gradient(to left, rgb(4, 172, 247), rgb(4, 172, 247)) right bottom no-repeat;
       /*设置大小*/
       background-size: 2px 80px, 80px 2px, 2px 80px, 80px 2px, 1px 200px, 80px 5px, 1px 200px, 80px 5px;
       .content-title {

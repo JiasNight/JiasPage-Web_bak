@@ -1,7 +1,7 @@
 import { defineConfig, loadEnv } from 'vite';
 import vuePlugin from '@vitejs/plugin-vue';
 // 组件样式按需加载
-import usePluginImport from 'vite-plugin-importer';
+// import usePluginImport from 'vite-plugin-importer';
 // 自动引入vue函数
 import autoImport from 'unplugin-auto-import/vite';
 // 添加tsx和jsx语法
@@ -9,7 +9,7 @@ import vueJsx from '@vitejs/plugin-vue-jsx';
 // 打包压缩
 import viteCompression from 'vite-plugin-compression';
 // 在开发和构建中进行代码规范校验
-import eslintPlugin from 'vite-plugin-eslint'
+import eslintPlugin from 'vite-plugin-eslint';
 // 按需引入Naive
 import Components from 'unplugin-vue-components/vite';
 import { NaiveUiResolver } from 'unplugin-vue-components/resolvers';
@@ -19,16 +19,19 @@ import * as path from 'path';
 // https://vitejs.dev/config/
 export default ({ mode }) => {
   return defineConfig({
+    define: {
+      'process.env': loadEnv(mode, process.cwd())
+    },
     resolve: {
       alias: {
         // 取相对路径别名, @表示当前的src目录路径
-        '@': path.resolve(__dirname, 'src'),
-      },
+        '@': path.resolve(__dirname, 'src')
+      }
     },
     plugins: [
       vuePlugin({
         // 开启ref转换
-        reactivityTransform: true,
+        reactivityTransform: true
       }),
       eslintPlugin({
         cache: false
@@ -44,8 +47,8 @@ export default ({ mode }) => {
           enabled: true,
           // 配置文件的位置
           filepath: './.eslintrc-auto-import.json',
-          globalsPropValue: true,
-        },
+          globalsPropValue: true
+        }
       }),
       vueJsx(),
       // gzip压缩
@@ -53,17 +56,17 @@ export default ({ mode }) => {
       Components({
         // 需要自动导入的组件
         resolvers: [NaiveUiResolver()],
-        dts: 'src/components.d.ts',
-      }),
+        dts: 'src/components.d.ts'
+      })
     ],
     // 样式相关规则
     css: {
       preprocessorOptions: {
         // 导入global.scss, 这样就可以在vue全局中使用global.scss中定义的变量了
         scss: {
-          additionalData: '@import "./src/assets/css/global.scss";',
-        },
-      },
+          additionalData: '@import "./src/assets/css/global.scss";'
+        }
+      }
     },
     // 打包相关规则
     build: {
@@ -78,23 +81,22 @@ export default ({ mode }) => {
         // 生产环境移除console
         compress: {
           drop_console: true, // 打包时删除console
-          drop_debugger: true, // 打包时删除 debugger
+          drop_debugger: true // 打包时删除 debugger
         },
         output: {
           // 去掉注释内容
-          comments: true,
-        },
+          comments: true
+        }
       },
       rollupOptions: {
         output: {
           manualChunks: {
             // 拆分代码，这个就是分包，配置完后自动按需加载，现在还比不上webpack的splitchunk，不过也能用了。
             vue: ['vue', 'vue-router', 'vuex'],
-            echarts: ['echarts'],
-          },
-        },
-      },
-      brotliSize: false,
+            echarts: ['echarts']
+          }
+        }
+      }
     },
     // 为服务器设置代理规则
     server: {
@@ -105,7 +107,7 @@ export default ({ mode }) => {
       cors: true, // 默认启用并允许任何源
       open: false, // 在服务器启动时自动在浏览器中打开
       hmr: {
-        overlay: false,
+        overlay: false
       },
       // 反向代理配置，注意rewrite写法
       proxy: {
@@ -113,9 +115,9 @@ export default ({ mode }) => {
           target: loadEnv(mode, process.cwd()).VITE_APP_BASE_API,
           ws: true,
           changeOrigin: true,
-          rewrite: (path) => path.replace(/^\/api/, ''),
-        },
-      },
-    },
+          rewrite: (path) => path.replace(/^\/api/, '')
+        }
+      }
+    }
   });
 };

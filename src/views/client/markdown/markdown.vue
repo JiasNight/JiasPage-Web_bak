@@ -15,7 +15,7 @@
         <div class="left-catalog">
           <hr />
           <ul class="catalog-box">
-            <li class="box-li" v-for="(item, index) in articleCatalogList" :key="index" @click="onClickArticle(item)">
+            <li v-for="(item, index) in articleCatalogList" :key="index" class="box-li" @click="onClickArticle(item)">
               {{ item.label }}
             </li>
           </ul>
@@ -31,7 +31,12 @@
       </div>
       <!-- 右边部分 -->
       <div class="body-right">
-        <md-editor class="right-mdeditor" v-model="markdownText" showCodeRowNumber @onSave="saveMarkdownText"></md-editor>
+        <md-editor
+          v-model="markdownText"
+          class="right-mdeditor"
+          show-code-row-number
+          @onSave="saveMarkdownText"
+        ></md-editor>
       </div>
     </div>
     <!-- <n-button @click="getMarkdownById">获 取</n-button> -->
@@ -54,24 +59,24 @@ const saveMarkdownText = (text: string) => {
     mdText: text
   };
   markdownSave(mdData)
-    .then(() => {
-      console.log('请求');
-    })
-    .catch(() => {
-      console.log('异常');
-    });
+  .then(() => {
+    console.log('请求');
+  })
+  .catch(() => {
+    console.log('异常');
+  });
 };
 
 const getMarkdownById = () => {
-  let mdId: string = '60e5fb94-92ff-4329-831e-3f364127d819';
+  let mdId = '60e5fb94-92ff-4329-831e-3f364127d819';
   markdownById(mdId)
-    .then((res: any) => {
-      console.log(res);
-      markdownText.value = res.data.md.mdText;
-    })
-    .catch(() => {
-      console.log('异常');
-    });
+  .then((res: any) => {
+    console.log(res);
+    markdownText.value = res.data.md.mdText;
+  })
+  .catch(() => {
+    console.log('异常');
+  });
 };
 
 const articleCatalogList = reactive([

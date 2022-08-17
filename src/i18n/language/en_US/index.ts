@@ -2,8 +2,7 @@ const en_US = {
   // 前台
   client: {
     // 登陆
-    login: {
-    },
+    login: {},
     navMenu: {
       menu1: 'Menu',
       menu2: 'Question',

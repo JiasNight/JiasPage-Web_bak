@@ -1,13 +1,10 @@
 <template>
-
   <v-navigation-drawer v-model="openMenu" app color="#218c74" :width="menuWidth">
     <VLogo></VLogo>
     <!-- <VMenu></VMenu> -->
   </v-navigation-drawer>
 
-  <v-app-bar app>
-    app-bar
-  </v-app-bar>
+  <v-app-bar app> app-bar </v-app-bar>
 
   <!-- Sizes your content based upon application components -->
   <v-main>
@@ -20,9 +17,7 @@
     </v-container>
   </v-main>
 
-  <v-footer app>
-    底部内容
-  </v-footer>
+  <v-footer app> 底部内容 </v-footer>
 </template>
 
 <script lang="ts" setup>
@@ -31,50 +26,50 @@ import VLogo from './layout/logo/index.vue';
 import VMenu from './layout/menu/index.vue';
 import { NIcon } from 'naive-ui';
 
-const openMenu = $ref<boolean>(true)
-const menuWidth = openMenu ? '250' : '60'
+const openMenu = $ref<boolean>(true);
+const menuWidth = openMenu ? '250' : '60';
 const desserts = [
   {
     name: 'Frozen Yogurt',
-    calories: 159,
+    calories: 159
   },
   {
     name: 'Ice cream sandwich',
-    calories: 237,
+    calories: 237
   },
   {
     name: 'Eclair',
-    calories: 262,
+    calories: 262
   },
   {
     name: 'Cupcake',
-    calories: 305,
+    calories: 305
   },
   {
     name: 'Gingerbread',
-    calories: 356,
+    calories: 356
   },
   {
     name: 'Jelly bean',
-    calories: 375,
+    calories: 375
   },
   {
     name: 'Lollipop',
-    calories: 392,
+    calories: 392
   },
   {
     name: 'Honeycomb',
-    calories: 408,
+    calories: 408
   },
   {
     name: 'Donut',
-    calories: 452,
+    calories: 452
   },
   {
     name: 'KitKat',
-    calories: 518,
-  },
-]
+    calories: 518
+  }
+];
 </script>
 
 <style lang="scss" scoped>

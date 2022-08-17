@@ -2,7 +2,9 @@
   <n-loading-bar-provider>
     <div class="login-container" :style="{ backgroundImage: 'url(' + backImgUrl + ')' }">
       <div class="container-header">
-        <n-button v-for="(item, index) in btnList" :key="index" :type="item.type" ghost @click="seasonClickBtn(item)">{{ item.label }}</n-button>
+        <n-button v-for="(item, index) in btnList" :key="index" :type="item.type" ghost @click="seasonClickBtn(item)">{{
+          item.label
+        }}</n-button>
       </div>
       <!-- 表单 -->
       <div class="container-login">
@@ -12,10 +14,10 @@
               <n-input v-model:value="loginFormData.userName" placeholder="输入用户名" />
             </n-form-item>
             <n-form-item label="密码" type="password" path="password">
-              <n-input placeholder="输入密码" v-model:value="loginFormData.password" />
+              <n-input v-model:value="loginFormData.password" placeholder="输入密码" />
             </n-form-item>
             <n-form-item>
-              <n-button @click="submitLoginBtn" attr-type="button">验 证</n-button>
+              <n-button attr-type="button" @click="submitLoginBtn">验 证</n-button>
             </n-form-item>
           </n-form>
         </n-message-provider>
@@ -25,24 +27,14 @@
 </template>
 
 <script lang="ts" setup>
-import {
-  defineComponent,
-  ref,
-  reactive,
-  isRef,
-  toRefs,
-  watch,
-  computed,
-  onMounted,
-  getCurrentInstance
-} from 'vue';
+import { defineComponent, ref, reactive, isRef, toRefs, watch, computed, onMounted, getCurrentInstance } from 'vue';
 import { useMessage, useLoadingBar } from 'naive-ui';
 import { userLogin } from '@/api/login/index';
 
 interface IBtnType {
-  type: string;
-  label: string;
-  bgImg: string;
+  type: string
+  label: string
+  bgImg: string
 }
 const btnList: IBtnType[] = reactive([
   { type: 'primary', label: '春', bgImg: '/src/assets/images/login_spring.jpg' },
@@ -58,8 +50,8 @@ const loginFormRef: any = ref(null);
 const message = useMessage();
 
 interface ILoginFormType {
-  userName: string;
-  password: string;
+  userName: string
+  password: string
 }
 const loginFormData: ILoginFormType = reactive({
   userName: '',
@@ -76,19 +68,18 @@ const submitLoginBtn = () => {
     if (!verify) {
       message.success('验证通过');
       userLogin(loginFormData)
-        .then(() => {
-          console.log('请求');
-        })
-        .catch(() => {
-          console.log('异常');
-        });
+      .then(() => {
+        console.log('请求');
+      })
+      .catch(() => {
+        console.log('异常');
+      });
     } else {
       console.log(verify);
       message.warning('验证不通过');
     }
   });
 };
-
 </script>
 
 <style lang="scss" scoped>

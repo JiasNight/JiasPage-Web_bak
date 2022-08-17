@@ -1,7 +1,7 @@
 <template>
   <div class="three-container">
     <n-spin :show="isLoading" size="large">
-      <div ref="threeDom" class="three-main" id="three-box"></div>
+      <div id="three-box" ref="threeDom" class="three-main"></div>
       <template #description>正在加载 . . .</template>
     </n-spin>
   </div>
@@ -29,10 +29,10 @@ onMounted(() => {
 const initCurrentThree = () => {
   const cdt = new CreateDivThree('#three-box');
   cdt.initThree();
-  const modelPath: string = '/public/model/';
-  const modelName: string = 'scene.gltf';
+  const modelPath = '/public/model/';
+  const modelName = 'scene.gltf';
   cdt.loadModel(modelPath, modelName);
-  const skyPath: string = '/public/images/';
+  const skyPath = '/public/images/';
   cdt.loadSky(skyPath);
   // cdt.loadHdr();
   cdt.renderThree();
@@ -52,7 +52,7 @@ const initCurrentThree = () => {
   cdt.cameraReset(cameraPosition, cameraLookAt);
 };
 </script>
-                                                                             
+
 <style lang="scss" scoped>
 .three-container {
   width: 100vw;
