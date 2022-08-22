@@ -13,7 +13,7 @@ const commonRoutes: Array<RouteRecordRaw> = [
         meta: {
           title: '首页'
         },
-        component: () => import('@/views/client/home/index.vue')
+        component: () => import('@/views/home/index.vue')
       }
     ]
   },
@@ -23,7 +23,7 @@ const commonRoutes: Array<RouteRecordRaw> = [
     meta: {
       title: '首页'
     },
-    component: () => import('@/views/client/three/index.vue')
+    component: () => import('@/views/three/index.vue')
   },
   {
     path: '/article',
@@ -31,7 +31,7 @@ const commonRoutes: Array<RouteRecordRaw> = [
     meta: {
       title: '首页'
     },
-    component: () => import('@/views/client/markdown/index.vue')
+    component: () => import('@/views/markdown/index.vue')
   },
   {
     path: '/markdown',
@@ -39,7 +39,7 @@ const commonRoutes: Array<RouteRecordRaw> = [
     meta: {
       title: '首页'
     },
-    component: () => import('@/views/client/markdown/markdown.vue')
+    component: () => import('@/views/markdown/markdown.vue')
   },
   {
     path: '/word',
@@ -47,7 +47,7 @@ const commonRoutes: Array<RouteRecordRaw> = [
     meta: {
       title: '首页'
     },
-    component: () => import('@/views/client/markdown/word.vue')
+    component: () => import('@/views/markdown/word.vue')
   },
   {
     path: '/login',
@@ -55,23 +55,7 @@ const commonRoutes: Array<RouteRecordRaw> = [
     meta: {
       title: '首页'
     },
-    component: () => import('@/views/client/login/index.vue')
-  },
-  {
-    path: '/adminLogin',
-    name: 'AdminLogin',
-    meta: {
-      title: '管理端登录'
-    },
-    component: () => import('@/views/admin/login/index.vue')
-  },
-  {
-    path: '/admin',
-    name: 'Admin',
-    meta: {
-      title: '管理端首页'
-    },
-    component: () => import('@/views/admin/index.vue')
+    component: () => import('@/views/login/index.vue')
   }
 ];
 

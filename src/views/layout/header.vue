@@ -157,8 +157,8 @@ const searchValue = $ref<string>('');
 const { locale, t } = useI18n();
 
 interface IMenuDrawer {
-  isMenuShow: boolean
-  maskShow: boolean
+  isMenuShow: boolean;
+  maskShow: boolean;
 }
 const menusList: any = $ref(null);
 const menuDrawer: IMenuDrawer = reactive({
@@ -187,7 +187,7 @@ const menuShowList = () => {
 <style lang="scss" scoped>
 .header-container {
   width: 100%;
-  height: 60px;
+  height: 50px;
   position: fixed;
   top: 0;
   z-index: 999;
@@ -217,7 +217,7 @@ const menuShowList = () => {
         overflow: hidden;
 
         img {
-          height: 60px;
+          height: 50px;
         }
       }
 
@@ -242,7 +242,6 @@ const menuShowList = () => {
 
       .item-menu {
         width: 100%;
-        height: 80%;
         justify-self: center;
         align-self: center;
         display: table-cell;

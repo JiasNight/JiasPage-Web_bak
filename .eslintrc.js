@@ -35,6 +35,8 @@ module.exports = {
     // 'warn' 或 1 - 开启规则，使用警告级别的错误：warn (不会导致程序退出)
     // 'error' 或 2 - 开启规则，使用错误级别的错误：error (当被触发的时候，程序会退出)
     // 'prettier/prettier': 1, // 使用prettier
+    'no-console': process.env.NODE_ENV === 'production' ? 2 : 0, // 禁止使用console
+    'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0, // 禁止使用debugger
     semi: [2, 'always'], // 语句强制分号结尾
     quotes: [2, 'single'], // 引号类型''
     camelcase: [1, { allow: ['drop_console', 'drop_debugger', 'zh_CN', 'en_US'] }], // 强制驼峰法命名
@@ -64,9 +66,7 @@ module.exports = {
     'no-unused-vars': [0, { vars: 'all', args: 'after-used' }], // 不能有声明后未被使用的变量或参数
     'no-var': 2, // 禁用var，用let和const代替
     'no-alert': 0, // 禁止使用alert
-    'no-console': process.env.NODE_ENV === 'production' ? 2 : 0, // 禁止使用console
     'no-const-assign': 2, // 禁止修改const声明的变量
-    'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0, // 禁止使用debugger
     'no-duplicate-case': 2, // switch中的case标签不能重复
     'no-extra-semi': 2, // 禁止多余的冒号
     'no-undef': 0, // 不能有未定义的变量
@@ -75,13 +75,16 @@ module.exports = {
     'comma-dangle': [2, 'never'], // 数组和对象键值对最后一个逗号,never：不能带末尾的逗号,always：必须带末尾的逗号，always-multiline：多行模式必须带逗号，单行模式不能带逗号
     'comma-spacing': [2, { before: false, after: true }], // 控制逗号前后的空格
     '@typescript-eslint/member-delimiter-style': [
+      // 定义接口的分隔符
       2,
       {
         multiline: {
-          delimiter: 'none'
+          delimiter: 'semi', // semi: 分号，comma：逗号，none: 无
+          requireLast: true // 最后一个成员是否需要分隔符
         },
         singleline: {
-          delimiter: 'comma'
+          delimiter: 'semi',
+          requireLast: true
         }
       }
     ],

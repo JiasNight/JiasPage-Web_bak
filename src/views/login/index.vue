@@ -32,9 +32,9 @@ import { useMessage, useLoadingBar } from 'naive-ui';
 import { userLogin } from '@/api/login/index';
 
 interface IBtnType {
-  type: string
-  label: string
-  bgImg: string
+  type: string;
+  label: string;
+  bgImg: string;
 }
 const btnList: IBtnType[] = reactive([
   { type: 'primary', label: '春', bgImg: '/src/assets/images/login_spring.jpg' },
@@ -50,8 +50,8 @@ const loginFormRef: any = ref(null);
 const message = useMessage();
 
 interface ILoginFormType {
-  userName: string
-  password: string
+  userName: string;
+  password: string;
 }
 const loginFormData: ILoginFormType = reactive({
   userName: '',

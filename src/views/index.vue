@@ -15,9 +15,10 @@
 </template>
 
 <script lang="ts" setup>
+import { $ref } from 'vue/macros';
 import { petal1, petal2, rain } from '@/assets/base64/index';
-import Header from '@/views/client/layout/header.vue';
-import Footer from '@/views/client/layout/footer.vue';
+import Header from '@/views/layout/header.vue';
+import Footer from '@/views/layout/footer.vue';
 
 onMounted(() => {
   window.addEventListener('scroll', handleScroll, true);

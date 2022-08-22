@@ -34,6 +34,7 @@ export default ({ mode }) => {
         reactivityTransform: true
       }),
       eslintPlugin({
+        // 禁用 eslint 缓存
         cache: false
       }),
       autoImport({
@@ -41,7 +42,7 @@ export default ({ mode }) => {
         // 自定引入 Vue VueRouter API,如果还需要其他的可以自行引入
         imports: ['vue', 'vue-router', 'pinia'],
         // 可以自定义文件生成的位置，默认是根目录下
-        dts: 'src/auto-imports.d.ts',
+        dts: './auto-imports.d.ts',
         // 解决自动引入eslint报错问题 需要在eslintrc的extend选项中引入
         eslintrc: {
           enabled: true,
@@ -56,7 +57,7 @@ export default ({ mode }) => {
       Components({
         // 需要自动导入的组件
         resolvers: [NaiveUiResolver()],
-        dts: 'src/components.d.ts'
+        dts: './components.d.ts'
       })
     ],
     // 样式相关规则

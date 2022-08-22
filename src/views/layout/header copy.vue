@@ -156,9 +156,9 @@ const renderIcon = (icon: Component) => {
 
 // 抽屉菜单接口
 interface IDropdownMenu {
-  label: string
-  key: string
-  icon: any
+  label: string;
+  key: string;
+  icon: any;
 }
 
 const getDropdownUserData = (): IDropdownMenu[] => {
@@ -210,8 +210,8 @@ const onClickDropdown = (key: string): void => {
 };
 
 interface IMenuDrawer {
-  isMenuShow: boolean
-  maskShow: boolean
+  isMenuShow: boolean;
+  maskShow: boolean;
 }
 const menusList: any = ref(null);
 const menuDrawer: IMenuDrawer = reactive({
