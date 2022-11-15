@@ -56,6 +56,14 @@ const commonRoutes: Array<RouteRecordRaw> = [
       title: '首页'
     },
     component: () => import('@/views/login/index.vue')
+  },
+  {
+    path: '/dataView',
+    name: 'DataView',
+    meta: {
+      title: '数据可视化'
+    },
+    component: () => import('@/views/bigScreen/index.vue')
   }
 ];
 

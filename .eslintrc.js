@@ -76,7 +76,7 @@ module.exports = {
     'comma-spacing': [2, { before: false, after: true }], // 控制逗号前后的空格
     '@typescript-eslint/member-delimiter-style': [
       // 定义接口的分隔符
-      2,
+      0,
       {
         multiline: {
           delimiter: 'semi', // semi: 分号，comma：逗号，none: 无

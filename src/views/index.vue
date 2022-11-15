@@ -78,7 +78,7 @@ const currentSeason = (): number => {
   let month: number = new Date().getMonth() + 1;
   if (month >= 2 && month <= 4) return 1;
   else if (month >= 5 && month <= 7) return 2;
-  else if (month >= 8 && month <= 10) return 2;
+  else if (month >= 8 && month <= 10) return 1;
   else return 4;
 };
 
