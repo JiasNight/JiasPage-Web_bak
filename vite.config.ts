@@ -12,7 +12,7 @@ import viteCompression from 'vite-plugin-compression';
 import eslintPlugin from 'vite-plugin-eslint';
 // 按需引入Naive
 import Components from 'unplugin-vue-components/vite';
-import { NaiveUiResolver } from 'unplugin-vue-components/resolvers';
+import { Vuetify3Resolver } from 'unplugin-vue-components/resolvers';
 
 import * as path from 'path';
 
@@ -109,8 +109,9 @@ export default ({ mode }) => {
       viteCompression(),
       Components({
         // 需要自动导入的组件
-        resolvers: [NaiveUiResolver()],
-        dts: './components.d.ts'
+        dts: true,
+        dirs: '/components.d.ts',
+        resolvers: [Vuetify3Resolver()]
       })
     ],
     // 样式相关规则
