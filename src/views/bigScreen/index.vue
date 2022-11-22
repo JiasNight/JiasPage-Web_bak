@@ -20,18 +20,10 @@ const initChinaMapChart = () => {
   echarts.registerMap('china', china);
   // 3. 设置图表 option
   let option = {
-    backgroundColor: '#000f1e',
-    geo: {
-      type: 'map',
-      map: 'china',
-      show: false
-    },
     geo3D: {
       map: 'china',
-      show: true,
-      boxWidth: 200,
-      boxHeight: 4, //4:没有bar. 30:有bar,bar最高度30，按比例分配高度
-      regionHeight: 10,
+      regionHeight: 5,
+      // boxDepth: 100, //地图倾斜度
       shading: 'lambert',
       viewControl: {
         projection: 'perspective',
@@ -42,22 +34,26 @@ const initChinaMapChart = () => {
         zoomSensitivity: 2, //缩放操作的灵敏度
         panSensitivity: 2, //平移操作的灵敏度
         panMouseButton: 'right', //平移操作使用的鼠标按键
-        distance: 200, //默认视角距离主体的距离
+        distance: 100, //默认视角距离主体的距离
         center: [0, 0, 0],
         animation: true,
         animationDurationUpdate: 1000,
         animationEasingUpdate: 'cubicInOut'
       },
-
       label: {
-        // 标签的相关设置
-        show: false
+        show: true, //是否显示市
+        textStyle: {
+          color: '#fff', //文字颜色
+          fontSize: 12, //文字大小
+          backgroundColor: 'rgba(0,0,0,0)' //透明度0清空文字背景
+        }
       },
 
       itemStyle: {
+        show: true, //是否显示市
         color: '#0fbcf9',
         areaColor: '#025894',
-        opacity: 0.8,
+        opacity: 1,
         borderWidth: 1,
         borderColor: '#81ecec'
       },
@@ -97,15 +93,13 @@ const initChinaMapChart = () => {
         symbol: 'pin',
         symbolSize: 100,
         label: {
-          normal: {
-            show: true,
-            position: 'right',
-            formatter: '{b}',
-            textStyle: {
-              color: '#fff',
-              fontSize: 14,
-              backgroundColor: 'transparent' // 字体背景色
-            }
+          show: true,
+          position: 'center',
+          formatter: '4444',
+          textStyle: {
+            color: '#fff',
+            fontSize: 14,
+            backgroundColor: 'transparent' // 字体背景色
           }
         },
         data: [[102.712251, 25.040609, 1000]],
@@ -121,6 +115,46 @@ const initChinaMapChart = () => {
             color: '#1ca1d2'
           }
         }
+      },
+
+      {
+        name: '箭头线',
+        type: 'lines3D',
+        coordinateSystem: 'geo3D',
+        zlevel: 3,
+        polyline: false,
+        label: {
+          show: true
+        },
+        effect: {
+          show: true,
+          period: 5,
+          trailLength: 0.5,
+          symbol: 'arrow',
+          color: '#e84118',
+          symbolSize: 100
+        },
+        lineStyle: {
+          show: true,
+          width: 3,
+          type: 'solid',
+          curveness: 0.2,
+          color: '#e84118'
+        },
+        data: [
+          {
+            coords: [
+              [102.712251, 25.040609],
+              [116.418757, 39.917544]
+            ]
+          },
+          {
+            coords: [
+              [102.543907, 24.350461],
+              [120.153576, 30.287459]
+            ]
+          }
+        ]
       }
     ]
   };
