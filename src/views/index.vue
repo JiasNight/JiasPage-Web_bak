@@ -10,7 +10,7 @@
       <!-- 子路由 -->
       <router-view></router-view>
     </div>
-    <Footer></Footer>
+    <!-- <Footer></Footer> -->
   </div>
 </template>
 
@@ -44,10 +44,22 @@ const initBkgTime: any = (): void => {
   });
 };
 
+/**
+ * 判断当前季节
+ */
+const currentSeason = (): number => {
+  let month: number = new Date().getMonth() + 1;
+  if (month >= 2 && month <= 4) return 1;
+  else if (month >= 5 && month <= 7) return 2;
+  else if (month >= 8 && month <= 10) return 3;
+  else return 4;
+};
+
 const renderImg = (indexBox: HTMLDivElement): void => {
   // 判断当前时间点处于四季的什么时候，再执行相应时期的动画函数
-  let current: number = currentSeason();
-  switch (current) {
+  let currentNum: number = currentSeason();
+  console.log(currentNum);
+  switch (currentNum) {
     // 春天
     case 1:
       setInterval(() => {
@@ -62,24 +74,19 @@ const renderImg = (indexBox: HTMLDivElement): void => {
       break;
     // 秋天
     case 3:
-      initAutumn(indexBox);
+      // initAutumn(indexBox);
+      setInterval(() => {
+        initSummer(indexBox);
+      }, 500);
       break;
     // 冬天
     case 4:
-      initWinter(indexBox);
+      // initWinter(indexBox);
+      setInterval(() => {
+        initSummer(indexBox);
+      }, 500);
       break;
   }
-};
-
-/**
- * 判断当前季节
- */
-const currentSeason = (): number => {
-  let month: number = new Date().getMonth() + 1;
-  if (month >= 2 && month <= 4) return 1;
-  else if (month >= 5 && month <= 7) return 2;
-  else if (month >= 8 && month <= 10) return 1;
-  else return 4;
 };
 
 /**

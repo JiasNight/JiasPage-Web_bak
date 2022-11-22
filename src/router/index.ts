@@ -4,8 +4,9 @@ const commonRoutes: Array<RouteRecordRaw> = [
   {
     path: '/',
     name: 'index',
-    component: () => import('@/views/index.vue'),
-    redirect: 'home',
+    // component: () => import('@/views/index.vue'),
+    component: () => import('@/App.vue'),
+    // redirect: 'home',
     children: [
       {
         path: 'home',

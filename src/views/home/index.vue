@@ -3,8 +3,8 @@
     <!-- 轮播图 -->
     <div class="container-loop">
       <v-carousel cycle hide-delimiter-background show-arrows="hover">
-        <v-carousel-item v-for="(item, i) in imgLists" :key="i">
-          <v-sheet height="100%" :style="{ backgroundImage: `url(${item.imgSrc})` }">
+        <v-carousel-item v-for="(item, i) in imgLists" :key="i" :value="i" cover>
+          <v-sheet class="carousel-sheet" height="100%" tile :style="{ backgroundImage: `url(${item.imgSrc})` }">
             <div class="d-flex fill-height justify-center align-center">
               <div class="img-text">
                 {{ item.describe }}
@@ -75,10 +75,18 @@ const imgLists: loopImgType[] = reactive([
   .container-loop {
     width: 100%;
     height: calc(100vh - 50%);
-    .img-text {
-      color: #fff;
-      font-size: 30px;
-      padding: 0 5%;
+    .v-sheet {
+      background-repeat: no-repeat;
+      background-size: cover;
+      .img-text {
+        color: #fff;
+        font-size: 30px;
+        padding: 0 5%;
+        cursor: pointer;
+        &:hover {
+          color: aqua;
+        }
+      }
     }
   }
   .container-main {

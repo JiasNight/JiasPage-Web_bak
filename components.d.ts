@@ -5,9 +5,19 @@ import '@vue/runtime-core';
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
-    Provider: typeof import('./src/components/Provider.vue')['default'];
     RouterLink: typeof import('vue-router')['RouterLink'];
     RouterView: typeof import('vue-router')['RouterView'];
+    VApp: typeof import('vuetify/components')['VApp'];
+    VAvatar: typeof import('vuetify/components')['VAvatar'];
+    VCarousel: typeof import('vuetify/components')['VCarousel'];
+    VCarouselItem: typeof import('vuetify/components')['VCarouselItem'];
+    VIcon: typeof import('vuetify/components')['VIcon'];
+    VList: typeof import('vuetify/components')['VList'];
+    VListItem: typeof import('vuetify/components')['VListItem'];
+    VListItemTitle: typeof import('vuetify/components')['VListItemTitle'];
+    VMenu: typeof import('vuetify/components')['VMenu'];
+    VSheet: typeof import('vuetify/components')['VSheet'];
+    VTextField: typeof import('vuetify/components')['VTextField'];
   }
 }
 
